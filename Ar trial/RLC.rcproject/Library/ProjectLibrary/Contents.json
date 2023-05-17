@@ -1,0 +1,62 @@
+[
+  {
+    "libraryIdentifier" : "c11c3868db1139150ef783bfbb351b3c",
+    "format" : "image",
+    "displayName" : "7451a949ee775c77f539521a67f8d329.png"
+  },
+  {
+    "libraryIdentifier" : "5d47a563c623db9d0510bef04d3ffe1a",
+    "format" : "model",
+    "displayName" : "toy_biplane_idle.usdz"
+  },
+  {
+    "libraryIdentifier" : "a9043854578dae87a8adc2996ded9a1c",
+    "format" : "model",
+    "displayName" : "capacitance.usdz"
+  },
+  {
+    "libraryIdentifier" : "0c19309770d91b718a6b83346e3d9d05",
+    "format" : "model",
+    "displayName" : "corner.usdz"
+  },
+  {
+    "libraryIdentifier" : "41d210f744dc68eb3b2803d6e8926ee3",
+    "format" : "model",
+    "displayName" : "inductance.usdz"
+  },
+  {
+    "libraryIdentifier" : "fb9f602ee2f9a8d0bdd7507772ad21f7",
+    "format" : "model",
+    "displayName" : "line.usdz"
+  },
+  {
+    "libraryIdentifier" : "4865a6088e08543731419f451e6737aa",
+    "format" : "model",
+    "displayName" : "resistance.usdz"
+  },
+  {
+    "libraryIdentifier" : "92d6e2353ecc7f410392615a0d63677a",
+    "format" : "model",
+    "displayName" : "ea4eec99-e364-4a9e-ae9e-3297f13925fc.usdz"
+  },
+  {
+    "libraryIdentifier" : "92c43a0f341b53f73fb76458706f5c05",
+    "format" : "model",
+    "displayName" : "capacitance_r.usdz"
+  },
+  {
+    "libraryIdentifier" : "e1be427dd432ac4b1a4d6a7c186aa836",
+    "format" : "model",
+    "displayName" : "resistance_r.usdz"
+  },
+  {
+    "libraryIdentifier" : "66348f441a6c1fb7e9487121ac2d4df4",
+    "format" : "model",
+    "displayName" : "triode_r.usdz"
+  },
+  {
+    "libraryIdentifier" : "be3605848ea6fa4a35b8b9147fbe0fe1",
+    "format" : "image",
+    "displayName" : "eelogo.jpeg"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "libraryIdentifier" : "0c19309770d91b718a6b83346e3d9d05",
+    "format" : "model",
+    "displayName" : "corner.usdz"
+  },
+  {
+    "libraryIdentifier" : "fb9f602ee2f9a8d0bdd7507772ad21f7",
+    "format" : "model",
+    "displayName" : "line.usdz"
+  },
+  {
+    "libraryIdentifier" : "14803c15e92f688d29dcc7028dd0e634",
+    "format" : "model",
+    "displayName" : "08e232b0-25f9-4d1b-b7fa-13bced68515b的副本.usdz"
+  },
+  {
+    "libraryIdentifier" : "8380bd46150991742b554f9abea9b44f",
+    "format" : "model",
+    "displayName" : "b5f8d86f-ffec-49f7-916c-65623a841759的副本.usdz"
+  },
+  {
+    "libraryIdentifier" : "d7df9391500d05d157c8214be551c57d",
+    "format" : "image",
+    "displayName" : "0.png"
+  },
+  {
+    "libraryIdentifier" : "d3cf5744d8de758deda8b5ad96441822",
+    "format" : "model",
+    "displayName" : "f7fd9c6d-843b-4795-b795-101f54ec76a2 (5).usdz"
+  },
+  {
+    "libraryIdentifier" : "647ad62acbdccd0c36f70eb5e8847083",
+    "format" : "model",
+    "displayName" : "234c619e-689c-414e-be5f-65f26a8c3bde (2).usdz"
+  },
+  {
+    "libraryIdentifier" : "2f2d62472e69e93a2b03a5bdfd94a5cc",
+    "format" : "model",
+    "displayName" : "0d467667-6208-4b24-95f3-b5826f66a8b9 (4).usdz"
+  },
+  {
+    "libraryIdentifier" : "52e2c32c5ae1d3139032b014d800ab05",
+    "format" : "model",
+    "displayName" : "bluecorner.usdz"
+  },
+  {
+    "libraryIdentifier" : "3eacf65e414daa6057a49dd7523c8377",
+    "format" : "model",
+    "displayName" : "yellowcorner.usdz"
+  },
+  {
+    "libraryIdentifier" : "c11c3868db1139150ef783bfbb351b3c",
+    "format" : "image",
+    "displayName" : "7451a949ee775c77f539521a67f8d329.png"
+  }
+]

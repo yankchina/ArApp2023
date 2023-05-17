@@ -1,0 +1,187 @@
+{
+  "__content" : [
+    {
+      "scenes" : [
+        {
+          "__content" : [
+            {
+              "arAnchorSpecification" : {
+                "name" : "image",
+                "physicalWidth" : 0.34951457381248474,
+                "url" : "image:c11c3868db1139150ef783bfbb351b3c\/7451a949ee775c77f539521a67f8d329.png"
+              },
+              "behaviors" : [
+
+              ],
+              "gravity" : [
+                0,
+                -9.8000001907348633,
+                0
+              ],
+              "identifier" : "F9610871-0955-494F-A5C3-51D1A281BAB3",
+              "material" : "concrete",
+              "overrides" : {
+                "children" : {
+                  "4A213441-135C-450E-8EF8-1A4EAB267C1D" : null,
+                  "7F5F1ADC-E5E4-4EF5-A5B5-FC43B071FFA5" : null,
+                  "61F94A28-5C0F-4854-987D-0DC1020F8F98" : null,
+                  "64C3D538-B8D0-4D7D-BBB8-DF031440CFAA" : null,
+                  "92B531EF-A3CE-46BD-AB65-80978276486F" : {
+                    "overrides" : {
+                      "arguments" : [
+                        [
+                          "includeSceneScaling",
+                          {
+                            "typeName" : "Bool",
+                            "value" : false
+                          }
+                        ],
+                        [
+                          "subpath",
+                          {
+                            "typeName" : "String",
+                            "value" : ""
+                          }
+                        ],
+                        [
+                          "url",
+                          {
+                            "typeName" : "String",
+                            "value" : "model:7167b63bcbf66c926f68e9e3b338b107\/%E6%96%B0%E9%A1%B9%E7%9B%AE(1).reality"
+                          }
+                        ],
+                        [
+                          "withDescendants",
+                          {
+                            "typeName" : "Bool",
+                            "value" : true
+                          }
+                        ]
+                      ],
+                      "factory" : {
+                        "identifier" : "com.apple.af.FileImportAssetFactory",
+                        "version" : "0.0"
+                      },
+                      "runtimeAttributes" : [
+                        [
+                          "RuntimeIdentifier",
+                          {
+                            "typeName" : "UUID",
+                            "value" : "7E78B70E-87EA-4166-A848-68830BBD3C1E"
+                          }
+                        ],
+                        [
+                          "entityName",
+                          {
+                            "typeName" : "String",
+                            "value" : "generatorboard"
+                          }
+                        ],
+                        [
+                          "rigidBody-enabled",
+                          {
+                            "typeName" : "Bool",
+                            "value" : true
+                          }
+                        ]
+                      ]
+                    },
+                    "transform" : {
+                      "matrix" : [
+                        3.0000002384185791,
+                        0,
+                        0,
+                        0,
+                        0,
+                        3.0000002384185791,
+                        0,
+                        0,
+                        0,
+                        0,
+                        3.0000002384185791,
+                        0,
+                        0,
+                        0.079999998211860657,
+                        0,
+                        1
+                      ]
+                    }
+                  },
+                  "632E476F-1E55-4E30-9723-1C51DD2E8B89" : null,
+                  "56693AE0-43A0-4733-8187-BB5ACFCFB27A" : null,
+                  "798509BA-47E7-4542-8139-9EDC4762BDFC" : null,
+                  "55345807-0C21-400D-A459-24DF15C000CD" : null,
+                  "B91C7CA3-4AB1-4253-9A84-07383168A8A8" : null,
+                  "D4B32136-3F88-4DDE-9554-85DF637CF92E" : null,
+                  "E2C7B3C0-DC5B-45E0-B98C-7795B2D18375" : null
+                },
+                "factory" : null,
+                "runtimeAttributes" : [
+                  [
+                    "isAccessibilityEnabled",
+                    {
+                      "typeName" : "Bool",
+                      "value" : false
+                    }
+                  ]
+                ]
+              },
+              "physicsMode" : "grid",
+              "title" : "Box",
+              "viewTransform" : {
+                "cameraTransform" : [
+                  0.83904725313186646,
+                  0,
+                  -0.54405862092971802,
+                  0,
+                  -0.43952301144599915,
+                  0.58937495946884155,
+                  -0.67783236503601074,
+                  0,
+                  0.32065451145172119,
+                  0.80785959959030151,
+                  0.49451339244842529,
+                  0,
+                  1.5267775058746338,
+                  2.4939134120941162,
+                  1.545020580291748,
+                  1
+                ],
+                "sceneTransform" : [
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.99999994039535522,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0.99999994039535522,
+                  0,
+                  0,
+                  0,
+                  0,
+                  1
+                ]
+              }
+            }
+          ],
+          "__version" : 5
+        }
+      ],
+      "tags" : {
+        "__content" : [
+          {
+            "tagsStore" : {
+
+            }
+          }
+        ],
+        "__version" : 1
+      }
+    }
+  ],
+  "__version" : 1
+}
