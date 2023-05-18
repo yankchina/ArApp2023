@@ -13,8 +13,9 @@ import Combine
 struct ArappUser:Identifiable,Codable {
     var id:String=""
     var password:String=""
-    var authority:Int = 1
+    var authority:Int = -1
     var simulationurl:String=""
+    var status:Bool=false
 }
 
 struct SignupResponse:Codable{
@@ -99,12 +100,11 @@ class Appusermodel:ObservableObject{
             .sink{ [weak self] (returnedPosts) in
                 self?.signinbuttonable=true
                 self?.user = returnedPosts
-                if let authority=self?.user.authority{
-                    if authority >= 0 {
-                        self?.appstatus=1
-                    }else{
-                        self?.loginfailalert=true
-                    }
+                if returnedPosts.authority >= 0{
+                    self?.appstatus=1
+                }
+                else{
+                    self?.loginfailalert=true
                 }
             }
             .store(in: &cancellables)
