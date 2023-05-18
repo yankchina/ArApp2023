@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+
+struct StartButton:View{
+    let yoffset:CGFloat
+    let Buttonaction:()->Void
+    var body: some View{
+        ZStack{
+            Button(action: Buttonaction) {
+                Text("Simulation")
+            }
+            .buttonStyle(.borderedProminent)
+            .buttonBorderShape(.roundedRectangle(radius: 2))
+            .offset(y:yoffset)
+        }.frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .bottomTrailing)
+
+    }
+}
 struct InputbackgroundView: View {
     var body:some View{
         RoundedRectangle(cornerRadius: 3).fill(Color.BackgroundprimaryColor.opacity(0.9))

@@ -1,19 +1,16 @@
 //
-//  SquarewaveView.swift
+//  SinegeneratorextraView.swift
 //  Ar trial
 //
-//  Created by niudan on 2023/4/18.
+//  Created by 何海心 on 2023/5/18.
 //
 
 import SwiftUI
-import Combine
-import RealityKit
-//MARK: SquarewaveView
-struct SquarewaveextraView: View {
-    
+
+struct SinegeneratorextraView: View {
     //View properties
     @EnvironmentObject var Usermodel:Appusermodel
-    @StateObject var vm = ARsquarewavemodel()
+    @StateObject var vm = ARsinegeneratormodel()
     @State var testonly:CGFloat = 100
     
     //View gestures
@@ -39,25 +36,17 @@ struct SquarewaveextraView: View {
             let Geometrysize=geometry.size
             switch vm.status {
             case .start:
-                //MARK: Start status view
                 StartButton(yoffset: -Geometrysize.height*0.08,Buttonaction: vm.startforward)
-                
-                
-                
-                //MARK: Input status view
             case .input:
                 ZStack{
                     VStack(alignment:.trailing,spacing:.zero){
                         VStack(alignment:.trailing,spacing:.zero){
                             InputupperLabel(backwardButtonaction: vm.inputbackward)
-                            StoptimeTextField(leadingtext: "stoptime", Stoptimetext: $vm.stoptimetext, unittext: "s", TextfieldWidth: Geometrysize.width/8,TextFieldKeyboardTyperawValue: 2)
-                            InputSlider(leadingtext: "RT:", Slidervalue: $vm.RT, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
-                            InputSlider(leadingtext: "CT:", Slidervalue: $vm.CT, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "𝛍F")
-                            InputSlider(leadingtext: "VCC:", Slidervalue: $vm.VCC, minimumValue: 1, maximumValue: 15, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "V")
-                            InputSlider(leadingtext: "R1:", Slidervalue: $vm.R1, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
-                            InputSlider(leadingtext: "R2:", Slidervalue: $vm.R2, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
-                            InputSlider(leadingtext: "R3:", Slidervalue: $vm.R3, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
-                        }.frame(width:Geometrysize.width*0.35)
+                            Group{
+                                InputSlider(leadingtext: "R:", Slidervalue: $vm.R, minimumValue: 1, maximumValue: 100, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
+                                InputSlider(leadingtext: "C:", Slidervalue: $vm.C, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
+                            }
+                        }.frame(width:geometry.size.width*0.35)
                             .padding(.horizontal,1)
                         InputConfirmButton(Buttondisable: !vm.Valuelegal()){
                             vm.inputforward(userurl: Usermodel.user.simulationurl)
@@ -67,20 +56,17 @@ struct SquarewaveextraView: View {
                         .background(
                             InputbackgroundView()
                         )
-                        .offset(y:-Geometrysize.height*0.08)
-                    .gesture(
-                        DragGesture()
-                                .onChanged { value in}
-                                .onEnded { value in
-                                    if value.translation.height > 20 {
-                                        vm.inputbackward()
+                        .offset(y: -geometry.size.height*0.08)
+                        .gesture(
+                            DragGesture()
+                                    .onEnded { value in
+                                        if value.translation.height > 20 {
+                                            vm.inputbackward()
+                                        }
                                     }
-                                }
-                    )
+                        )
+                        
                 }.frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .bottomTrailing)
-                
-                
-                //MARK: Image status view
             case .image:
                 ZStack{
                     VStack(spacing:.zero){
@@ -120,30 +106,16 @@ struct SquarewaveextraView: View {
                             SimulationImagebackgroundView()
                         )
                         .offset(y:-geometry.size.height*0.08+vm.imageyoffset)
-
                     //.frame(maxWidth: geometry.size.width*0.9)
                         .gesture(
                             AsyncImageDraggesture
-//                            DragGesture()
-//                                    .onChanged { value in
-//                                        if value.translation.height > 0 {
-//                                            vm.imageyoffset=value.translation.height
-//                                        }
-//                                    }
-//                                    .onEnded { value in
-//                                        withAnimation(.spring()) {
-//                                            if value.translation.height > 20 {
-//                                                vm.imageforward()
-//                                            }
-//                                            vm.imageyoffset=0
-//                                        }
-//                                    }
                         )
                 }.frame(maxWidth: .infinity,maxHeight: .infinity, alignment: .bottomTrailing)
+
+                
             }
         }
         .onReceive(Usermodel.Timereveryonesecond, perform: Usermodel.SimulationImageRefreshCountdown)
+        
     }
-    
-    
 }

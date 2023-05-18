@@ -11,7 +11,7 @@ import AVKit
 
 //MARK: Appmenuview
 struct ARappmenuView: View {
-    let scaaningmodes:[scanmode]=[.free,.Squarewavegenerator,.Secondorder,.Sequence]
+    let scaaningmodes:[scanmode]=[.free,.Squarewavegenerator,.SquarewaveDRgenerator,.Secondorder,.Sequence]
     @EnvironmentObject var Usermodel:Appusermodel
 
     @StateObject var ARappMaterialpart:ARappMaterialpartmodel=ARappMaterialpartmodel()
@@ -39,7 +39,7 @@ struct ARappmenuView: View {
                   .buttonStyle(.borderedProminent)
                   .buttonBorderShape(.roundedRectangle(radius: 3))
                   .accentColor(Color.red)
-
+                  
 //                  NavigationLink(
 //                    destination:
 //                        VideoPlayer(player: .init(url: URL(fileURLWithPath:

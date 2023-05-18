@@ -13,7 +13,8 @@ import Combine
 /// The modes of AR
 enum scanmode:String{
     case free="Free Scanning"
-    case Squarewavegenerator="Squarewave Generator"
+    case Squarewavegenerator="Squarewave generator"
+    case SquarewaveDRgenerator="Duty ratio adjustable squarewave generator"
     case Secondorder="Second order filter"
     case Sequence="Sequence generator"
 }
@@ -38,14 +39,16 @@ class ARappARpartmodel:ObservableObject{
     let scaaningmodes:[scanmode]
     let scanmodeindex:[scanmode:Int]
     @Published var SquarewaveGeneratorAnchor:Squarewave.Box
+    @Published var SquarewaveDRGeneratorAnchor:SquarewaveDR.Box
     @Published var SecondorderfilterAnchor:Secondorderfilter.Box
     @Published var SequencegeneratorAnchor:Sequencegenerator.Box
     
     //MARK: initiate
     init() {
         scaaningmodes=[scanmode.free,.Squarewavegenerator,.Secondorder,.Sequence]
-        scanmodeindex=[.Squarewavegenerator:0,.Secondorder:1,.Sequence:2]
+        scanmodeindex=[.Squarewavegenerator:0,.SquarewaveDRgenerator:1,.Secondorder:2,.Sequence:3]
         SquarewaveGeneratorAnchor=try! Squarewave.loadBox()
+        SquarewaveDRGeneratorAnchor=try! SquarewaveDR.loadBox()
         SecondorderfilterAnchor=try! Secondorderfilter.loadBox()
         SequencegeneratorAnchor=try! Sequencegenerator.loadBox()
         container = NSPersistentContainer(name: "ARAppdata")
@@ -120,13 +123,14 @@ class ARappARpartmodel:ObservableObject{
             return returnlight
         }
         SquarewaveGeneratorAnchor.addChild(generatedirectionallight())
+        SquarewaveDRGeneratorAnchor.addChild(generatedirectionallight())
         SecondorderfilterAnchor.addChild(generatedirectionallight())
         SequencegeneratorAnchor.addChild(generatedirectionallight())
     }
     
     /// Add anchors to AR scene
     func addanchor(ARview:ARView,mode:scanmode)->Void{
-        let Anchors:[HasAnchoring]=[SquarewaveGeneratorAnchor,SecondorderfilterAnchor,SequencegeneratorAnchor]
+        let Anchors:[HasAnchoring]=[SquarewaveGeneratorAnchor,SquarewaveDRGeneratorAnchor,SecondorderfilterAnchor,SequencegeneratorAnchor]
         switch mode {
         case .free:
             ARview.scene.anchors.append(contentsOf: Anchors)
@@ -180,6 +184,10 @@ class ARappARpartmodel:ObservableObject{
         switch mode {
         case .Squarewavegenerator:
             let model=SquarewaveGeneratorAnchor.generatorboard!
+            model.generateCollisionShapes(recursive: true)
+            arView.installGestures([.all], for: model as! (Entity & HasCollision))
+        case .SquarewaveDRgenerator:
+            let model=SquarewaveDRGeneratorAnchor.generator!
             model.generateCollisionShapes(recursive: true)
             arView.installGestures([.all], for: model as! (Entity & HasCollision))
         case .Secondorder:

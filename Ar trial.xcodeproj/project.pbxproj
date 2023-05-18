@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A66016932A162B3200AE96C8 /* SquarewaveDR.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = A66016922A162B3200AE96C8 /* SquarewaveDR.rcproject */; };
+		A66016952A163EB800AE96C8 /* ServercircuitModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66016942A163EB800AE96C8 /* ServercircuitModels.swift */; };
+		A66016972A1640F500AE96C8 /* SinegeneratorextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66016962A1640F500AE96C8 /* SinegeneratorextraView.swift */; };
+		A66016992A16420000AE96C8 /* Timer555triggerextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */; };
 		C70D16EF2A04E9D400389E0C /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D16EE2A04E9D400389E0C /* Usermodel.swift */; };
 		C70D17102A0503B100389E0C /* LoginTextFieldAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */; };
 		C71390D029D83088001C7827 /* Sequencegenerator.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C71390CF29D83088001C7827 /* Sequencegenerator.rcproject */; };
@@ -110,6 +114,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A66016922A162B3200AE96C8 /* SquarewaveDR.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = SquarewaveDR.rcproject; sourceTree = "<group>"; };
+		A66016942A163EB800AE96C8 /* ServercircuitModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServercircuitModels.swift; sourceTree = "<group>"; };
+		A66016962A1640F500AE96C8 /* SinegeneratorextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinegeneratorextraView.swift; sourceTree = "<group>"; };
+		A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer555triggerextraView.swift; sourceTree = "<group>"; };
 		C70D16EE2A04E9D400389E0C /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldAreaView.swift; sourceTree = "<group>"; };
 		C71390CF29D83088001C7827 /* Sequencegenerator.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Sequencegenerator.rcproject; sourceTree = "<group>"; };
@@ -311,6 +319,7 @@
 		C778B1BB29D4680D0007854A /* ARmodeextra */ = {
 			isa = PBXGroup;
 			children = (
+				A66016942A163EB800AE96C8 /* ServercircuitModels.swift */,
 				C7733DE829C4B4CD002AE566 /* RCextraView.swift */,
 				C7AFF2CF29D412850080D1CA /* ProportionalextraView.swift */,
 				C7C4FC2029D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift */,
@@ -318,6 +327,8 @@
 				C773ADD429EE912900693EF6 /* SquarewaveextraView.swift */,
 				C78B1AB029F17121000C9F6B /* SquarewaveDRextraView.swift */,
 				C78B1AB229F179B6000C9F6B /* SecondorderfilterextraView.swift */,
+				A66016962A1640F500AE96C8 /* SinegeneratorextraView.swift */,
+				A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */,
 				C7CF0C022A150A7B005F764D /* SimlationSubViews */,
 			);
 			path = ARmodeextra;
@@ -368,6 +379,7 @@
 				C75CD4862A08C8D500223E09 /* Secondorderfilter.rcproject */,
 				C71390CF29D83088001C7827 /* Sequencegenerator.rcproject */,
 				C7E417802A0E74B600A8EB9B /* Squarewave.rcproject */,
+				A66016922A162B3200AE96C8 /* SquarewaveDR.rcproject */,
 				C7AA30D429B874DE0080D7B8 /* Experience.rcproject */,
 				C7AD257329C2F039000B3B5C /* ARapp */,
 				C738CB1929D0667C002A5F1C /* ARScan */,
@@ -565,6 +577,7 @@
 				C786D82229C34AE0003F0627 /* Arrayextension.swift in Sources */,
 				C7E4178C2A0F6D6600A8EB9B /* OnlineTaskAddingView.swift in Sources */,
 				C7C4FC2129D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift in Sources */,
+				A66016992A16420000AE96C8 /* Timer555triggerextraView.swift in Sources */,
 				C795C61829C9CDB400D9C4E5 /* ARappmodel.swift in Sources */,
 				C7E4178A2A0F66BB00A8EB9B /* ViewExtension.swift in Sources */,
 				C77B0DB829D2BFF30087DD44 /* Proportionalcircuit.rcproject in Sources */,
@@ -582,9 +595,11 @@
 				C7AD257B29C2F039000B3B5C /* Helpers.swift in Sources */,
 				C7677FC429DEF752000A2267 /* ExtraimageView.swift in Sources */,
 				C70D17102A0503B100389E0C /* LoginTextFieldAreaView.swift in Sources */,
+				A66016932A162B3200AE96C8 /* SquarewaveDR.rcproject in Sources */,
 				C7AD257929C2F039000B3B5C /* Legend.swift in Sources */,
 				C7E417882A0E8B6C00A8EB9B /* CalendarExtension.swift in Sources */,
 				C7AD257F29C2F039000B3B5C /* Line.swift in Sources */,
+				A66016972A1640F500AE96C8 /* SinegeneratorextraView.swift in Sources */,
 				C7733DE929C4B4CD002AE566 /* RCextraView.swift in Sources */,
 				C7521BAE29FFAD07005AA58A /* VideoView.swift in Sources */,
 				C71390D029D83088001C7827 /* Sequencegenerator.rcproject in Sources */,
@@ -599,6 +614,7 @@
 				C7734EB629D548C800ED51DF /* Boolextension.swift in Sources */,
 				C7AD257C29C2F039000B3B5C /* MagnifierRect.swift in Sources */,
 				C7CF0C042A150ACE005F764D /* SimulationSubView.swift in Sources */,
+				A66016952A163EB800AE96C8 /* ServercircuitModels.swift in Sources */,
 				C773A73F29C864B7006ABFA4 /* ARappMaterialView.swift in Sources */,
 				C7E417862A0E899300A8EB9B /* DateExtension.swift in Sources */,
 				C7E417842A0E87CD00A8EB9B /* OnlineTaskView.swift in Sources */,
@@ -746,9 +762,9 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -779,9 +795,9 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

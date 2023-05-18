@@ -56,6 +56,7 @@ extension ARscanView{
         ZStack{
             switch extraviewmode {
             case .Squarewavegenerator:SquarewaveextraView()
+            case .SquarewaveDRgenerator:SquarewaveDRextraView()
             case .Secondorder:SecondorderfilterextraView()
             case .Sequence:SequencegeneratorextraView()
             default:ZStack{Spacer()}
@@ -73,20 +74,6 @@ extension ARscanView{
                         .foregroundColor(Color.accentColor)
                             .font(.title)
                 }
-//                Button {
-//                    showmodeinformation=true
-//                } label: {
-//                        Image(systemName: "eye.square")
-//                            .foregroundColor(Color.accentColor)
-//                            .font(.title)
-//                }
-//                Button {
-//                    showmodeinformation=true
-//                } label: {
-//                        Image(systemName: "photo")
-//                            .foregroundColor(Color.accentColor)
-//                            .font(.title)
-//                }
             }
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
