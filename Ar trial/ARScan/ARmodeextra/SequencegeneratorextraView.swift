@@ -36,7 +36,7 @@ struct SequencegeneratorextraView: View {
                             }
                         } label: {
                             Image(systemName: Sequencemodel.simulating ? "pause.circle":"play.circle")
-                                .foregroundColor(Color("arrowcolor1"))
+                                .foregroundColor(Color.accentColor)
                                 .font(.title)
                         }
                         if Sequencemodel.simulating{
@@ -59,10 +59,10 @@ struct SequencegeneratorextraView: View {
                                 }
                             } label: {
                                 HStack(spacing:.zero){
-                                    Text("CLK").foregroundColor(Color("arrowcolor1"))
+                                    Text("CLK").foregroundColor(Color.accentColor)
                                         .font(.title2)
                                     Image(systemName: "arrow.forward.circle")
-                                        .foregroundColor(Color("arrowcolor1"))
+                                        .foregroundColor(Color.accentColor)
                                         .font(.title)
                                 }
                                 
