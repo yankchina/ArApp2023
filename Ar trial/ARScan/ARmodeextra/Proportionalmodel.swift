@@ -326,7 +326,7 @@ class Proportionalcircuitmodel:ObservableObject,Identifiable{
                 (time:Double)->Double in
                 let distance:Double=ceil(time*plusinput[index].frequency)-time*plusinput[index].frequency
                 switch distance {
-                case 0...0.25:return -distance*plusinput[index].peak
+                case 0...0.25:return -4*distance*plusinput[index].peak
                 case 0.25...0.75:return (4*distance-2)*plusinput[index].peak
                 case 0.75...1:return (4-4*distance)*plusinput[index].peak
                 default:return 0

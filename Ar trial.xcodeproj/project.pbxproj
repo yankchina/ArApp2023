@@ -213,7 +213,7 @@
 		C7C4FC2029D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencegeneratorextraView.swift; sourceTree = "<group>"; };
 		C7CF0C032A150ACE005F764D /* SimulationSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationSubView.swift; sourceTree = "<group>"; };
 		C7E417802A0E74B600A8EB9B /* Squarewave.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Squarewave.rcproject; sourceTree = "<group>"; };
-		C7E417832A0E87CD00A8EB9B /* OnlineTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTaskView.swift; sourceTree = SOURCE_ROOT; };
+		C7E417832A0E87CD00A8EB9B /* OnlineTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlineTaskView.swift; sourceTree = "<group>"; };
 		C7E417852A0E899300A8EB9B /* DateExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		C7E417872A0E8B6C00A8EB9B /* CalendarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarExtension.swift; sourceTree = "<group>"; };
 		C7E417892A0F66BB00A8EB9B /* ViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtension.swift; sourceTree = "<group>"; };
