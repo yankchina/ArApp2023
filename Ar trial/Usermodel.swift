@@ -41,10 +41,11 @@ class Appusermodel:ObservableObject{
     @Published var Signupsuccess:Bool?
     @Published var Actiondate:Date
     @Published var Receivedate:Date
+    @Published var Serverswitch:Bool
     
     init(){
         user=ArappUser()
-        appstatus=1
+        appstatus=0
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -59,6 +60,7 @@ class Appusermodel:ObservableObject{
         Signupsuccess=nil
         Actiondate=Date()
         Receivedate=Date()
+        Serverswitch=false
     }
     //MARK: Functions
     func Simulationurllegal()->Bool{
@@ -161,6 +163,15 @@ class Appusermodel:ObservableObject{
                 refreshcount=3
             }
         }
+    }
+    
+    func UpdateServer()->Void{
+        if user.simulationurl == ""{
+            user.simulationurl = ""
+        }else{
+            user.simulationurl = ""
+        }
+        Serverswitch=false
     }
     
     static func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {

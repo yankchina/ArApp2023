@@ -278,7 +278,7 @@ class ARappARpartmodel:ObservableObject{
         var message:Text?=nil
         switch mode {
         case .Secondorder:
-            text=Text("")
+            text=Text("This is a second order filter.")
         case .Sequence:
             text=Text("This is a sequence generator. Tap on 74138 Y0-Y7 and 74151 D0-D7 to set parameters of the generator. Tap the button on the left to see the details of the generator design.")
         default:break

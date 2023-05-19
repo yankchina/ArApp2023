@@ -52,7 +52,18 @@ struct ARappmenuView: View {
 //                  }.padding(.vertical,10)
               }
               .navigationTitle("Menu")
-              .navigationBarItems(leading: Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05))
+              .toolbar{
+                  ToolbarItem(placement: .navigationBarLeading) {
+                      Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05)
+                  }
+                  ToolbarItem(placement: .navigationBarTrailing) {
+                      Toggle(isOn: $Usermodel.Serverswitch) {
+                          Text("")
+                      }
+                      .toggleStyle(.switch)
+                  }
+
+              }
           }
           
               

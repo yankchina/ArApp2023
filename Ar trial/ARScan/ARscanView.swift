@@ -24,30 +24,33 @@ struct ARscanView:View{
     @StateObject var Proportionalmodel:Proportionalcircuitmodel=Proportionalcircuitmodel()
     //MARK: body
     var body: some View{
-        
-        ZStack {
-            //Main AR View
-            ARViewContainer(startmode: startmode,updatemode: $updatemode,extraviewmode:$extraviewmode).ignoresSafeArea(.all, edges: .top)
-                .alert(isPresented: $showmodeinformation){
-                    ARappARpartmodel.generatemodeinform(mode: extraviewmode)
+        GeometryReader{
+            let size=$0.size
+            ZStack {
+                //Main AR View
+                ARViewContainer(startmode: startmode,updatemode: $updatemode,extraviewmode:$extraviewmode).ignoresSafeArea(.all, edges: .top)
+                    .alert(isPresented: $showmodeinformation){
+                        ARappARpartmodel.generatemodeinform(mode: extraviewmode)
+                    }
+                modeextraview
+                ARUpdatetabView(startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
+                //topleadingbuttons
+                if !ARappARpart.Tipconfirmed{
+                    ARTipView()
                 }
-            modeextraview
-            ARUpdatetabView(startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
-            topleadingbuttons
-            if !ARappARpart.Tipconfirmed{
-                ARTipView()
+                //returnbutton
             }
-            //returnbutton
-        }
-        .toolbar(content: {
-            Button {
-                showmodeinformation=true
-            } label: {
+            .toolbar{
+                Button {
+                    showmodeinformation=true
+                } label: {
                     Image(systemName: "info.circle")
                     .foregroundColor(Color.accentColor)
-                        .font(.title)
+                        .font(.title2)
+                }
             }
-        })
+
+        }
         .environmentObject(Proportionalmodel)
         .environmentObject(Sequencemodel)
         .environmentObject(ARappARpart)
@@ -88,6 +91,36 @@ extension ARscanView{
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
     
+    @ViewBuilder
+    func  ARscantoolbar(size :CGSize)->some View{
+        HStack{
+            Button {
+                showmodeinformation=true
+            } label: {
+                Image(systemName: "photo")
+                .foregroundColor(Color.accentColor)
+                    .font(.title2)
+            }
+            Spacer()
+            Button {
+                showmodeinformation=true
+            } label: {
+                Image(systemName: "info.circle")
+                .foregroundColor(Color.accentColor)
+                    .font(.title2)
+            }
+
+        }
+        .frame(width: size.width/2)
+
+        
+        
+
+
+    }
+
+    
+
 }
 
 
