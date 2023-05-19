@@ -17,6 +17,7 @@ enum scanmode:String{
     case SquarewaveDRgenerator="Duty ratio adjustable squarewave generator"
     case Secondorder="Second order filter"
     case Sequence="Sequence generator"
+    case Proportional="Proportional Circuit"
 }
 extension scanmode{
     
@@ -42,15 +43,17 @@ class ARappARpartmodel:ObservableObject{
     @Published var SquarewaveDRGeneratorAnchor:SquarewaveDR.Box
     @Published var SecondorderfilterAnchor:Secondorderfilter.Box
     @Published var SequencegeneratorAnchor:Sequencegenerator.Box
-    
+    @Published var ProportionalAnchor:Proportionalcircuit.Box
+
     //MARK: initiate
     init() {
         scaaningmodes=[scanmode.free,.Squarewavegenerator,.Secondorder,.Sequence]
-        scanmodeindex=[.Squarewavegenerator:0,.SquarewaveDRgenerator:1,.Secondorder:2,.Sequence:3]
+        scanmodeindex=[.Squarewavegenerator:0,.SquarewaveDRgenerator:1,.Secondorder:2,.Sequence:3,.Proportional:4]
         SquarewaveGeneratorAnchor=try! Squarewave.loadBox()
         SquarewaveDRGeneratorAnchor=try! SquarewaveDR.loadBox()
         SecondorderfilterAnchor=try! Secondorderfilter.loadBox()
         SequencegeneratorAnchor=try! Sequencegenerator.loadBox()
+        ProportionalAnchor=try! Proportionalcircuit.loadBox()
         container = NSPersistentContainer(name: "ARAppdata")
         container.loadPersistentStores { (description, error) in
             if let error = error {
@@ -126,11 +129,12 @@ class ARappARpartmodel:ObservableObject{
         SquarewaveDRGeneratorAnchor.addChild(generatedirectionallight())
         SecondorderfilterAnchor.addChild(generatedirectionallight())
         SequencegeneratorAnchor.addChild(generatedirectionallight())
+        ProportionalAnchor.addChild(generatedirectionallight())
     }
     
     /// Add anchors to AR scene
     func addanchor(ARview:ARView,mode:scanmode)->Void{
-        let Anchors:[HasAnchoring]=[SquarewaveGeneratorAnchor,SquarewaveDRGeneratorAnchor,SecondorderfilterAnchor,SequencegeneratorAnchor]
+        let Anchors:[HasAnchoring]=[SquarewaveGeneratorAnchor,SquarewaveDRGeneratorAnchor,SecondorderfilterAnchor,SequencegeneratorAnchor,ProportionalAnchor]
         switch mode {
         case .free:
             ARview.scene.anchors.append(contentsOf: Anchors)
@@ -140,43 +144,43 @@ class ARappARpartmodel:ObservableObject{
     
     //MARK: Updatetext
     //proportional update resistance text
-//    func proportionalupdatetext(ratext:String,rftext:String,plusresistancetext:[String],minusresistancetext:[String])->Void{
-//        var material=SimpleMaterial()
-//        material.color = .init(tint:.yellow)
-//        // update ra
-//        var textentity:Entity=SecondorderfilterAnchor.circuit!.findEntity(named: "ra")!.children[0].children[0]
-//        var textmodelcomponent:ModelComponent=(textentity.components[ModelComponent.self])!
-//        textmodelcomponent.materials[0]=material
-//        textmodelcomponent.mesh = .generateText(ratext.appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
-//        textentity.position=[-0.01,-0.01,0]
-//        textentity.components.set(textmodelcomponent)
-//        //update rf
-//        textentity=SecondorderfilterAnchor.circuit!.findEntity(named: "rf")!.children[0].children[0]
-//        textmodelcomponent=(textentity.components[ModelComponent.self])!
-//        textmodelcomponent.materials[0]=material
-//        textmodelcomponent.mesh = .generateText(rftext.appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
-//        textentity.position=[0,-0.01,0]
-//        textentity.components.set(textmodelcomponent)
-//        //update plusinput resistance
-//        for index in plusresistancetext.indices {
-//            textentity=SecondorderfilterAnchor.circuit!.findEntity(named: "rp\(index)")!.children[0].children[0]
-//            textmodelcomponent=(textentity.components[ModelComponent.self])!
-//            textmodelcomponent.materials[0]=material
-//            textmodelcomponent.mesh = .generateText(plusresistancetext[index].appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
-//            textentity.position=[0.01,0,0.01]
-//            textentity.components.set(textmodelcomponent)
-//        }
-//        //update minusinput resistance
-//        for index in minusresistancetext.indices {
-//            textentity=SecondorderfilterAnchor.circuit!.findEntity(named: "rm\(index)")!.children[0].children[0]
-//            textmodelcomponent=(textentity.components[ModelComponent.self])!
-//            textmodelcomponent.materials[0]=material
-//            textmodelcomponent.mesh = .generateText(minusresistancetext[index].appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
-//            textentity.position=[0.01,0,0.01]
-//            textentity.components.set(textmodelcomponent)
-//        }
-//        
-//    }
+    func proportionalupdatetext(ratext:String,rftext:String,plusresistancetext:[String],minusresistancetext:[String])->Void{
+        var material=SimpleMaterial()
+        material.color = .init(tint:.yellow)
+        // update ra
+        var textentity:Entity=ProportionalAnchor.circuit!.findEntity(named: "ra")!.children[0].children[0]
+        var textmodelcomponent:ModelComponent=(textentity.components[ModelComponent.self])!
+        textmodelcomponent.materials[0]=material
+        textmodelcomponent.mesh = .generateText(ratext.appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
+        textentity.position=[-0.01,-0.01,0]
+        textentity.components.set(textmodelcomponent)
+        //update rf
+        textentity=ProportionalAnchor.circuit!.findEntity(named: "rf")!.children[0].children[0]
+        textmodelcomponent=(textentity.components[ModelComponent.self])!
+        textmodelcomponent.materials[0]=material
+        textmodelcomponent.mesh = .generateText(rftext.appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
+        textentity.position=[0,-0.01,0]
+        textentity.components.set(textmodelcomponent)
+        //update plusinput resistance
+        for index in plusresistancetext.indices {
+            textentity=ProportionalAnchor.circuit!.findEntity(named: "rp\(index)")!.children[0].children[0]
+            textmodelcomponent=(textentity.components[ModelComponent.self])!
+            textmodelcomponent.materials[0]=material
+            textmodelcomponent.mesh = .generateText(plusresistancetext[index].appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
+            textentity.position=[0.01,0,0.01]
+            textentity.components.set(textmodelcomponent)
+        }
+        //update minusinput resistance
+        for index in minusresistancetext.indices {
+            textentity=ProportionalAnchor.circuit!.findEntity(named: "rm\(index)")!.children[0].children[0]
+            textmodelcomponent=(textentity.components[ModelComponent.self])!
+            textmodelcomponent.materials[0]=material
+            textmodelcomponent.mesh = .generateText(minusresistancetext[index].appending("𝛀"), extrusionDepth: 0.001, font: .systemFont(ofSize: 0.02))
+            textentity.position=[0.01,0,0.01]
+            textentity.components.set(textmodelcomponent)
+        }
+        
+    }
     
     //MARK: Enable gesture
     /// Enable gestures on anchors that temporarily contain no tapping behaviour
@@ -194,6 +198,11 @@ class ARappARpartmodel:ObservableObject{
             let filter=SecondorderfilterAnchor.filter!
             filter.generateCollisionShapes(recursive: true)
             arView.installGestures([.all], for: filter as! (Entity & HasCollision))
+        case .Proportional:
+            let model=ProportionalAnchor.circuit!
+            model.generateCollisionShapes(recursive: true)
+            arView.installGestures([.all], for: model as! (Entity & HasCollision))
+
         default:break        
         }
     }

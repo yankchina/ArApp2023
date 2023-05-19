@@ -43,6 +43,13 @@ struct Timer555triggerextraView: View {
                         VStack(alignment:.trailing,spacing:.zero){
                             InputupperLabel(backwardButtonaction: vm.inputbackward)
                             Group{
+                                InputSlider(leadingtext: "R:", Slidervalue: $vm.R, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
+                                InputSlider(leadingtext: "C:", Slidervalue: $vm.C, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "𝛍F")
+                                InputSlider(leadingtext: "u1Amplitude:", Slidervalue: $vm.SquarewaveAmplitude, minimumValue: 1, maximumValue: 15, SlidervalueStep: 0.1, ValueLabelDecimalplaces: 1, unittext: "V")
+                                InputSlider(leadingtext: "u1Offset:", Slidervalue: $vm.Squarewaveoffset, minimumValue: 1, maximumValue: 15, SlidervalueStep: 0.1, ValueLabelDecimalplaces: 1, unittext: "V")
+                                InputSlider(leadingtext: "Vcc:", Slidervalue: $vm.Vcc, minimumValue: 1, maximumValue: 15, SlidervalueStep: 0.1, ValueLabelDecimalplaces: 1, unittext: "V")
+                                InputSlider(leadingtext: "u1Period:", Slidervalue: $vm.Vcc, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "ms")
+                                InputSlider(leadingtext: "u1Dutyratio:", Slidervalue: $vm.SquarewaveDR, minimumValue: 1, maximumValue: 100, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "%")
                             }
                         }.frame(width:geometry.size.width*0.35)
                             .padding(.horizontal,1)

@@ -223,7 +223,7 @@ class ARSecondorderfiltermodel: ObservableObject {
 class AR555timertriggermodel: ObservableObject {
     @Published var R:Double
     @Published var C:Double
-    @Published var SquarewaveAmplititude:Double
+    @Published var SquarewaveAmplitude:Double
     @Published var Squarewaveoffset:Double
     @Published var Vcc:Double
     @Published var SquarewavePeriod:Double
@@ -240,7 +240,7 @@ class AR555timertriggermodel: ObservableObject {
     init() {
         R=10
         C=1
-        SquarewaveAmplititude=5
+        SquarewaveAmplitude=5
         Squarewaveoffset=0
         Vcc=5
         SquarewavePeriod=20
@@ -269,7 +269,7 @@ class AR555timertriggermodel: ObservableObject {
     func startforward()->Void{statusforward()}
     func inputforward(userurl:String)->Void{
         requestcount += 1
-        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/timer555monostabletrigger?R=\(R)&C=\(C)&Amplititude=\(SquarewaveAmplititude)&Offset\(Squarewaveoffset)&Vcc=\(Vcc)&Period=\(SquarewavePeriod)&Dutyratio=\(SquarewaveDR)&requestcount=\(requestcount)")
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/timer555monostabletrigger?R=\(R)&C=\(C)&Amplititude=\(SquarewaveAmplitude)&Offset\(Squarewaveoffset)&Vcc=\(Vcc)&Period=\(SquarewavePeriod)&Dutyratio=\(SquarewaveDR)&requestcount=\(requestcount)")
         statusforward()
     }
     func inputbackward()->Void{statusbackward()}
@@ -277,7 +277,7 @@ class AR555timertriggermodel: ObservableObject {
     func imageforward()->Void{statusforward()}
     func imagerefresh(userurl:String)->Void {
         requestcount += 1
-        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/timer555monostabletrigger?R=\(R)&C=\(C)&Amplititude=\(SquarewaveAmplititude)&Offset\(Squarewaveoffset)&Vcc=\(Vcc)&Period=\(SquarewavePeriod)&Dutyratio=\(SquarewaveDR)&requestcount=\(requestcount)")
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/timer555monostabletrigger?R=\(R)&C=\(C)&Amplititude=\(SquarewaveAmplitude)&Offset\(Squarewaveoffset)&Vcc=\(Vcc)&Period=\(SquarewavePeriod)&Dutyratio=\(SquarewaveDR)&requestcount=\(requestcount)")
     }
     func Valuelegal()->Bool{
         return true

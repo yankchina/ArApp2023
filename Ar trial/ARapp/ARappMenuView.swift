@@ -11,7 +11,7 @@ import AVKit
 
 //MARK: Appmenuview
 struct ARappmenuView: View {
-    let scaaningmodes:[scanmode]=[.free,.Squarewavegenerator,.SquarewaveDRgenerator,.Secondorder,.Sequence]
+    let scaaningmodes:[scanmode]=[.free,.Squarewavegenerator,.SquarewaveDRgenerator,.Secondorder,.Sequence,.Proportional]
     @EnvironmentObject var Usermodel:Appusermodel
 
     @StateObject var ARappMaterialpart:ARappMaterialpartmodel=ARappMaterialpartmodel()

@@ -44,7 +44,7 @@ struct SinegeneratorextraView: View {
                             InputupperLabel(backwardButtonaction: vm.inputbackward)
                             Group{
                                 InputSlider(leadingtext: "R:", Slidervalue: $vm.R, minimumValue: 1, maximumValue: 100, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
-                                InputSlider(leadingtext: "C:", Slidervalue: $vm.C, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
+                                InputSlider(leadingtext: "C:", Slidervalue: $vm.C, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "𝛍F")
                             }
                         }.frame(width:geometry.size.width*0.35)
                             .padding(.horizontal,1)

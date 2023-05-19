@@ -39,6 +39,15 @@ struct ARscanView:View{
             }
             //returnbutton
         }
+        .toolbar(content: {
+            Button {
+                showmodeinformation=true
+            } label: {
+                    Image(systemName: "info.circle")
+                    .foregroundColor(Color.accentColor)
+                        .font(.title)
+            }
+        })
         .environmentObject(Proportionalmodel)
         .environmentObject(Sequencemodel)
         .environmentObject(ARappARpart)
@@ -59,6 +68,7 @@ extension ARscanView{
             case .SquarewaveDRgenerator:SquarewaveDRextraView()
             case .Secondorder:SecondorderfilterextraView()
             case .Sequence:SequencegeneratorextraView()
+            case .Proportional:ProportionalextraView()
             default:ZStack{Spacer()}
             }
         }

@@ -246,8 +246,6 @@
 				C7AD258329C2F109000B3B5C /* ARscanView.swift */,
 				C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */,
 				C7A05BA229E4081600812238 /* ARTipView.swift */,
-				C7734EB729D5494E00ED51DF /* Sequencegeneratormodel.swift */,
-				C7512B7229D971D700906A05 /* Proportionalmodel.swift */,
 				C778B1BB29D4680D0007854A /* ARmodeextra */,
 			);
 			path = ARScan;
@@ -320,6 +318,8 @@
 			isa = PBXGroup;
 			children = (
 				A66016942A163EB800AE96C8 /* ServercircuitModels.swift */,
+				C7734EB729D5494E00ED51DF /* Sequencegeneratormodel.swift */,
+				C7512B7229D971D700906A05 /* Proportionalmodel.swift */,
 				C7733DE829C4B4CD002AE566 /* RCextraView.swift */,
 				C7AFF2CF29D412850080D1CA /* ProportionalextraView.swift */,
 				C7C4FC2029D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift */,
