@@ -75,7 +75,7 @@ struct ArappLoginViewiOS16: View {
     @EnvironmentObject var Usermodel:Appusermodel
     var body: some View {
         if #available(iOS 16.0, *) {
-            NavigationStack{
+            NavigationView{
                 GeometryReader{geometry in
                     HStack{
                         Spacer()
