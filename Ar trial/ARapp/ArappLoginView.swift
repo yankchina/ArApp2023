@@ -59,8 +59,8 @@ struct ArappLoginView: View {
             
 
         }
-        .blurredSheet(.init(.ultraThinMaterial), show: $Usermodel.UserSignup){
-            
+        .blurredSheet(Usermodel.blurredShapestyle, show: $Usermodel.UserSignup){
+
         }content: {
             ARappSignupView()
         }

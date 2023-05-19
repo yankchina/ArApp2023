@@ -11,10 +11,10 @@ import RealityKit
 import Combine
 
 struct ArappUser:Identifiable,Codable {
-    var id:String=""
-    var password:String=""
+    var id:String="1"
+    var password:String="1"
     var authority:Int = -1
-    var simulationurl:String=""
+    var simulationurl:String="10.198.72.122:8000"
     var status:Bool=false
 }
 
@@ -32,6 +32,7 @@ class Appusermodel:ObservableObject{
     @Published var loginfailalert:Bool
     let Timereveryonesecond:Publishers.Autoconnect<Timer.TimerPublisher>
     let Timerevery15second:Publishers.Autoconnect<Timer.TimerPublisher>
+    let blurredShapestyle:AnyShapeStyle
     @Published var SimulationimageRefreshDisable:Bool
     @Published var refreshcount:Int
     @Published var Simulationurlsecure:Bool
@@ -51,6 +52,7 @@ class Appusermodel:ObservableObject{
         loginfailalert=false
         Timereveryonesecond = Timer.publish(every: 1, tolerance: nil, on: .main, in: .common, options: nil).autoconnect()
         Timerevery15second=Timer.publish(every: 15, tolerance: nil, on: .main, in: .common, options: nil).autoconnect()
+        blurredShapestyle = .init(.ultraThinMaterial)
         SimulationimageRefreshDisable=false
         refreshcount=3
         Simulationurlsecure=true
@@ -116,7 +118,6 @@ class Appusermodel:ObservableObject{
         let username=user.id
         user=ArappUser(id:username)
         appstatus=0
-        cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
         SimulationimageRefreshDisable=false

@@ -9,7 +9,7 @@ import SwiftUI
 
 //MARK: UpdatetabView
 struct ARUpdatetabView:View{
-    @EnvironmentObject var appmodel:ARappARpartmodel
+    @ObservedObject var appmodel:ARappARpartmodel
     let startmode:scanmode
     @Binding var updatemode:scanmode?
     @Binding var extraviewmode:scanmode

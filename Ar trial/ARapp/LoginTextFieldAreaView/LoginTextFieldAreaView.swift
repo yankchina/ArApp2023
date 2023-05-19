@@ -21,19 +21,19 @@ struct LoginTextFieldAreaView: View {
          TextFieldtext:[Binding<String>],
          TextFieldkeyboardtype:[Int])
     {
-        self.TextFieldWidth=width
+        TextFieldWidth=width
         self.TextFieldLeadingLabel=TextFieldLeadingLabel
         self.TextFieldTypeisSecure=TextFieldTypeisSecure
         self.TextFieldtext=TextFieldtext
         self.TextFieldkeyboardtype=TextFieldkeyboardtype.map{
-            UIKeyboardType(rawValue: $0) ?? .default
+            UIKeyboardType(rawValue: $0) ?? UIKeyboardType.default
         }
         TextFieldSecure=Array(repeating: true, count: TextFieldLeadingLabel.count)
         let Length:[Int]=[TextFieldLeadingLabel.count,TextFieldTypeisSecure.count,TextFieldtext.count]
         if Length.max() == Length.min(){
-            self.InputLegal=true
+            InputLegal=true
         }else{
-            self.InputLegal=false
+            InputLegal=false
         }
     }
     
@@ -68,14 +68,14 @@ struct LoginTextFieldAreaView: View {
                             } label: {
                                 Image(systemName: TextFieldSecure[index] ? "eye.slash" : "eye")
                                     .foregroundColor(.accentColor)
-                            }
+                            }.controlSize(ControlSize.large)
                         }else{
                             Button {
 
                             } label: {
                                 Image(systemName: "eye")
                                     .foregroundColor(.accentColor)
-                            }.disabled(true).hidden()
+                            }.disabled(true).controlSize(ControlSize.large).hidden()
                         }
                         
                     }

@@ -11,20 +11,25 @@ import Combine
 struct ContentView : View {
     @StateObject var Usermodel:Appusermodel=Appusermodel()
     var body: some View {
-        ZStack{
-            switch Usermodel.appstatus {
-            case 0:ArappLoginView()
-            case 1:ARappmenuView()
+        NavigationView{
+            ZStack{
+                switch Usermodel.appstatus {
+                case 0:ArappLoginView()
+                case 1:ARappmenuView()
 
-            default: ZStack{}
+                default: ZStack{}
 
+                }
             }
-        }.environmentObject(Usermodel)
+
+        }
+        .environmentObject(Usermodel)
             .onReceive(Usermodel.Timereveryonesecond) { output in
                 if Usermodel.Serverswitch{
                     Usermodel.UpdateServer()
                 }
             }
+
         //OnlineTaskView()
 //        VideoView(Resource:"ARtrial",timeoutduration:2)
 //        CustomURLTypingView(Initialtext: "URL", text: $Usermodel.user.simulationurl)

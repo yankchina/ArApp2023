@@ -33,7 +33,7 @@ struct OnlineTaskView: View {
                                             Image(systemName: "arrow.right.circle")
                                         }.font(.title)
                                             .padding(.horizontal)
-                                            .foregroundColor(.accentColor)
+                                            .foregroundColor(Color.accentColor)
                                         Divider()
                                         HStack{
                                             Text("Remaining: ").font(.title2)
@@ -47,12 +47,14 @@ struct OnlineTaskView: View {
                                             .padding(.horizontal)
                                     }
                                     .frame(width:geometry.size.width*0.5)
-                                        .background(RoundedRectangle(cornerRadius: 5).stroke(.secondary))
+                                        .background(RoundedRectangle(cornerRadius: 5)
+                                                        .stroke(Color.secondary)
+                                        )
                                         .padding(.horizontal,5)
                                         .onTapGesture {
                                             OnlineTaskmodel.TaskDetaildisplay[index].toggle()
                                         }
-                                        .blurredSheet(.init(.ultraThinMaterial), show: $OnlineTaskmodel.TaskDetaildisplay[index]) {
+                                        .blurredSheet(Usermodel.blurredShapestyle, show: $OnlineTaskmodel.TaskDetaildisplay[index]) {
                                             
                                         } content: {
                                             TaskDetailView(OnlineTaskmodel: OnlineTaskmodel, Taskindex: index)

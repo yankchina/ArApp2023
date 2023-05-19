@@ -9,8 +9,8 @@ import SwiftUI
 import RealityKit
 
 struct ProportionalextraView: View {
-    @EnvironmentObject var appmodel:ARappARpartmodel
-    @EnvironmentObject var proportionalmodel:Proportionalcircuitmodel
+    @ObservedObject var appmodel:ARappARpartmodel
+    @ObservedObject var proportionalmodel:Proportionalcircuitmodel
     @State var display:Bool=false
     @State var Imagemagnifyamount:CGFloat=0
     @State var Imagemagnifylastamount:CGFloat=0
@@ -19,7 +19,7 @@ struct ProportionalextraView: View {
         GeometryReader{geometry in
             ZStack{
                 ZStack{
-                    ProportionalextrachartView(geometry: geometry)
+                    ProportionalextrachartView(appmodel: appmodel, proportionalmodel: proportionalmodel, geometry: geometry)
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
 //                resetbutton
@@ -55,8 +55,8 @@ struct ProportionalextraView: View {
 //}
 
 struct ProportionalextrachartView:View{
-    @EnvironmentObject var appmodel:ARappARpartmodel
-    @EnvironmentObject var proportionalmodel:Proportionalcircuitmodel
+    @ObservedObject var appmodel:ARappARpartmodel
+    @ObservedObject var proportionalmodel:Proportionalcircuitmodel
     var geometry:GeometryProxy
     @State var showalert:Bool=false
     @State var zooming:Bool=false

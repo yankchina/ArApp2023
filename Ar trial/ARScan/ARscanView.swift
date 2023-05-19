@@ -28,15 +28,15 @@ struct ARscanView:View{
             let size=$0.size
             ZStack {
                 //Main AR View
-                ARViewContainer(startmode: startmode,updatemode: $updatemode,extraviewmode:$extraviewmode).ignoresSafeArea(.all, edges: .top)
+                ARViewContainer(startmode: startmode, appmodel: ARappARpart, Sequencemodel: Sequencemodel,updatemode: $updatemode,extraviewmode:$extraviewmode).ignoresSafeArea(.all, edges: .top)
                     .alert(isPresented: $showmodeinformation){
                         ARappARpartmodel.generatemodeinform(mode: extraviewmode)
                     }
                 modeextraview
-                ARUpdatetabView(startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
+                ARUpdatetabView(appmodel: ARappARpart, startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
                 //topleadingbuttons
                 if !ARappARpart.Tipconfirmed{
-                    ARTipView()
+                    ARTipView(appmodel: ARappARpart)
                 }
                 //returnbutton
             }
@@ -51,9 +51,6 @@ struct ARscanView:View{
             }
 
         }
-        .environmentObject(Proportionalmodel)
-        .environmentObject(Sequencemodel)
-        .environmentObject(ARappARpart)
         .onAppear {
             print("ar Appear")
         }
@@ -70,8 +67,8 @@ extension ARscanView{
             case .Squarewavegenerator:SquarewaveextraView()
             case .SquarewaveDRgenerator:SquarewaveDRextraView()
             case .Secondorder:SecondorderfilterextraView()
-            case .Sequence:SequencegeneratorextraView()
-            case .Proportional:ProportionalextraView()
+            case .Sequence:SequencegeneratorextraView(appmodel: ARappARpart, Sequencemodel: Sequencemodel)
+            case .Proportional:ProportionalextraView(appmodel: ARappARpart, proportionalmodel: Proportionalmodel)
             default:ZStack{Spacer()}
             }
         }
@@ -130,8 +127,8 @@ struct ARViewContainer: UIViewRepresentable {
     
     /// The AR mode when AR view starts
     let startmode:scanmode?
-    @EnvironmentObject var appmodel:ARappARpartmodel
-    @EnvironmentObject var Sequencemodel:Sequencegeneratormodel
+    @ObservedObject var appmodel:ARappARpartmodel
+    @ObservedObject var Sequencemodel:Sequencegeneratormodel
     /// Temporal variable for updating AR mode
     @Binding var updatemode:scanmode?
     /// Temporal variable for updating AR mode

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SequencegeneratorextraView: View {
-    @EnvironmentObject var appmodel:ARappARpartmodel
-    @EnvironmentObject var Sequencemodel:Sequencegeneratormodel
+    @ObservedObject var appmodel:ARappARpartmodel
+    @ObservedObject var Sequencemodel:Sequencegeneratormodel
     @State var display:Bool=false
     @State var Imagemagnifyamount:CGFloat=0
     @State var Imagemagnifylastamount:CGFloat=0

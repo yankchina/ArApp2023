@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct ARappSignupView: View {
-    @Environment(\.presentationMode) var present
     @EnvironmentObject var Usermodel:Appusermodel
 //    @StateObject var Usermodel:Appusermodel
     @State var username:String=""
@@ -26,7 +25,7 @@ struct ARappSignupView: View {
                         }else{
                             Text(Usermodel.Signupsuccess! ? "Sign up success" : "Sign up fail")
                                 .font(.title)
-                                .foregroundColor(Usermodel.Signupsuccess! ? .green : .red)
+                                .foregroundColor(Usermodel.Signupsuccess! ? Color.green : Color.red)
                         }
                     }else{
                         Text("Registration").font(.largeTitle).bold()

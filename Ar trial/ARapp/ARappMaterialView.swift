@@ -13,12 +13,12 @@ struct ARappMaterialview: View{
     
     
     //MARK: parameters
-    @Environment(\.presentationMode) var presentationMode
+//    @Environment(\.presentationMode) var presentationMode
     //var imageset:[String]=["SEUlogo","SEUlogo_dark"]
     //@Binding var imagestemporalstorage:[Int]
     let chapter:Int
     let scrollwidthratio:CGFloat = 1/6
-    @EnvironmentObject var appmodel:ARappMaterialpartmodel
+    @ObservedObject var appmodel:ARappMaterialpartmodel
     @State var scrolltoindex:Int = 0
     @State var scrollpresent:Bool=true
     @State var scrolloffsetx:CGFloat=0
@@ -159,25 +159,10 @@ struct ARappMaterialview: View{
                 .overlay(alignment: .topLeading){
                     
                 }
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now()+0.001) {
-                        StaticWidth=geometry.size.width
-                        StaticHeight=geometry.size.height
-                        LocalSizeApply=true
-                        print("perform")
-                    }
-                }
 //                .onChange(of: geometry.size.width) { _ in
 //                    print("geometry change")
 //                }
 
-        }
-        
-        .onAppear {
-            print("MA Appear")
-        }
-        .onDisappear {
-            print("MA disappear")
         }
         .onChange(of: appmodel.imageprogress[chapter]){ value in
             UserDefaults.standard.set(value, forKey: "chapterprogress\(chapter)")
@@ -267,7 +252,6 @@ extension ARappMaterialview{
             .font(.title)
             .padding(5)
             .onTapGesture {
-                print("present")
                             scrollpresent=true
             }
                         

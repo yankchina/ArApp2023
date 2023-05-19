@@ -17,29 +17,38 @@ struct ARappmenuView: View {
     @StateObject var ARappMaterialpart:ARappMaterialpartmodel=ARappMaterialpartmodel()
     var body: some View {
         
-      NavigationView{
-          GeometryReader{geometry in
-              List{
-                  //MARK: ARscan section placement
-                  Scansection
-                  
+        GeometryReader{geometry in
+            List{
+                //MARK: ARscan section placement
+                Scansection
+                
 
-                 
-                  
-                  //MARK: Material section placement
-                  Materialsection
-                  
-                  NavigationLink(destination: OnlineTaskView()) {
-                      Text("Tasks").font(.title2)
-                  }
-                  
-                  Button(action: Usermodel.logout) {
-                      Text("Log out")
-                  }
-                  .buttonStyle(.borderedProminent)
-                  .buttonBorderShape(.roundedRectangle(radius: 3))
-                  .accentColor(Color.red)
-                  
+               
+                
+                //MARK: Material section placement
+                Materialsection
+                
+                NavigationLink(destination: OnlineTaskView()) {
+                    Text("Tasks").font(.title2)
+                }
+                NavigationLink(destination:
+                                ZStack{}
+                                .onAppear(perform: Usermodel.logout)
+                ) {
+                    Text("Log out")
+                        .font(.title2)
+                        .padding(5)
+                        .foregroundColor(Color.TextprimaryColor)
+                        .background(Color.red.cornerRadius(3))
+                }
+
+//                Button(action: Usermodel.logout) {
+//                    Text("Log out")
+//                }
+//                .buttonStyle(.borderedProminent)
+//                .buttonBorderShape(.roundedRectangle(radius: 3))
+//                .accentColor(Color.red)
+                
 //                  NavigationLink(
 //                    destination:
 //                        VideoPlayer(player: .init(url: URL(fileURLWithPath:
@@ -50,24 +59,21 @@ struct ARappmenuView: View {
 //                  ) {
 //                      Text("Tutorial Video").font(.title2)
 //                  }.padding(.vertical,10)
-              }
-              .navigationTitle("Menu")
-              .toolbar{
-                  ToolbarItem(placement: .navigationBarLeading) {
-                      Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05)
-                  }
-                  ToolbarItem(placement: .navigationBarTrailing) {
-                      Toggle(isOn: $Usermodel.Serverswitch) {
-                          Text("")
-                      }
-                      .toggleStyle(.switch)
-                  }
+            }
+            .navigationTitle("Menu")
+            .toolbar{
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05)
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Toggle(isOn: $Usermodel.Serverswitch) {
+                        Text("")
+                    }
+                    .toggleStyle(.switch)
+                }
 
-              }
-          }
-          
-              
-        }.environmentObject(ARappMaterialpart)
+            }
+        }
     }
 }
 
@@ -92,7 +98,7 @@ extension ARappmenuView{
     private var Materialsection:some View{
         Section(header: Text("Material").font(.title)) {
             ForEach(ARappMaterialpart.Material.indices,id:\.self) { index in
-                NavigationLink(destination: ARappMaterialview(chapter: index)) {
+                NavigationLink(destination: ARappMaterialview(chapter: index, appmodel: ARappMaterialpart)) {
                     Text("Ch\(index)").font(.title2).bold()
                     if ARappMaterialpart.chapterviewed[index]{
                         Text("(last viewing:page\(ARappMaterialpart.imageprogress[index]))").font(.title3)

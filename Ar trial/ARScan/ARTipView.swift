@@ -9,7 +9,7 @@ import SwiftUI
 import RealityKit
 
 struct ARTipView: View {
-    @EnvironmentObject var appmodel:ARappARpartmodel
+    @ObservedObject var appmodel:ARappARpartmodel
     var body: some View {
         ZStack{
             Color.secondary.opacity(0.8).ignoresSafeArea(.all)
@@ -101,11 +101,5 @@ extension ARTipView{
             }.frame(maxWidth: .infinity,maxHeight: .infinity,alignment: .bottomTrailing)
         }
         
-    }
-}
-
-struct ARTipView_Previews: PreviewProvider {
-    static var previews: some View {
-        ARTipView()
     }
 }
