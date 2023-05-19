@@ -9,11 +9,11 @@ import SwiftUI
 import RealityKit
 import Combine
 
+/// View of all Online Tasks
 struct OnlineTaskView: View {
     @EnvironmentObject var Usermodel:Appusermodel
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject var OnlineTaskmodel:OnlineTaskModel=OnlineTaskModel()
-    @State var currentDay:Date = .init()
     var body: some View {
         GeometryReader{geometry in
             ZStack{

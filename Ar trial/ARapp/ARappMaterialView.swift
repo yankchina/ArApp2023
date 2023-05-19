@@ -9,6 +9,7 @@ import SwiftUI
 import RealityKit
 
 //MARK: Material view definition
+/// App Material View
 struct ARappMaterialview: View{
     
     
@@ -17,12 +18,15 @@ struct ARappMaterialview: View{
     //var imageset:[String]=["SEUlogo","SEUlogo_dark"]
     //@Binding var imagestemporalstorage:[Int]
     let chapter:Int
+    /// Width ratio of leading ScrollView
     let scrollwidthratio:CGFloat = 1/6
     @ObservedObject var appmodel:ARappMaterialpartmodel
+    /// Index for ScrollViewReader proxy to scroll to
     @State var scrolltoindex:Int = 0
+    /// Present leading ScrollView
     @State var scrollpresent:Bool=true
+    /// Horizontal offset of leading ScrollView
     @State var scrolloffsetx:CGFloat=0
-    @State var StaticWidth:CGFloat=0
     @State var StaticHeight:CGFloat=0
     @State var LocalSizeApply:Bool=false
     //MARK: body

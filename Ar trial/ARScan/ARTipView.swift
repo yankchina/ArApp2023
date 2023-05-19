@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 
+/// Tips when first entering ARView
 struct ARTipView: View {
     @ObservedObject var appmodel:ARappARpartmodel
     var body: some View {

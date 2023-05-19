@@ -10,8 +10,15 @@ import AVFoundation
 import AVKit
 
 //MARK: Appmenuview
+/// App menu
 struct ARappmenuView: View {
-    let scaaningmodes:[scanmode]=[.free,.Squarewavegenerator,.SquarewaveDRgenerator,.Secondorder,.Sequence,.Proportional]
+    /// Navigationlinks modes
+    let scaaningmodes:[scanmode]=[.free,
+                                  .Squarewavegenerator,
+                                  .SquarewaveDRgenerator,
+                                  .Secondorder,
+                                  .Sequence,
+                                  .Proportional]
     @EnvironmentObject var Usermodel:Appusermodel
 
     @StateObject var ARappMaterialpart:ARappMaterialpartmodel=ARappMaterialpartmodel()
@@ -62,14 +69,22 @@ struct ARappmenuView: View {
             }
             .navigationTitle("Menu")
             .toolbar{
+                //Leading image
                 ToolbarItem(placement: .navigationBarLeading) {
                     Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05)
                 }
+                //Button to switch between two servers
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Toggle(isOn: $Usermodel.Serverswitch) {
-                        Text("")
+                    Button {
+                        if Usermodel.user.simulationurl == ""{
+                            
+                        }else{
+                            
+                        }
+                    } label: {
+                        Text("switch").foregroundColor(Color.secondary).opacity(0.05)
                     }
-                    .toggleStyle(.switch)
+
                 }
 
             }

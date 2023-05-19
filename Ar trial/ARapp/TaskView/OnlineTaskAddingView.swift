@@ -8,6 +8,7 @@
 import SwiftUI
 import RealityKit
 
+/// View of adding online task
 struct OnlineTaskAddingView: View {
     @EnvironmentObject var Usermodel:Appusermodel
     @ObservedObject var OnlineTaskmodel:OnlineTaskModel

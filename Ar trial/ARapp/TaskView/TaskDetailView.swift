@@ -7,9 +7,11 @@
 
 import SwiftUI
 
+/// Details of a task
 struct TaskDetailView: View {
     @ObservedObject var OnlineTaskmodel:OnlineTaskModel
     @EnvironmentObject var Usermodel:Appusermodel
+    /// Index of the task in the OnlineTaskModel
     let Taskindex:Int
     @State var showdeletefailalert:Bool=false
     var body: some View {

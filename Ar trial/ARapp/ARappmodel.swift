@@ -34,10 +34,14 @@ class ARappARpartmodel:ObservableObject{
     //coredata
     let container: NSPersistentContainer
     @Published var ARapptipEntity: [Tip]
+    /// Whether user has confirmed all tips when user first enters ARView
     @Published var Tipconfirmed:Bool
+    /// Number of all tips
     let Tipnumber:Int
     //AR part variables
+    /// Circuit modes used in update tab
     let scaaningmodes:[scanmode]
+    /// Dictionary used in adding AR anchors
     let scanmodeindex:[scanmode:Int]
     @Published var SquarewaveGeneratorAnchor:Squarewave.Box
     @Published var SquarewaveDRGeneratorAnchor:SquarewaveDR.Box
@@ -47,8 +51,17 @@ class ARappARpartmodel:ObservableObject{
 
     //MARK: initiate
     init() {
-        scaaningmodes=[scanmode.free,.Squarewavegenerator,.Secondorder,.Sequence]
-        scanmodeindex=[.Squarewavegenerator:0,.SquarewaveDRgenerator:1,.Secondorder:2,.Sequence:3,.Proportional:4]
+        scaaningmodes=[scanmode.free,
+                       .Squarewavegenerator,
+                       .SquarewaveDRgenerator,
+                       .Secondorder,.Sequence,
+                       .Proportional
+        ]
+        scanmodeindex=[.Squarewavegenerator:0,
+                       .SquarewaveDRgenerator:1,
+                       .Secondorder:2,.Sequence:3,
+                       .Proportional:4
+        ]
         SquarewaveGeneratorAnchor=try! Squarewave.loadBox()
         SquarewaveDRGeneratorAnchor=try! SquarewaveDR.loadBox()
         SecondorderfilterAnchor=try! Secondorderfilter.loadBox()
@@ -109,6 +122,8 @@ class ARappARpartmodel:ObservableObject{
             print("Error saving. \(error)")
         }
     }
+    /// Operates when any of the tips is confirmed, if all tips have been confirmed,
+    /// set Tipconfirmed true
     func Updatetipstatus()->Void{
         for index in 0..<Tipnumber {
             if !ARapptipEntity[index].tipviewed {
@@ -144,6 +159,12 @@ class ARappARpartmodel:ObservableObject{
     
     //MARK: Updatetext
     //proportional update resistance text
+    /// Operates when user modifies proportional circuit, updates AR scene
+    /// - Parameters:
+    ///   - ratext: Value of ra
+    ///   - rftext: Value of rf
+    ///   - plusresistancetext: Value of all plus side resistors
+    ///   - minusresistancetext: Value of all minus side resistors
     func proportionalupdatetext(ratext:String,rftext:String,plusresistancetext:[String],minusresistancetext:[String])->Void{
         var material=SimpleMaterial()
         material.color = .init(tint:.yellow)
@@ -257,17 +278,10 @@ class ARappARpartmodel:ObservableObject{
     }
     
     //MARK: static functions
-    public static func generetemodel()->ModelEntity{
-        let mesh:MeshResource = .generatePlane(width: 0.3, depth: 0.3)
-
-        var material=SimpleMaterial()
-        material.metallic = .float(1)
-        material.roughness = .float(1)
-        material.color = .init(tint: .white.withAlphaComponent(0.99), texture: .init(try! .load(named:"SEUlogo")))
-        return ModelEntity(mesh: mesh)
-        
-        
-    }
+    
+    
+    
+    
     
     //MARK: mode information requires editing and changing
     /// Generates mode alert when the toptrailing questionmark.circle button is pressed
@@ -286,15 +300,6 @@ class ARappARpartmodel:ObservableObject{
         return Alert(title: text, message: message, dismissButton: .default(Text("OK")))
     }
     
-    static func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {
-        guard
-            let response = output.response as? HTTPURLResponse,
-            response.statusCode >= 200 && response.statusCode < 300 else {
-            throw URLError(.badServerResponse)
-        }
-        return output.data
-    }
-    
 }
 
 //MARK: ARappMaterialpartmodel
@@ -308,8 +313,11 @@ class ARappMaterialpartmodel:ObservableObject{
     let container: NSPersistentContainer
     @Published var ARappchapterEntity: [Chapter]
     //Material part data
+    /// Progress of all chapters
     @Published var imageprogress:[Int]
+    /// Whether each chapter is viewed
     @Published var chapterviewed:[Bool]
+    /// Dictionaries of chapter images
     @Published var Material:[[([Image],Int)]]
     
     //MARK: initiate
@@ -318,7 +326,7 @@ class ARappMaterialpartmodel:ObservableObject{
         imageprogress=[0,0]
         chapterviewed=[false,false]
         Material=[]
-        let chapterlength:[Int]=[47,0]
+        let chapterlength:[Int]=[47]
         var Materialimages:[[([Image],Int)]]=[]
         for index1 in chapterlength.indices {
             var chapterimages:[([Image],Int)] = []

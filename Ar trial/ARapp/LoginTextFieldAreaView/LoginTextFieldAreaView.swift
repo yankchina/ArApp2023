@@ -7,13 +7,21 @@
 import Foundation
 import SwiftUI
 
+/// Login TextFields View
 struct LoginTextFieldAreaView: View {
+    /// Width of all TextField
     let TextFieldWidth:CGFloat?
+    /// Leading description of TextField binding text
     let TextFieldLeadingLabel:[String]
+    /// Whether each TextField enables secure mode
     let TextFieldTypeisSecure:[Bool]
+    /// Binding text of each TextField
     var TextFieldtext:[Binding<String>]
+    /// KeyboardType of each TextField
     let TextFieldkeyboardtype:[UIKeyboardType]
+    /// Each TextField is in secure mode
     @State var TextFieldSecure:[Bool]
+    /// Whether input is valid
     let InputLegal:Bool
     init(width:CGFloat?,
          TextFieldLeadingLabel:[String],

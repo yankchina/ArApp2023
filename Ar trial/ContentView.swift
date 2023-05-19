@@ -24,11 +24,6 @@ struct ContentView : View {
 
         }
         .environmentObject(Usermodel)
-            .onReceive(Usermodel.Timereveryonesecond) { output in
-                if Usermodel.Serverswitch{
-                    Usermodel.UpdateServer()
-                }
-            }
 
         //OnlineTaskView()
 //        VideoView(Resource:"ARtrial",timeoutduration:2)

@@ -7,18 +7,20 @@
 
 import SwiftUI
 
+/// Singup View, displays after user taps signup Button in LoginView
 struct ARappSignupView: View {
     @EnvironmentObject var Usermodel:Appusermodel
-//    @StateObject var Usermodel:Appusermodel
     @State var username:String=""
     @State var password:String=""
     @State var url:String=""
+    //MARK: body
     var body: some View {
         GeometryReader{
             let size=$0.size
             HStack{
                 Spacer()
                 VStack{
+                    //View when user pressed signup Button
                     if Usermodel.Signingup{
                         if Usermodel.Signupsuccess == nil {
                             ProgressView()
@@ -27,7 +29,9 @@ struct ARappSignupView: View {
                                 .font(.title)
                                 .foregroundColor(Usermodel.Signupsuccess! ? Color.green : Color.red)
                         }
-                    }else{
+                    }
+                    //View when typing in user information
+                    else{
                         Text("Registration").font(.largeTitle).bold()
                         Spacer()
                         Image(systemName: "person.crop.circle")

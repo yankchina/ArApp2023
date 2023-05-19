@@ -10,43 +10,56 @@ import SwiftUI
 import RealityKit
 import Combine
 
+/// The struct stores User information
 struct ArappUser:Identifiable,Codable {
+    /// user id
     var id:String="1"
+    /// user password
     var password:String="1"
+    /// user authority level,
+    /// authority < 0 means unauthorized user
+    /// authority >=0 allow user to log in
     var authority:Int = -1
+    /// server address of sending requests
     var simulationurl:String="10.198.72.122:8000"
     var status:Bool=false
 }
 
+/// struct to decode sign up response json
 struct SignupResponse:Codable{
     var Signupsuccess:Bool
 }
 
 //MARK: Appusermodel
+/// The model includes user information, app status, timers, view state vars
 class Appusermodel:ObservableObject{
     //variables
     @Published var user: ArappUser
+    /// 0 -> login status, 1 -> running status
     @Published var appstatus:Int
     var cancellables:Set<AnyCancellable>
+    /// Log in view sign in button able bool, prevents user from sending frequent requests
     @Published var signinbuttonable: Bool
     @Published var loginfailalert:Bool
     let Timereveryonesecond:Publishers.Autoconnect<Timer.TimerPublisher>
     let Timerevery15second:Publishers.Autoconnect<Timer.TimerPublisher>
     let blurredShapestyle:AnyShapeStyle
+    /// Simulation image refreshing button able bool, prevents user from refreshing image frequently
     @Published var SimulationimageRefreshDisable:Bool
+    /// Minimum interval between two refresh requests
     @Published var refreshcount:Int
-    @Published var Simulationurlsecure:Bool
-    @Published var Passwordsecure:Bool
+    /// User in signup view
     @Published var UserSignup:Bool
+    /// Having sent signing up request
     @Published var Signingup:Bool
+    /// Signing up request success
     @Published var Signupsuccess:Bool?
     @Published var Actiondate:Date
     @Published var Receivedate:Date
-    @Published var Serverswitch:Bool
     
     init(){
         user=ArappUser()
-        appstatus=0
+        appstatus=1
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -55,16 +68,15 @@ class Appusermodel:ObservableObject{
         blurredShapestyle = .init(.ultraThinMaterial)
         SimulationimageRefreshDisable=false
         refreshcount=3
-        Simulationurlsecure=true
-        Passwordsecure=true
         UserSignup=false
         Signingup=false
         Signupsuccess=nil
         Actiondate=Date()
         Receivedate=Date()
-        Serverswitch=false
     }
     //MARK: Functions
+    /// Returns whether the login view url is legal text
+    /// - Returns: Whether the url match xxx.xxx.xxx.xxx:xxx syntax
     func Simulationurllegal()->Bool{
         var Urllinks:[String]=user.simulationurl.Droplastblankspaces.split(separator: ".").map { String($0)}
         guard Urllinks.count == 4 else{return false}
@@ -80,14 +92,20 @@ class Appusermodel:ObservableObject{
         return true
     }
     
+    /// Clears login view textfields texts
     func clearlogintype() -> Void {
         user=ArappUser()
     }
+    
+    /// Operation after user tap login button
     func loginconfirm() -> Void {
+        //Disable signin button
         signinbuttonable=false
+        //Remove blank spaces at the end of login view textfields texts
         user.simulationurl.Removelastblankspaces()
         user.password.Removelastblankspaces()
         user.id.Removelastblankspaces()
+        //Form url
         let urlstring:String="http://"+user.simulationurl+"/AR/Online/Confirm?username="+user.id+"&password="+user.password+"&url="+user.simulationurl
         guard let url = URL(string: urlstring) else {
             signinbuttonable=true
@@ -102,8 +120,10 @@ class Appusermodel:ObservableObject{
             .decode(type: ArappUser.self, decoder: JSONDecoder())
             .replaceError(with: user)
             .sink{ [weak self] (returnedPosts) in
+                //Enable signin button
                 self?.signinbuttonable=true
                 self?.user = returnedPosts
+                //If response authority >= 0, log in. Else alert user
                 if returnedPosts.authority >= 0{
                     self?.appstatus=1
                 }
@@ -114,20 +134,24 @@ class Appusermodel:ObservableObject{
             .store(in: &cancellables)
     }
     
+    /// Operation after user tap logout button, reassign usermodel properties
     func logout()->Void{
+        //Save user id
         let username=user.id
+        //Clean user password and url
         user=ArappUser(id:username)
+        //Return to login view
         appstatus=0
         signinbuttonable=true
         loginfailalert=false
         SimulationimageRefreshDisable=false
         refreshcount=3
-        Simulationurlsecure=true
-        Passwordsecure=true
     }
     
+    /// Operation when user tap signin button
     func Signup(username:String,password:String,signupurl:String)->Void{
         Signingup=true
+        //Form url
         let urlstring:String="http://"+signupurl+"/AR/Online/Signup?username="+username+"&password="+password+"&url="+signupurl
         guard let url = URL(string: urlstring) else {
             return
@@ -139,7 +163,9 @@ class Appusermodel:ObservableObject{
             .decode(type: SignupResponse.self, decoder: JSONDecoder())
             .replaceError(with: SignupResponse(Signupsuccess: false))
             .sink{ [weak self] Signupresponse in
+                //Assign usermodel signup success var
                 self?.Signupsuccess=Signupresponse.Signupsuccess
+                //Automatically quit signin view after 2 seconds
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     self?.UserSignup=false
                 }
@@ -150,11 +176,15 @@ class Appusermodel:ObservableObject{
             }
             .store(in: &cancellables)
     }
+    
+    /// Operation when simulation AsyncImage appears, disable refresh button, start countdown 4s
     func SimulationImagedisplay() -> Void {
         SimulationimageRefreshDisable=true
         refreshcount=4
     }
     
+    /// Countdown loop of 4s
+    /// - Parameter Date: The output of timer
     func SimulationImageRefreshCountdown(Date:Date)->Void{
         if SimulationimageRefreshDisable{
             if refreshcount > 0{
@@ -166,15 +196,8 @@ class Appusermodel:ObservableObject{
         }
     }
     
-    func UpdateServer()->Void{
-        if user.simulationurl == ""{
-            user.simulationurl = ""
-        }else{
-            user.simulationurl = ""
-        }
-        Serverswitch=false
-    }
-    
+    //MARK: static functions
+    /// Handle datatask output
     static func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {
         guard
             let response = output.response as? HTTPURLResponse,

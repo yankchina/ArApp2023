@@ -9,16 +9,23 @@ import SwiftUI
 import UIKit
 import RealityKit
 
+/// Login View, displays when appstatus == 0
 struct ArappLoginView: View {
+    /// Usermodel passed in by ContentView
     @EnvironmentObject var Usermodel:Appusermodel
+    
+    //MARK: body
     var body: some View {
         GeometryReader{geometry in
             HStack{
                 Spacer()
                 VStack{
+                    //Upper image
                     Image("SEUlogo").resizable().aspectRatio(nil, contentMode: .fit)
                         .frame(width:geometry.size.width*0.4)
+                    //Login TextFields
                     LoginTextFieldAreaView(width: geometry.size.width*0.5, TextFieldLeadingLabel: ["Username","Password","URL"], TextFieldTypeisSecure: [false,true,true], TextFieldtext: [$Usermodel.user.id,$Usermodel.user.password,$Usermodel.user.simulationurl], TextFieldkeyboardtype: [0,0,2])
+                    //Clear Button and Login Button
                     HStack{
                         Button(action: Usermodel.clearlogintype) {
                             Text("Clear")
@@ -42,7 +49,7 @@ struct ArappLoginView: View {
                             .background(!Usermodel.signinbuttonable || !Usermodel.Simulationurllegal() ? Color.secondary.opacity(0.7) : Color.accentColor)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                     }
-                    
+                    //Signup button
                     Button(action: {Usermodel.UserSignup.toggle()}) {
                         Text("Sign up")
                     }

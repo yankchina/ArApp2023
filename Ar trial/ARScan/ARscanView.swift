@@ -10,16 +10,20 @@ import RealityKit
 import Combine
 
 //MARK: ARscanView
+/// AR part View
 struct ARscanView:View{
     
     
     //MARK: parameters
     @StateObject var ARappARpart:ARappARpartmodel=ARappARpartmodel()
+    /// Circuit mode when AR part starts
     let startmode:scanmode?
+    /// The circuit mode to update to
     @State var updatemode:scanmode?
+    /// Circuit mode of extra view
     @State var extraviewmode:scanmode
+    /// Show mode information alert
     @State var showmodeinformation:Bool=false
-    @State var release:Bool=false
     @StateObject var Sequencemodel:Sequencegeneratormodel=Sequencegeneratormodel()
     @StateObject var Proportionalmodel:Proportionalcircuitmodel=Proportionalcircuitmodel()
     //MARK: body
@@ -32,6 +36,7 @@ struct ARscanView:View{
                     .alert(isPresented: $showmodeinformation){
                         ARappARpartmodel.generatemodeinform(mode: extraviewmode)
                     }
+                //extra view according to circuit mode
                 modeextraview
                 ARUpdatetabView(appmodel: ARappARpart, startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
                 //topleadingbuttons
@@ -88,7 +93,12 @@ extension ARscanView{
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
     
+    
+    
+    //MARK: Not used in current View
     @ViewBuilder
+    /// Return AR part toolbar
+    /// - Parameter size: geometry size
     func  ARscantoolbar(size :CGSize)->some View{
         HStack{
             Button {
@@ -141,11 +151,17 @@ struct ARViewContainer: UIViewRepresentable {
         
         //MARK: add lights
         appmodel.addlight()
+        
+        
+        
         //MARK: add anchors
         appmodel.addanchor(ARview: arView,mode: scanmode)
         
+        
+        
         //MARK: enable direct gesture(translate,rotate,scale)
         appmodel.enablegesture(arView: arView, mode: scanmode)
+        
         
         
         //MARK: define triggers

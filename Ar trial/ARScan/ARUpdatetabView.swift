@@ -8,8 +8,10 @@
 import SwiftUI
 
 //MARK: UpdatetabView
+/// Update tab
 struct ARUpdatetabView:View{
     @ObservedObject var appmodel:ARappARpartmodel
+    /// Circuit mode while starting ARView
     let startmode:scanmode
     @Binding var updatemode:scanmode?
     @Binding var extraviewmode:scanmode
