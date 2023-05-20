@@ -15,7 +15,7 @@ struct ARTipView: View {
 
     var body: some View {
         ZStack{
-            Color.secondary.opacity(0.8).ignoresSafeArea(.all)
+            Color.gray.ignoresSafeArea(.all)
             if !appmodel.ARapptipEntity[0].tipviewed {
                 resetbuttontip
             }
