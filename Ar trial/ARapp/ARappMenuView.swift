@@ -36,13 +36,13 @@ struct ARappmenuView: View {
                 Materialsection
                 
                 NavigationLink(destination: OnlineTaskView()) {
-                    Text("Tasks").font(.title2)
+                    Text(Usermodel.Language ? "任务" : "Tasks").font(.title2)
                 }
                 NavigationLink(destination:
                                 ZStack{}
                                 .onAppear(perform: Usermodel.logout)
                 ) {
-                    Text("Log out")
+                    Text(Usermodel.Language ? "登出" : "Log out")
                         .font(.title2)
                         .padding(5)
                         .foregroundColor(Color.TextprimaryColor)
@@ -67,14 +67,10 @@ struct ARappmenuView: View {
 //                      Text("Tutorial Video").font(.title2)
 //                  }.padding(.vertical,10)
             }
-            .navigationTitle("Menu")
+            .navigationTitle(Usermodel.Language ? "主页" : "Menu")
             .toolbar{
-                //Leading image
+                //Leading image to switch between two servers
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05)
-                }
-                //Button to switch between two servers
-                ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         if Usermodel.user.simulationurl == ""{
                             
@@ -82,9 +78,16 @@ struct ARappmenuView: View {
                             
                         }
                     } label: {
-                        Text("switch").foregroundColor(Color.secondary).opacity(0.05)
+                        Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05)
                     }
 
+                }
+                //Button to switch language
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Toggle(isOn: $Usermodel.Language) {
+                        Text("")
+                    }
+                    .toggleStyle(.switch)
                 }
 
             }
@@ -98,7 +101,7 @@ extension ARappmenuView{
     
     /// Navigationlinks to all ARscan views
     private var Scansection:some View{
-        Section(header: Text("ARscan").font(.title)) {
+        Section(header: Text(Usermodel.Language ? "增强现实模块" : "ARscan").font(.title)) {
             ForEach(scaaningmodes.indices,id:\.self) { index in
                 NavigationLink(destination: ARscanView(startmode:scaaningmodes[index],extraviewmode: scaaningmodes[index])) {
                     Text(scaaningmodes[index].rawValue)
@@ -111,12 +114,15 @@ extension ARappmenuView{
     }
     /// Navigationlinks to all Material views
     private var Materialsection:some View{
-        Section(header: Text("Material").font(.title)) {
+        Section(header: Text(Usermodel.Language ? "资料" : "Material").font(.title)) {
             ForEach(ARappMaterialpart.Material.indices,id:\.self) { index in
                 NavigationLink(destination: ARappMaterialview(chapter: index, appmodel: ARappMaterialpart)) {
                     Text("Ch\(index)").font(.title2).bold()
                     if ARappMaterialpart.chapterviewed[index]{
-                        Text("(last viewing:page\(ARappMaterialpart.imageprogress[index]))").font(.title3)
+                        Text(Usermodel.Language ?
+                             "(上次看到:第\(ARappMaterialpart.imageprogress[index]))页" :
+                                "(last viewing:page\(ARappMaterialpart.imageprogress[index]))"
+                        ).font(.title3)
                     }
                 }
                 // Set image progress and chapter viewed from AppStorage and coredata

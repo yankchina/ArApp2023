@@ -24,11 +24,25 @@ struct ArappLoginView: View {
                     Image("SEUlogo").resizable().aspectRatio(nil, contentMode: .fit)
                         .frame(width:geometry.size.width*0.4)
                     //Login TextFields
-                    LoginTextFieldAreaView(width: geometry.size.width*0.5, TextFieldLeadingLabel: ["Username","Password","URL"], TextFieldTypeisSecure: [false,true,true], TextFieldtext: [$Usermodel.user.id,$Usermodel.user.password,$Usermodel.user.simulationurl], TextFieldkeyboardtype: [0,0,2])
+                    LoginTextFieldAreaView(width: geometry.size.width*0.5,
+                                           TextFieldLeadingLabel: Usermodel.Language ? [
+                                            "用户名",
+                                            "密码",
+                                            "服务器地址"
+                                           ] :
+                                            [
+                                            "Username",
+                                            "Password",
+                                            "URL"
+                                           ],
+                                           TextFieldTypeisSecure: [false,true,true],
+                                           TextFieldtext: [$Usermodel.user.id,$Usermodel.user.password,$Usermodel.user.simulationurl],
+                                           TextFieldkeyboardtype: [0,0,2]
+                    )
                     //Clear Button and Login Button
                     HStack{
                         Button(action: Usermodel.clearlogintype) {
-                            Text("Clear")
+                            Text(Usermodel.Language ? "清空" : "Clear")
                                 .foregroundColor(.white)
                         }.disabled(false)
                             .padding()
@@ -42,7 +56,7 @@ struct ArappLoginView: View {
                                 Usermodel.loginconfirm()
                             }
                         }) {
-                            Text("Log in")
+                            Text(Usermodel.Language ? "登录" : "Log in")
                                 .foregroundColor(!Usermodel.signinbuttonable ? Color.secondary:Color.white)
                         }.disabled(!Usermodel.signinbuttonable || !Usermodel.Simulationurllegal())
                             .padding()
@@ -51,7 +65,7 @@ struct ArappLoginView: View {
                     }
                     //Signup button
                     Button(action: {Usermodel.UserSignup.toggle()}) {
-                        Text("Sign up")
+                        Text(Usermodel.Language ? "注册" : "Sign up")
                     }
                     .padding()
                     .background(Capsule().stroke())
@@ -65,6 +79,14 @@ struct ArappLoginView: View {
             }
             
 
+        }
+        .toolbar{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Toggle(isOn: $Usermodel.Language) {
+                    Text("")
+                }
+                .toggleStyle(.switch)
+            }
         }
         .blurredSheet(Usermodel.blurredShapestyle, show: $Usermodel.UserSignup){
 

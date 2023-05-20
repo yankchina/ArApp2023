@@ -11,6 +11,7 @@ import SwiftUI
 /// Update tab
 struct ARUpdatetabView:View{
     @ObservedObject var appmodel:ARappARpartmodel
+    @EnvironmentObject var Usermodel:Appusermodel
     /// Circuit mode while starting ARView
     let startmode:scanmode
     @Binding var updatemode:scanmode?
@@ -36,7 +37,9 @@ struct ARUpdatetabView:View{
                                         }label: {
                                             ZStack{
                                                 
-                                                Text(appmodel.scaaningmodes[index] == extraviewmode ?  appmodel.scaaningmodes[index].rawValue.appending(" (Current)"):appmodel.scaaningmodes[index].rawValue)
+                                                Text(appmodel.scaaningmodes[index] == extraviewmode ?
+                                                     appmodel.scaaningmodes[index].rawValue.appending(Usermodel.Language ? "现在" : " (Current)") :
+                                                        appmodel.scaaningmodes[index].rawValue)
                                                     .foregroundColor(appmodel.scaaningmodes[index] == extraviewmode ? Color.accentColor:Color.primary)
                                             }.frame(width:geometry.size.width*0.3)
                                         }.controlSize(.large)

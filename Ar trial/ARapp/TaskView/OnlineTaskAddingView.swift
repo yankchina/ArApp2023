@@ -27,7 +27,7 @@ struct OnlineTaskAddingView: View {
         VStack{
             TextEditor(text: $Tasktitle).cornerRadius(3)
             TextEditor(text: $Taskdescription).cornerRadius(5)
-            DatePicker("Select deadline date", selection: $TaskDate, in: CurrentDate...EndingDate, displayedComponents: [.date,.hourAndMinute])
+            DatePicker(Usermodel.Language ? "选择截止日期" : "Select deadline date", selection: $TaskDate, in: CurrentDate...EndingDate, displayedComponents: [.date,.hourAndMinute])
                 .accentColor(Color.red)
                 .padding(.trailing,10)
             HStack{
@@ -35,7 +35,7 @@ struct OnlineTaskAddingView: View {
                 Button{
                     TaskAddingshowAlert.toggle()
                 }label:{
-                    Text("Confirm")
+                    Text(Usermodel.Language ? "确认" : "Confirm")
                         .foregroundColor(OnlineTaskmodel.Taskadded ? Color.secondary:Color.white)
                 }
                 .disabled(OnlineTaskmodel.Taskadded)
@@ -47,12 +47,12 @@ struct OnlineTaskAddingView: View {
             .overlay(alignment: .trailing){
                 if OnlineTaskmodel.Taskadded{
                     HStack{
-                        Text("Task add success")
+                        Text(Usermodel.Language ? "添加成功" : "Task add success")
                         Image(systemName: "checkmark.circle")
                     }.foregroundColor(.green)
                 }else if let fail=OnlineTaskmodel.TaskAddingFail,fail{
                     HStack{
-                        Text("Task add fail")
+                        Text(Usermodel.Language ? "添加失败" : "Task add fail")
                         Image(systemName: "xmark.circle")
                     }.foregroundColor(.red)
                 }
@@ -60,8 +60,14 @@ struct OnlineTaskAddingView: View {
             
         }
         .alert(isPresented: $TaskAddingshowAlert) {
-            Alert(title: Text("Are you sure to add this task"), primaryButton: .destructive(Text("Cancel").foregroundColor(.red)) {},
-                  secondaryButton: .default(Text("OK")){
+            Alert(title: Text(Usermodel.Language ? "确认添加此项任务？" : "Are you sure to add this task？"),
+                  primaryButton: .destructive(
+                    Text(Usermodel.Language ? "取消" : "Cancel")
+                        .foregroundColor(.red)
+                  ) {},
+                  secondaryButton: .default(
+                    Text(Usermodel.Language ? "确认" : "OK")
+                  ){
                 TaskAddingFail=nil
                 OnlineTaskmodel.Addtask(Url: Usermodel.user.simulationurl, id:Usermodel.user.id,title: Tasktitle, description: Taskdescription, DeadlineDate: TaskDate)
             }

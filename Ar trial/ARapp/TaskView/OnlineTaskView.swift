@@ -36,11 +36,11 @@ struct OnlineTaskView: View {
                                             .foregroundColor(Color.accentColor)
                                         Divider()
                                         HStack{
-                                            Text("Remaining: ").font(.title2)
+                                            Text(Usermodel.Language ? "剩余时间:" : "Remaining: ").font(.title2)
                                             if OnlineTaskmodel.Remaining[index].4{
                                                 Text("\(OnlineTaskmodel.Remaining[index].0)d:\(OnlineTaskmodel.Remaining[index].1)h:\(OnlineTaskmodel.Remaining[index].2)m").font(.title2)
                                             }else{
-                                                Text("0d:0h:0m Ended").font(.title2)
+                                                Text(Usermodel.Language ? "已截止" : "0d:0h:0m Ended").font(.title2)
                                                     .foregroundColor(OnlineTaskmodel.Remaining[index].4 ? Color.primary : Color.red)
                                             }
                                         }
@@ -75,7 +75,7 @@ struct OnlineTaskView: View {
                             HStack{
                                 Image(systemName:"plus").foregroundColor(.BackgroundprimaryColor)
                                     .font(.title2)
-                                Text("Add task").foregroundColor(.BackgroundprimaryColor)
+                                Text(Usermodel.Language ? "添加任务" : "Add task").foregroundColor(.BackgroundprimaryColor)
                                     .font(.title2)
                             }
                         }.padding()
@@ -86,6 +86,10 @@ struct OnlineTaskView: View {
                 .blurredSheet(.init(.ultraThinMaterial), show: $OnlineTaskmodel.TaskAddingdisplay) {
                     
                 } content: {
+                    Usermodel.Language ? OnlineTaskAddingView(OnlineTaskmodel: OnlineTaskmodel,
+                                                              Tasktitle: "任务标题",
+                                                              Taskdescription: "任务描述"
+                    ) :
                     OnlineTaskAddingView(OnlineTaskmodel: OnlineTaskmodel)
                 }
                 //.background(RoundedRectangle(cornerRadius: 5).stroke(Color.primary))

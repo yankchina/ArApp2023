@@ -54,6 +54,8 @@ class Appusermodel:ObservableObject{
     @Published var Signingup:Bool
     /// Signing up request success
     @Published var Signupsuccess:Bool?
+    /// App language option, false for English, true for Chinese
+    @Published var Language:Bool
     @Published var Actiondate:Date
     @Published var Receivedate:Date
     
@@ -71,6 +73,7 @@ class Appusermodel:ObservableObject{
         UserSignup=false
         Signingup=false
         Signupsuccess=nil
+        Language=true
         Actiondate=Date()
         Receivedate=Date()
     }

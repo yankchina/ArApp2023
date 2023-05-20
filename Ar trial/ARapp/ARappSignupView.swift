@@ -32,17 +32,31 @@ struct ARappSignupView: View {
                     }
                     //View when typing in user information
                     else{
-                        Text("Registration").font(.largeTitle).bold()
+                        Text(Usermodel.Language ? "注册" : "Registration").font(.largeTitle).bold()
                         Spacer()
                         Image(systemName: "person.crop.circle")
                             .resizable().scaledToFit()
                             .frame(width: 100)
                             .foregroundColor(.accentColor)
-                        LoginTextFieldAreaView(width: size.width/2, TextFieldLeadingLabel: ["Username","Password","URL"], TextFieldTypeisSecure: [false,true,true], TextFieldtext: [$username,$password,$url], TextFieldkeyboardtype: [0,0,2])
+                        LoginTextFieldAreaView(width: size.width/2,
+                                               TextFieldLeadingLabel: Usermodel.Language ? [
+                                                "用户名",
+                                                "密码",
+                                                "服务器地址"
+                                               ] :
+                                                [
+                                                "Username",
+                                                "Password",
+                                                "URL"
+                                               ],
+                                               TextFieldTypeisSecure: [false,true,true],
+                                               TextFieldtext: [$username,$password,$url],
+                                               TextFieldkeyboardtype: [0,0,2]
+                        )
                         Button{
                             Usermodel.Signup(username: username, password: password, signupurl: url)
                         }label: {
-                            Text("Confirm")
+                            Text(Usermodel.Language ? "确认" : "Confirm")
                                 .foregroundColor(.white)
                         }
                         .padding()

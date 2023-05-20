@@ -50,7 +50,7 @@ struct SquarewaveextraView: View {
                     VStack(alignment:.trailing,spacing:.zero){
                         VStack(alignment:.trailing,spacing:.zero){
                             InputupperLabel(backwardButtonaction: vm.inputbackward)
-                            StoptimeTextField(leadingtext: "stoptime", Stoptimetext: $vm.stoptimetext, unittext: "s", TextfieldWidth: Geometrysize.width/8,TextFieldKeyboardTyperawValue: 2)
+                            StoptimeTextField(leadingtext: Usermodel.Language ? "仿真截止时间" : "stoptime", Stoptimetext: $vm.stoptimetext, unittext: "s", TextfieldWidth: Geometrysize.width/8,TextFieldKeyboardTyperawValue: 2)
                             InputSlider(leadingtext: "RT:", Slidervalue: $vm.RT, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
                             InputSlider(leadingtext: "CT:", Slidervalue: $vm.CT, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "𝛍F")
                             InputSlider(leadingtext: "VCC:", Slidervalue: $vm.VCC, minimumValue: 1, maximumValue: 15, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "V")
