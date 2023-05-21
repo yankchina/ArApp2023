@@ -9,12 +9,13 @@ import SwiftUI
 
 
 struct StartButton:View{
+    @EnvironmentObject var Usermodel:Appusermodel
     let yoffset:CGFloat
     let Buttonaction:()->Void
     var body: some View{
         ZStack{
             Button(action: Buttonaction) {
-                Text("Simulation")
+                Text(Usermodel.Language ? "仿真" : "Simulation")
             }
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.roundedRectangle(radius: 2))
@@ -87,11 +88,12 @@ struct InputSlider: View {
     }
 }
 struct InputConfirmButton: View {
+    @EnvironmentObject var Usermodel:Appusermodel
     let Buttondisable:Bool
     let Buttonaction:()->Void
     var body:some View{
         Button(action: Buttonaction) {
-            Text("Confirm")
+            Text(Usermodel.Language ? "确认" : "Confirm")
                 .foregroundColor(Buttondisable ? Color.secondary:Color.white)
         }
         .disabled(Buttondisable)

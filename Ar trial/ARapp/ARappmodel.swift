@@ -20,7 +20,26 @@ enum scanmode:String{
     case Proportional="Proportional Circuit"
 }
 extension scanmode{
-    
+    func RawValuebyLanguage(Language:Bool)->String{
+        if Language {
+            switch self {
+            case .free:return "自由扫描"
+            case .Squarewavegenerator:return "矩形波发生器"
+            case .SquarewaveDRgenerator:return "占空比可调的矩形波发生器"
+            case .Secondorder:return "二阶状态变量滤波器"
+            case .Sequence:return "序列发生器"
+            case .Proportional:return "加减法电路"
+            default:return ""
+            }
+        }else{
+            return self.rawValue
+        }
+    }
+}
+
+struct Scanmodeforvm:Identifiable{
+    let id:String=UUID().uuidString
+    let mode:scanmode
 }
 
 
@@ -40,7 +59,7 @@ class ARappARpartmodel:ObservableObject{
     let Tipnumber:Int
     //AR part variables
     /// Circuit modes used in update tab
-    let scaaningmodes:[scanmode]
+    let scaaningmodes:[Scanmodeforvm]
     /// Dictionary used in adding AR anchors
     let scanmodeindex:[scanmode:Int]
     @Published var SquarewaveGeneratorAnchor:Squarewave.Box
@@ -51,11 +70,13 @@ class ARappARpartmodel:ObservableObject{
 
     //MARK: initiate
     init() {
-        scaaningmodes=[scanmode.free,
-                       .Squarewavegenerator,
-                       .SquarewaveDRgenerator,
-                       .Secondorder,.Sequence,
-                       .Proportional
+        scaaningmodes=[
+            Scanmodeforvm(mode: scanmode.free),
+            Scanmodeforvm(mode: .Squarewavegenerator),
+            Scanmodeforvm(mode: .SquarewaveDRgenerator),
+            Scanmodeforvm(mode: .Secondorder),
+            Scanmodeforvm(mode: .Sequence),
+            Scanmodeforvm(mode: .Proportional)
         ]
         scanmodeindex=[.Squarewavegenerator:0,
                        .SquarewaveDRgenerator:1,
@@ -240,11 +261,11 @@ class ARappARpartmodel:ObservableObject{
                     SequencegeneratorAnchor.actions.allActions[index1].onAction={ [weak self]_  in
                         guard !Sequencemodel.simulating else { return }
                         Sequencemodel.selector138(index2)
-                        for index3 in self!.SequencegeneratorAnchor.notifications.allNotifications.indices {
-                            if self!.SequencegeneratorAnchor.notifications.allNotifications[index3].identifier == "respondY\(index2)"{
-                                self!.SequencegeneratorAnchor.notifications.allNotifications[index3].post()
-                            }
-                        }
+//                        for index3 in self!.SequencegeneratorAnchor.notifications.allNotifications.indices {
+//                            if self!.SequencegeneratorAnchor.notifications.allNotifications[index3].identifier == "respondY\(index2)"{
+//                                self!.SequencegeneratorAnchor.notifications.allNotifications[index3].post()
+//                            }
+//                        }
                     }
                 }
             }
@@ -254,11 +275,11 @@ class ARappARpartmodel:ObservableObject{
                     SequencegeneratorAnchor.actions.allActions[index1].onAction={ [weak self]_ in
                         guard !Sequencemodel.simulating else { return }
                         Sequencemodel.selector151(index2)
-                        for index3 in self!.SequencegeneratorAnchor.notifications.allNotifications.indices {
-                            if self!.SequencegeneratorAnchor.notifications.allNotifications[index3].identifier == "respondD\(index2)0"{
-                                self!.SequencegeneratorAnchor.notifications.allNotifications[index3].post()
-                            }
-                        }
+//                        for index3 in self!.SequencegeneratorAnchor.notifications.allNotifications.indices {
+//                            if self!.SequencegeneratorAnchor.notifications.allNotifications[index3].identifier == "respondD\(index2)0"{
+//                                self!.SequencegeneratorAnchor.notifications.allNotifications[index3].post()
+//                            }
+//                        }
                     }
                 }
                 //define 74151 D0~D7 selected(set to 1)
@@ -266,11 +287,11 @@ class ARappARpartmodel:ObservableObject{
                     SequencegeneratorAnchor.actions.allActions[index1].onAction={ [weak self]_ in
                         guard !Sequencemodel.simulating else { return }
                         Sequencemodel.selector151(index2)
-                        for index3 in self!.SequencegeneratorAnchor.notifications.allNotifications.indices {
-                            if self!.SequencegeneratorAnchor.notifications.allNotifications[index3].identifier == "respondD\(index2)1"{
-                                self!.SequencegeneratorAnchor.notifications.allNotifications[index3].post()
-                            }
-                        }
+//                        for index3 in self!.SequencegeneratorAnchor.notifications.allNotifications.indices {
+//                            if self!.SequencegeneratorAnchor.notifications.allNotifications[index3].identifier == "respondD\(index2)1"{
+//                                self!.SequencegeneratorAnchor.notifications.allNotifications[index3].post()
+//                            }
+//                        }
                     }
                 }
             }

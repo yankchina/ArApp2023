@@ -13,7 +13,6 @@
 		A66016992A16420000AE96C8 /* Timer555triggerextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */; };
 		C70D16EF2A04E9D400389E0C /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D16EE2A04E9D400389E0C /* Usermodel.swift */; };
 		C70D17102A0503B100389E0C /* LoginTextFieldAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */; };
-		C71390D029D83088001C7827 /* Sequencegenerator.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C71390CF29D83088001C7827 /* Sequencegenerator.rcproject */; };
 		C738CB1B29D066C2002A5F1C /* ARUpdatetabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */; };
 		C73D2D3229CF18510068B4DA /* RC.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C73D2D3129CF18510068B4DA /* RC.rcproject */; };
 		C743D08D29C878FD00F9EEB7 /* ARappMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743D08C29C878FD00F9EEB7 /* ARappMenuView.swift */; };
@@ -102,6 +101,7 @@
 		C7AD257F29C2F039000B3B5C /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AD257229C2F038000B3B5C /* Line.swift */; };
 		C7AD258429C2F109000B3B5C /* ARscanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AD258329C2F109000B3B5C /* ARscanView.swift */; };
 		C7AFF2D029D412850080D1CA /* ProportionalextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7AFF2CF29D412850080D1CA /* ProportionalextraView.swift */; };
+		C7C2484E2A1A08F800C842E0 /* Sequencegenerator.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C7C2484D2A1A08F800C842E0 /* Sequencegenerator.rcproject */; };
 		C7C4FC2129D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7C4FC2029D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift */; };
 		C7CF0C042A150ACE005F764D /* SimulationSubView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CF0C032A150ACE005F764D /* SimulationSubView.swift */; };
 		C7E417812A0E74B600A8EB9B /* Squarewave.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C7E417802A0E74B600A8EB9B /* Squarewave.rcproject */; };
@@ -120,7 +120,6 @@
 		A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer555triggerextraView.swift; sourceTree = "<group>"; };
 		C70D16EE2A04E9D400389E0C /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldAreaView.swift; sourceTree = "<group>"; };
-		C71390CF29D83088001C7827 /* Sequencegenerator.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Sequencegenerator.rcproject; sourceTree = "<group>"; };
 		C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARUpdatetabView.swift; sourceTree = "<group>"; };
 		C73D2D3129CF18510068B4DA /* RC.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = RC.rcproject; sourceTree = "<group>"; };
 		C743D08C29C878FD00F9EEB7 /* ARappMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARappMenuView.swift; sourceTree = "<group>"; };
@@ -210,6 +209,7 @@
 		C7AD257229C2F038000B3B5C /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Line.swift; sourceTree = "<group>"; };
 		C7AD258329C2F109000B3B5C /* ARscanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARscanView.swift; sourceTree = "<group>"; };
 		C7AFF2CF29D412850080D1CA /* ProportionalextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProportionalextraView.swift; sourceTree = "<group>"; };
+		C7C2484D2A1A08F800C842E0 /* Sequencegenerator.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Sequencegenerator.rcproject; sourceTree = "<group>"; };
 		C7C4FC2029D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SequencegeneratorextraView.swift; sourceTree = "<group>"; };
 		C7CF0C032A150ACE005F764D /* SimulationSubView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimulationSubView.swift; sourceTree = "<group>"; };
 		C7E417802A0E74B600A8EB9B /* Squarewave.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Squarewave.rcproject; sourceTree = "<group>"; };
@@ -375,9 +375,9 @@
 				C7AA30D629B874E30080D7B8 /* Assets.xcassets */,
 				C767E09029D448A000E59311 /* ARAppdata.xcdatamodeld */,
 				C77B0DB729D2BFF30087DD44 /* Proportionalcircuit.rcproject */,
+				C7C2484D2A1A08F800C842E0 /* Sequencegenerator.rcproject */,
 				C73D2D3129CF18510068B4DA /* RC.rcproject */,
 				C75CD4862A08C8D500223E09 /* Secondorderfilter.rcproject */,
-				C71390CF29D83088001C7827 /* Sequencegenerator.rcproject */,
 				C7E417802A0E74B600A8EB9B /* Squarewave.rcproject */,
 				A66016922A162B3200AE96C8 /* SquarewaveDR.rcproject */,
 				C7AA30D429B874DE0080D7B8 /* Experience.rcproject */,
@@ -602,8 +602,8 @@
 				A66016972A1640F500AE96C8 /* SinegeneratorextraView.swift in Sources */,
 				C7733DE929C4B4CD002AE566 /* RCextraView.swift in Sources */,
 				C7521BAE29FFAD07005AA58A /* VideoView.swift in Sources */,
-				C71390D029D83088001C7827 /* Sequencegenerator.rcproject in Sources */,
 				C78559B12A1120B300ABDF6E /* TaskDetailView.swift in Sources */,
+				C7C2484E2A1A08F800C842E0 /* Sequencegenerator.rcproject in Sources */,
 				C78559B52A113D8900ABDF6E /* ARappSignupView.swift in Sources */,
 				C78B1AB129F17122000C9F6B /* SquarewaveDRextraView.swift in Sources */,
 				C7AD257E29C2F039000B3B5C /* MultiLineChartView.swift in Sources */,

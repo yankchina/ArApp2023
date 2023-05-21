@@ -43,7 +43,7 @@ struct ArappLoginView: View {
                     HStack{
                         Button(action: Usermodel.clearlogintype) {
                             Text(Usermodel.Language ? "清空" : "Clear")
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.BackgroundprimaryColor)
                         }.disabled(false)
                             .padding()
                             .background(Color.red)
@@ -57,7 +57,7 @@ struct ArappLoginView: View {
                             }
                         }) {
                             Text(Usermodel.Language ? "登录" : "Log in")
-                                .foregroundColor(!Usermodel.signinbuttonable ? Color.secondary:Color.white)
+                                .foregroundColor(!Usermodel.signinbuttonable ? Color.secondary:Color.BackgroundprimaryColor)
                         }.disabled(!Usermodel.signinbuttonable || !Usermodel.Simulationurllegal())
                             .padding()
                             .background(!Usermodel.signinbuttonable || !Usermodel.Simulationurllegal() ? Color.secondary.opacity(0.7) : Color.accentColor)

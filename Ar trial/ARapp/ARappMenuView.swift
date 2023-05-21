@@ -45,7 +45,7 @@ struct ARappmenuView: View {
                     Text(Usermodel.Language ? "登出" : "Log out")
                         .font(.title2)
                         .padding(5)
-                        .foregroundColor(Color.TextprimaryColor)
+                        .foregroundColor(Color.BackgroundprimaryColor)
                         .background(Color.red.cornerRadius(3))
                 }
 
@@ -70,24 +70,31 @@ struct ARappmenuView: View {
             .navigationTitle(Usermodel.Language ? "主页" : "Menu")
             .toolbar{
                 //Leading image to switch between two servers
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        if Usermodel.user.simulationurl == ""{
-                            
-                        }else{
-                            
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    Picker(selection: $Usermodel.user.simulationurl){
+                        ForEach(Usermodel.Urladdress.indices,id:\.self){index in
+                            Image(systemName: "\(index).circle")
+                                .foregroundColor(Color.accentColor)
+                                .tag(Usermodel.Urladdress[index])
                         }
                     } label: {
-                        Image("SEUlogo").resizable().scaledToFit().frame(height:geometry.size.height*0.05)
+                        Image(systemName: "network")
+                            .foregroundColor(Color.accentColor)
                     }
-
-                }
-                //Button to switch language
-                ToolbarItem(placement: .navigationBarTrailing) {
+                    .pickerStyle(.menu)
+                    .padding(.trailing, 5)
+                    //Button to switch language
                     Toggle(isOn: $Usermodel.Language) {
                         Text("")
                     }
                     .toggleStyle(.switch)
+
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Image("SEUlogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(height:geometry.size.height*0.05)
                 }
 
             }
@@ -104,7 +111,9 @@ extension ARappmenuView{
         Section(header: Text(Usermodel.Language ? "增强现实模块" : "ARscan").font(.title)) {
             ForEach(scaaningmodes.indices,id:\.self) { index in
                 NavigationLink(destination: ARscanView(startmode:scaaningmodes[index],extraviewmode: scaaningmodes[index])) {
-                    Text(scaaningmodes[index].rawValue)
+                    Text(
+                        scaaningmodes[index].RawValuebyLanguage(Language: Usermodel.Language)
+                    )
                         .font(.title2)
                 }
 //                .background(Color.BackgroundprimaryColor)

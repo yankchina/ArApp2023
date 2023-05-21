@@ -58,10 +58,11 @@ class Appusermodel:ObservableObject{
     @Published var Language:Bool
     @Published var Actiondate:Date
     @Published var Receivedate:Date
+    let Urladdress:[String]
     
     init(){
         user=ArappUser()
-        appstatus=0
+        appstatus=1
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -76,6 +77,10 @@ class Appusermodel:ObservableObject{
         Language=true
         Actiondate=Date()
         Receivedate=Date()
+        Urladdress=[
+            "10.198.72.122:8000",
+            "10.198.71.148:8000"
+        ]
     }
     //MARK: Functions
     /// Returns whether the login view url is legal text
