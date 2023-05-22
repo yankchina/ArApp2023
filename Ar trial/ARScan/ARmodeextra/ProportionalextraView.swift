@@ -23,7 +23,7 @@ struct ProportionalextraView: View {
                 }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
 
 //                resetbutton
-                ExtraimageView(display: $display, geometry: geometry, Imagemagnifyamount: $Imagemagnifyamount, Imagemagnifylastamount: $Imagemagnifylastamount, extraimage: Image("proportional"))
+                //ExtraimageView(display: $display, geometry: geometry, Imagemagnifyamount: $Imagemagnifyamount, Imagemagnifylastamount: $Imagemagnifylastamount, extraimage: Image("proportional"))
 
             }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 

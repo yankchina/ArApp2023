@@ -26,12 +26,7 @@ struct StartButton:View{
 }
 struct InputbackgroundView: View {
     var body:some View{
-        RoundedRectangle(cornerRadius: 3).fill(Color.BackgroundprimaryColor.opacity(0.9))
-    }
-}
-struct SimulationImagebackgroundView: View {
-    var body:some View{
-        RoundedRectangle(cornerRadius: 3).fill(Color.BackgroundprimaryColor.opacity(0.9))
+        RoundedRectangle(cornerRadius: 3).fill(Color.BackgroundprimaryColor.opacity(0.8))
     }
 }
 struct InputupperLabel: View {
@@ -64,6 +59,7 @@ struct StoptimeTextField: View {
         }.padding(.vertical,5)
     }
 }
+
 struct InputSlider: View {
     let leadingtext:String
     @Binding var Slidervalue:Double
@@ -87,6 +83,7 @@ struct InputSlider: View {
 
     }
 }
+
 struct InputConfirmButton: View {
     @EnvironmentObject var Usermodel:Appusermodel
     let Buttondisable:Bool
@@ -99,6 +96,12 @@ struct InputConfirmButton: View {
         .disabled(Buttondisable)
             .buttonStyle(.borderedProminent)
             .buttonBorderShape(.roundedRectangle(radius: 1))
+    }
+}
+
+struct SimulationImagebackgroundView: View {
+    var body:some View{
+        RoundedRectangle(cornerRadius: 3).fill(Color.BackgroundprimaryColor.opacity(0.8))
     }
 }
 

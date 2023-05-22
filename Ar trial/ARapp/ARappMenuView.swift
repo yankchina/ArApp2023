@@ -13,15 +13,55 @@ import AVKit
 /// App menu
 struct ARappmenuView: View {
     /// Navigationlinks modes
-    let scaaningmodes:[scanmode]=[.free,
-                                  .Squarewavegenerator,
-                                  .SquarewaveDRgenerator,
-                                  .Secondorder,
-                                  .Sequence,
-                                  .Proportional]
+    let scaaningmodes:[Scanmodeforvm]=[
+        Scanmodeforvm(mode: scanmode.free),
+        Scanmodeforvm(mode: .Squarewavegenerator),
+        Scanmodeforvm(mode: .SquarewaveDRgenerator),
+        Scanmodeforvm(mode: .Secondorder),
+        Scanmodeforvm(mode: .Sequence),
+        Scanmodeforvm(mode: .Proportional)
+        ]
     @EnvironmentObject var Usermodel:Appusermodel
-
     @StateObject var ARappMaterialpart:ARappMaterialpartmodel=ARappMaterialpartmodel()
+    // MARK: Toolbar Content
+    /// - Returns: ToolbarContent for Menu
+    var MenutoolbarContent:some ToolbarContent{
+        Group{
+            //Leading image to switch between two servers
+            ToolbarItemGroup(placement: .navigationBarTrailing) {
+                Picker(selection: $Usermodel.user.simulationurl){
+                    ForEach(Usermodel.Urladdress.indices,id:\.self){index in
+                        Image(systemName: "\(index).circle")
+                            .foregroundColor(Color.accentColor)
+                            .tag(Usermodel.Urladdress[index])
+                    }
+                } label: {
+                    Image(systemName: "network")
+                        .foregroundColor(Color.accentColor)
+                }
+                .pickerStyle(.menu)
+                .padding(.trailing, 5)
+                //Button to switch language
+                Toggle(isOn: $Usermodel.Language) {
+                    Text("")
+                }
+                .toggleStyle(.switch)
+
+            }
+            ToolbarItem(placement: .navigationBarLeading) {
+                Image("SEUlogo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(height:2
+                            //geometry.size.height*0.05
+                    )
+            }
+        }
+    }
+    
+    
+    
+    // MARK: body
     var body: some View {
         
         GeometryReader{geometry in
@@ -68,51 +108,21 @@ struct ARappmenuView: View {
 //                  }.padding(.vertical,10)
             }
             .navigationTitle(Usermodel.Language ? "主页" : "Menu")
-            .toolbar{
-                //Leading image to switch between two servers
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Picker(selection: $Usermodel.user.simulationurl){
-                        ForEach(Usermodel.Urladdress.indices,id:\.self){index in
-                            Image(systemName: "\(index).circle")
-                                .foregroundColor(Color.accentColor)
-                                .tag(Usermodel.Urladdress[index])
-                        }
-                    } label: {
-                        Image(systemName: "network")
-                            .foregroundColor(Color.accentColor)
-                    }
-                    .pickerStyle(.menu)
-                    .padding(.trailing, 5)
-                    //Button to switch language
-                    Toggle(isOn: $Usermodel.Language) {
-                        Text("")
-                    }
-                    .toggleStyle(.switch)
-
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Image("SEUlogo")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(height:geometry.size.height*0.05)
-                }
-
-            }
+            .toolbar{MenutoolbarContent}
         }
     }
 }
 
-//MARK: Material section definition
 extension ARappmenuView{
     
-    
+    //MARK: AR section definition
     /// Navigationlinks to all ARscan views
     private var Scansection:some View{
         Section(header: Text(Usermodel.Language ? "增强现实模块" : "ARscan").font(.title)) {
-            ForEach(scaaningmodes.indices,id:\.self) { index in
-                NavigationLink(destination: ARscanView(startmode:scaaningmodes[index],extraviewmode: scaaningmodes[index])) {
+            ForEach(scaaningmodes) { Scanmodeforvm in
+                NavigationLink(destination: ARscanView(startmode:Scanmodeforvm.mode,extraviewmode: Scanmodeforvm.mode)) {
                     Text(
-                        scaaningmodes[index].RawValuebyLanguage(Language: Usermodel.Language)
+                        Scanmodeforvm.mode.RawValuebyLanguage(Language: Usermodel.Language)
                     )
                         .font(.title2)
                 }
@@ -121,6 +131,10 @@ extension ARappmenuView{
             }
         }
     }
+    
+    
+    
+    //MARK: Material section definition
     /// Navigationlinks to all Material views
     private var Materialsection:some View{
         Section(header: Text(Usermodel.Language ? "资料" : "Material").font(.title)) {

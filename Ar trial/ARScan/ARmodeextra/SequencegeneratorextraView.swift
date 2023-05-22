@@ -72,7 +72,7 @@ struct SequencegeneratorextraView: View {
                     }
                     
                 }.frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-                ExtraimageView(display: $display, geometry: geometry, Imagemagnifyamount: $Imagemagnifyamount, Imagemagnifylastamount: $Imagemagnifylastamount, extraimage: Image("sequence"))
+                //ExtraimageView(display: $display, geometry: geometry, Imagemagnifyamount: $Imagemagnifyamount, Imagemagnifylastamount: $Imagemagnifylastamount, extraimage: Image("sequence"))
             }.frame( maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
         }
         

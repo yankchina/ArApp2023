@@ -16,6 +16,7 @@ struct ARscanView:View{
     
     //MARK: parameters
     @StateObject var ARappARpart:ARappARpartmodel=ARappARpartmodel()
+    @EnvironmentObject var Usermodel:Appusermodel
     /// Circuit mode when AR part starts
     let startmode:scanmode?
     /// The circuit mode to update to
@@ -24,20 +25,54 @@ struct ARscanView:View{
     @State var extraviewmode:scanmode
     /// Show mode information alert
     @State var showmodeinformation:Bool=false
+    @State var showcircuitimage:Bool=false
     @StateObject var Sequencemodel:Sequencegeneratormodel=Sequencegeneratormodel()
     @StateObject var Proportionalmodel:Proportionalcircuitmodel=Proportionalcircuitmodel()
+    
+    //MARK: AR toolbar Content
+    var ARtoolbarContent:some ToolbarContent{
+        Group{
+            ToolbarItem(placement:.navigationBarTrailing) {
+                HStack(spacing: .zero){
+                    Button {
+                        showmodeinformation=true
+                    } label: {
+                        Image(systemName: "info.circle")
+                        .foregroundColor(Color.accentColor)
+                    }
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            showcircuitimage.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "photo.circle")
+                        .foregroundColor(Color.accentColor)
+                    }
+                }
+                .font(.title2)
+            }
+        }
+    }
+
     //MARK: body
     var body: some View{
         GeometryReader{
             let size=$0.size
             ZStack {
                 //Main AR View
-                ARViewContainer(startmode: startmode, appmodel: ARappARpart, Sequencemodel: Sequencemodel,updatemode: $updatemode,extraviewmode:$extraviewmode).ignoresSafeArea(.all, edges: .top)
+                ARViewContainer(startmode: startmode,
+                                appmodel: ARappARpart,
+                                Sequencemodel: Sequencemodel,
+                                updatemode: $updatemode,
+                                extraviewmode:$extraviewmode
+                )
+                    .ignoresSafeArea(.all, edges: .top)
                     .alert(isPresented: $showmodeinformation){
-                        ARappARpartmodel.generatemodeinform(mode: extraviewmode)
+                        ARappARpartmodel.generatemodeinform(mode: extraviewmode,Language: Usermodel.Language)
                     }
                 //extra view according to circuit mode
                 modeextraview
+                ARCircuitImageView(appmodel: ARappARpart, extraviewmode: $extraviewmode, ispresent: $showcircuitimage, Geometrysize: size)
                 ARUpdatetabView(appmodel: ARappARpart, startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
                 //topleadingbuttons
                 if !ARappARpart.Tipconfirmed{
@@ -45,15 +80,7 @@ struct ARscanView:View{
                 }
                 //returnbutton
             }
-            .toolbar{
-                Button {
-                    showmodeinformation=true
-                } label: {
-                    Image(systemName: "info.circle")
-                    .foregroundColor(Color.accentColor)
-                        .font(.title2)
-                }
-            }
+            .toolbar{ARtoolbarContent}
 
         }
         .onAppear {

@@ -72,6 +72,7 @@
 		C764EAB729D6A98800ED6A2D /* ARViewContainer_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764EAB629D6A98800ED6A2D /* ARViewContainer_extension.swift */; };
 		C7677FC429DEF752000A2267 /* ExtraimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7677FC329DEF752000A2267 /* ExtraimageView.swift */; };
 		C767E09229D448A000E59311 /* ARAppdata.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C767E09029D448A000E59311 /* ARAppdata.xcdatamodeld */; };
+		C76D69DB2A1BB0B400341FD5 /* ARCircuitImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76D69DA2A1BB0B400341FD5 /* ARCircuitImageView.swift */; };
 		C7733DE929C4B4CD002AE566 /* RCextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7733DE829C4B4CD002AE566 /* RCextraView.swift */; };
 		C7734EB629D548C800ED51DF /* Boolextension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7734EB529D548C800ED51DF /* Boolextension.swift */; };
 		C7734EB829D5494E00ED51DF /* Sequencegeneratormodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7734EB729D5494E00ED51DF /* Sequencegeneratormodel.swift */; };
@@ -179,6 +180,7 @@
 		C764EAB629D6A98800ED6A2D /* ARViewContainer_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer_extension.swift; sourceTree = "<group>"; };
 		C7677FC329DEF752000A2267 /* ExtraimageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraimageView.swift; sourceTree = "<group>"; };
 		C767E09129D448A000E59311 /* ARAppdata.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ARAppdata.xcdatamodel; sourceTree = "<group>"; };
+		C76D69DA2A1BB0B400341FD5 /* ARCircuitImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCircuitImageView.swift; sourceTree = "<group>"; };
 		C7733DE829C4B4CD002AE566 /* RCextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCextraView.swift; sourceTree = "<group>"; };
 		C7734EB529D548C800ED51DF /* Boolextension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Boolextension.swift; sourceTree = "<group>"; };
 		C7734EB729D5494E00ED51DF /* Sequencegeneratormodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sequencegeneratormodel.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				C7AD258329C2F109000B3B5C /* ARscanView.swift */,
 				C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */,
 				C7A05BA229E4081600812238 /* ARTipView.swift */,
+				C76D69DA2A1BB0B400341FD5 /* ARCircuitImageView.swift */,
 				C778B1BB29D4680D0007854A /* ARmodeextra */,
 			);
 			path = ARScan;
@@ -575,6 +578,7 @@
 				C78B1AB329F179B6000C9F6B /* SecondorderfilterextraView.swift in Sources */,
 				C743D08D29C878FD00F9EEB7 /* ARappMenuView.swift in Sources */,
 				C786D82229C34AE0003F0627 /* Arrayextension.swift in Sources */,
+				C76D69DB2A1BB0B400341FD5 /* ARCircuitImageView.swift in Sources */,
 				C7E4178C2A0F6D6600A8EB9B /* OnlineTaskAddingView.swift in Sources */,
 				C7C4FC2129D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift in Sources */,
 				A66016992A16420000AE96C8 /* Timer555triggerextraView.swift in Sources */,
