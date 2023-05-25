@@ -39,6 +39,11 @@ extension scanmode{
         switch self{
         case .Proportional:return "proportional"
         case .Sequence:return "sequence"
+        case .Squarewavegenerator:return "squarewave"
+        case .SquarewaveDRgenerator:return "squarewaveDR"
+        case .Secondorder:return "secondorderfilter"
+
+
         default:return nil
         }
     }
@@ -90,6 +95,15 @@ class ARappARpartmodel:ObservableObject{
                        .Secondorder:2,.Sequence:3,
                        .Proportional:4
         ]
+//        var boxanchor:Squarewave.Box?
+//        Squarewave.loadBoxAsync(completion: { (result) in
+//            do {
+//                boxanchor = try result.get()
+//                // ...
+//            } catch {
+//                // handle error
+//            }
+//        })
         SquarewaveGeneratorAnchor=try! Squarewave.loadBox()
         SquarewaveDRGeneratorAnchor=try! SquarewaveDR.loadBox()
         SecondorderfilterAnchor=try! Secondorderfilter.loadBox()
@@ -244,9 +258,10 @@ class ARappARpartmodel:ObservableObject{
             model.generateCollisionShapes(recursive: true)
             arView.installGestures([.all], for: model as! (Entity & HasCollision))
         case .Secondorder:
-            let filter=SecondorderfilterAnchor.filter!
-            filter.generateCollisionShapes(recursive: true)
-            arView.installGestures([.all], for: filter as! (Entity & HasCollision))
+            return
+//            let filter=SecondorderfilterAnchor.filter!
+//            filter.generateCollisionShapes(recursive: true)
+//            arView.installGestures([.translation,.scale], for: filter as! (Entity & HasCollision))
         case .Proportional:
             let model=ProportionalAnchor.circuit!
             model.generateCollisionShapes(recursive: true)

@@ -32,6 +32,30 @@ struct ARscanView:View{
     //MARK: AR toolbar Content
     var ARtoolbarContent:some ToolbarContent{
         Group{
+            ToolbarItem(placement:.navigationBarLeading) {
+                HStack{
+                    switch extraviewmode {
+                    case .Secondorder:
+                        Button {
+                            ARappARpart.SecondorderfilterAnchor.notifications.facecamera.post()
+                        } label: {
+                            Image(systemName: "camera.viewfinder")
+                                .foregroundColor(Color.accentColor)
+                        }
+                        Button {
+                            ARappARpart.SecondorderfilterAnchor.notifications.playaudio.post()
+                        } label: {
+                            Image(systemName: "music.note")
+                                .foregroundColor(Color.accentColor)
+
+                        }
+                    default:Text("")
+                    }
+
+                }
+                .font(.title2)
+            }
+
             ToolbarItem(placement:.navigationBarTrailing) {
                 HStack(spacing: .zero){
                     Button {
@@ -60,20 +84,32 @@ struct ARscanView:View{
             let size=$0.size
             ZStack {
                 //Main AR View
-                ARViewContainer(startmode: startmode,
-                                appmodel: ARappARpart,
-                                Sequencemodel: Sequencemodel,
-                                updatemode: $updatemode,
-                                extraviewmode:$extraviewmode
+                ARViewContainer(
+                    startmode: startmode,
+                    appmodel: ARappARpart,
+                    Sequencemodel: Sequencemodel,
+                    updatemode: $updatemode,
+                    extraviewmode:$extraviewmode
                 )
                     .ignoresSafeArea(.all, edges: .top)
                     .alert(isPresented: $showmodeinformation){
                         ARappARpartmodel.generatemodeinform(mode: extraviewmode,Language: Usermodel.Language)
                     }
                 //extra view according to circuit mode
+                ARCircuitImageView(
+                    appmodel: ARappARpart,
+                    extraviewmode: $extraviewmode,
+                    ispresent: $showcircuitimage,
+                    Geometrysize: size,
+                    PresentToggleAnimation:.easeInOut(duration: 0.3)
+                )
                 modeextraview
-                ARCircuitImageView(appmodel: ARappARpart, extraviewmode: $extraviewmode, ispresent: $showcircuitimage, Geometrysize: size)
-                ARUpdatetabView(appmodel: ARappARpart, startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
+                ARUpdatetabView(
+                    appmodel: ARappARpart,
+                    startmode:startmode!,
+                    updatemode: $updatemode,
+                    extraviewmode: $extraviewmode
+                )
                 //topleadingbuttons
                 if !ARappARpart.Tipconfirmed{
                     ARTipView(appmodel: ARappARpart)
@@ -96,7 +132,7 @@ extension ARscanView{
     private var modeextraview:some View{
         ZStack{
             switch extraviewmode {
-            case .Squarewavegenerator:SquarewaveextraView()
+            case .Squarewavegenerator:VoltageregulatorextraView()
             case .SquarewaveDRgenerator:SquarewaveDRextraView()
             case .Secondorder:SecondorderfilterextraView()
             case .Sequence:SequencegeneratorextraView(appmodel: ARappARpart, Sequencemodel: Sequencemodel)
@@ -120,38 +156,6 @@ extension ARscanView{
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
     
-    
-    
-    //MARK: Not used in current View
-    @ViewBuilder
-    /// Return AR part toolbar
-    /// - Parameter size: geometry size
-    func  ARscantoolbar(size :CGSize)->some View{
-        HStack{
-            Button {
-                showmodeinformation=true
-            } label: {
-                Image(systemName: "photo")
-                .foregroundColor(Color.accentColor)
-                    .font(.title2)
-            }
-            Spacer()
-            Button {
-                showmodeinformation=true
-            } label: {
-                Image(systemName: "info.circle")
-                .foregroundColor(Color.accentColor)
-                    .font(.title2)
-            }
-
-        }
-        .frame(width: size.width/2)
-
-        
-        
-
-
-    }
 
     
 

@@ -24,20 +24,21 @@ struct ArappLoginView: View {
                     Image("SEUlogo").resizable().aspectRatio(nil, contentMode: .fit)
                         .frame(width:geometry.size.width*0.4)
                     //Login TextFields
-                    LoginTextFieldAreaView(width: geometry.size.width*0.5,
-                                           TextFieldLeadingLabel: Usermodel.Language ? [
-                                            "用户名",
-                                            "密码",
-                                            "服务器地址"
-                                           ] :
-                                            [
-                                            "Username",
-                                            "Password",
-                                            "URL"
-                                           ],
-                                           TextFieldTypeisSecure: [false,true,true],
-                                           TextFieldtext: [$Usermodel.user.id,$Usermodel.user.password,$Usermodel.user.simulationurl],
-                                           TextFieldkeyboardtype: [0,0,2]
+                    LoginTextFieldAreaView(
+                        width: geometry.size.width*0.5,
+                        TextFieldLeadingLabel: Usermodel.Language ? [
+                         "用户名",
+                         "密码",
+                         "服务器地址"
+                        ] :
+                         [
+                         "Username",
+                         "Password",
+                         "URL"
+                        ],
+                        TextFieldTypeisSecure: [false,true,true],
+                        TextFieldtext: [$Usermodel.user.id,$Usermodel.user.password,$Usermodel.user.simulationurl],
+                        TextFieldkeyboardtype: [0,0,2]
                     )
                     //Clear Button and Login Button
                     HStack{
@@ -95,7 +96,11 @@ struct ArappLoginView: View {
         }
         
         .alert(isPresented: $Usermodel.loginfailalert) {
-            Alert(title: Text("Failed to log in."), message: nil, dismissButton: .default(Text("OK")))
+            Alert(
+                title: Text(Usermodel.Language ? "登录失败" : "Failed to log in."),
+                message: nil,
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
 }

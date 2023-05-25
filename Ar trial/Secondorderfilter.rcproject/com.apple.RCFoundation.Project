@@ -32,38 +32,8 @@
                                     {
                                       "configurationBox" : {
                                         "configuration" : {
-                                          "target" : [
-
-                                          ],
-                                          "userIdentifier" : "行为"
-                                        },
-                                        "name" : {
-                                          "type" : "custom"
-                                        }
-                                      },
-                                      "identifier" : "714EF8CA-213E-4D82-8C53-E57F8EC6194D",
-                                      "isEnabled" : true
-                                    }
-                                  ],
-                                  "__version" : 1
-                                }
-                              ],
-                              "identifier" : "638E7D55-ECE3-428A-BF8C-900D1F212632",
-                              "isEnabled" : true
-                            }
-                          ],
-                          "__version" : 1
-                        },
-                        {
-                          "__content" : [
-                            {
-                              "configurations" : [
-                                {
-                                  "__content" : [
-                                    {
-                                      "configurationBox" : {
-                                        "configuration" : {
                                           "audioType" : "play",
+                                          "filePath" : "audio:com.apple.rc.audio.ambience.atmospheres-forest-floor\/%E6%B0%9B%E5%9B%B4%20-%20%E6%A3%AE%E6%9E%97%E5%9C%B0%E8%A1%A8.caf",
                                           "loops" : false,
                                           "target" : [
 
@@ -75,14 +45,14 @@
                                           "type" : "soundtrack"
                                         }
                                       },
-                                      "identifier" : "25773C5D-AF97-4968-A0C4-FE4B394E4B97",
+                                      "identifier" : "3CFFD1DF-08E9-43FE-A76B-E8EC8BC4DE1D",
                                       "isEnabled" : true
                                     }
                                   ],
                                   "__version" : 1
                                 }
                               ],
-                              "identifier" : "C086B776-355A-4E7F-8A6C-87806EA6828E",
+                              "identifier" : "63BA1CF4-99A9-4457-8048-32AFF44FED63",
                               "isEnabled" : true
                             }
                           ],
@@ -99,18 +69,106 @@
                       "isEnabled" : true,
                       "isLooping" : false,
                       "isModal" : false,
-                      "name" : "行为",
+                      "name" : "播放音频",
                       "triggers" : [
                         {
                           "__content" : [
                             {
                               "configurationBox" : {
                                 "configuration" : {
-                                  "userIdentifier" : "行为"
+                                  "userIdentifier" : "playaudio"
                                 },
                                 "name" : "custom"
                               },
-                              "identifier" : "77B8F78F-3E0D-4CC6-A8A5-E11A4883117B",
+                              "identifier" : "BF04B096-A9A7-405A-83F7-B39D7DB94D5D",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ]
+                    }
+                  ],
+                  "__version" : 3
+                },
+                {
+                  "__content" : [
+                    {
+                      "accessibility" : {
+                        "__content" : [
+                          {
+                            "isEnabled" : false
+                          }
+                        ],
+                        "__version" : 1
+                      },
+                      "actionGroups" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurations" : [
+                                {
+                                  "__content" : [
+                                    {
+                                      "configurationBox" : {
+                                        "configuration" : {
+                                          "animationDuration" : 0,
+                                          "direction" : [
+                                            0,
+                                            1,
+                                            0
+                                          ],
+                                          "duration" : 0,
+                                          "loops" : false,
+                                          "target" : [
+                                            "B916DCB7-696E-423C-AFFF-8A749078135E"
+                                          ],
+                                          "upVector" : [
+                                            1,
+                                            0,
+                                            0
+                                          ]
+                                        },
+                                        "name" : {
+                                          "type" : "lookAtCamera"
+                                        }
+                                      },
+                                      "identifier" : "6B0E73A4-8DF4-4498-830E-F19F2CE423BD",
+                                      "isEnabled" : true
+                                    }
+                                  ],
+                                  "__version" : 1
+                                }
+                              ],
+                              "identifier" : "548A64A5-D4F8-44BB-A757-6D4D6F85656E",
+                              "isEnabled" : true
+                            }
+                          ],
+                          "__version" : 1
+                        }
+                      ],
+                      "color" : [
+                        0.21568627655506134,
+                        0.72549021244049072,
+                        0.80000001192092896,
+                        1
+                      ],
+                      "identifier" : "9628D0F1-EE18-417F-9123-27E81D0B1B2D",
+                      "isEnabled" : true,
+                      "isLooping" : false,
+                      "isModal" : false,
+                      "name" : "看向摄像头",
+                      "triggers" : [
+                        {
+                          "__content" : [
+                            {
+                              "configurationBox" : {
+                                "configuration" : {
+                                  "userIdentifier" : "facecamera"
+                                },
+                                "name" : "custom"
+                              },
+                              "identifier" : "DFC82A37-09AF-450B-A8A0-927141595B36",
                               "isEnabled" : true
                             }
                           ],
@@ -242,21 +300,21 @@
               "title" : "box",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.87594765424728394,
+                  0.96079283952713013,
+                  -4.4732583859286024e-08,
+                  -0.27726668119430542,
                   0,
-                  -0.48240584135055542,
+                  -0.17044982314109802,
+                  0.78872174024581909,
+                  -0.59064775705337524,
                   0,
-                  -0.38852807879447937,
-                  0.59273612499237061,
-                  -0.70548540353775024,
+                  0.21868638694286346,
+                  0.6147502064704895,
+                  0.75779837369918823,
                   0,
-                  0.28593945503234863,
-                  0.80539661645889282,
-                  0.51920592784881592,
-                  0,
-                  0.28655269742012024,
-                  0.55449509620666504,
-                  0.18633705377578735,
+                  0.85795193910598755,
+                  0.78062069416046143,
+                  1.281144380569458,
                   1
                 ],
                 "sceneTransform" : [

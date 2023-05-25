@@ -25,9 +25,20 @@ struct ARappSignupView: View {
                         if Usermodel.Signupsuccess == nil {
                             ProgressView()
                         }else{
-                            Text(Usermodel.Signupsuccess! ? "Sign up success" : "Sign up fail")
+                            Text(Usermodel.Language ? "注册" : "Registration").font(.largeTitle).bold()
+                            Spacer()
+                            Image(systemName: "person.crop.circle")
+                                .resizable().scaledToFit()
+                                //.frame(width: 100)
+                                .foregroundColor(.accentColor)
+                                .font(.system(size:10,weight:.thin))
+                                
+                            Text(
+                                Usermodel.Signupsuccess! ? Usermodel.Language ? "注册成功" : "Sign up success" : Usermodel.Language ? "注册失败" : "Sign up fail"
+                            )
                                 .font(.title)
                                 .foregroundColor(Usermodel.Signupsuccess! ? Color.green : Color.red)
+                            Spacer()
                         }
                     }
                     //View when typing in user information
@@ -36,22 +47,24 @@ struct ARappSignupView: View {
                         Spacer()
                         Image(systemName: "person.crop.circle")
                             .resizable().scaledToFit()
-                            .frame(width: 100)
+                            //.frame(width: 100)
                             .foregroundColor(.accentColor)
-                        LoginTextFieldAreaView(width: size.width/2,
-                                               TextFieldLeadingLabel: Usermodel.Language ? [
-                                                "用户名",
-                                                "密码",
-                                                "服务器地址"
-                                               ] :
-                                                [
-                                                "Username",
-                                                "Password",
-                                                "URL"
-                                               ],
-                                               TextFieldTypeisSecure: [false,true,true],
-                                               TextFieldtext: [$username,$password,$url],
-                                               TextFieldkeyboardtype: [0,0,2]
+                            .font(.system(size:10,weight:.thin))
+                        LoginTextFieldAreaView(
+                            width: size.width/2,
+                            TextFieldLeadingLabel: Usermodel.Language ? [
+                             "用户名",
+                             "密码",
+                             "服务器地址"
+                            ] :
+                             [
+                             "Username",
+                             "Password",
+                             "URL"
+                            ],
+                            TextFieldTypeisSecure: [false,true,true],
+                            TextFieldtext: [$username,$password,$url],
+                            TextFieldkeyboardtype: [0,0,2]
                         )
                         Button{
                             Usermodel.Signup(username: username, password: password, signupurl: url)
