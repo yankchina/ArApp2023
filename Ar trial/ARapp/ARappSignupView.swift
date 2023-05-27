@@ -28,10 +28,9 @@ struct ARappSignupView: View {
                             Text(Usermodel.Language ? "注册" : "Registration").font(.largeTitle).bold()
                             Spacer()
                             Image(systemName: "person.crop.circle")
-                                .resizable().scaledToFit()
-                                //.frame(width: 100)
+                                //.resizable().scaledToFit()
                                 .foregroundColor(.accentColor)
-                                .font(.system(size:10,weight:.thin))
+                                .font(.system(size:size.height*0.1,weight:.light))
                                 
                             Text(
                                 Usermodel.Signupsuccess! ? Usermodel.Language ? "注册成功" : "Sign up success" : Usermodel.Language ? "注册失败" : "Sign up fail"
@@ -46,10 +45,9 @@ struct ARappSignupView: View {
                         Text(Usermodel.Language ? "注册" : "Registration").font(.largeTitle).bold()
                         Spacer()
                         Image(systemName: "person.crop.circle")
-                            .resizable().scaledToFit()
-                            //.frame(width: 100)
+                            //.resizable().scaledToFit()
                             .foregroundColor(.accentColor)
-                            .font(.system(size:10,weight:.thin))
+                            .font(.system(size:size.height*0.1,weight:.light))
                         LoginTextFieldAreaView(
                             width: size.width/2,
                             TextFieldLeadingLabel: Usermodel.Language ? [
@@ -70,7 +68,7 @@ struct ARappSignupView: View {
                             Usermodel.Signup(username: username, password: password, signupurl: url)
                         }label: {
                             Text(Usermodel.Language ? "确认" : "Confirm")
-                                .foregroundColor(.white)
+                                .foregroundColor(.BackgroundprimaryColor)
                         }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 5).fill(Color.accentColor))

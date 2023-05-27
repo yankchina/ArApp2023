@@ -282,21 +282,19 @@ public struct MultiLineChartRCView: View {
                             //.bold()
                         .foregroundColor(.primary)
                         Spacer()
-                        Button {
+                        Button{
                             zooming.toggle()
-                        } label: {
-                            Text("Zoom").font(.title3)
-                                .foregroundColor(.accentColor.opacity(0.8))
+                        }label:{
+                            Image(systemName:zooming ? "arrow.down.right.and.arrow.up.left":"arrow.up.left.and.arrow.down.right")
+                                .font(.title3)
                         }
-                        .controlSize(.large)
                         .padding(.trailing,5)
-                        Button {
+                        Button{
                             ispresent=false
-                        } label: {
-                            Text("Hide").font(.title3)
-                                .foregroundColor(.accentColor.opacity(0.8))
+                        }label: {
+                            Image(systemName: "chevron.down")
+                                .font(.title3)
                         }
-                        .controlSize(.large)
                         .padding(.trailing,5)
 
                     }

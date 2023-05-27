@@ -30,7 +30,7 @@ struct ARscanView:View{
     @StateObject var Proportionalmodel:Proportionalcircuitmodel=Proportionalcircuitmodel()
     
     //MARK: AR toolbar Content
-    var ARtoolbarContent:some ToolbarContent{
+    func ARtoolbarContent(geometrysize:CGSize)->some ToolbarContent{
         Group{
             ToolbarItem(placement:.navigationBarLeading) {
                 HStack{
@@ -40,13 +40,13 @@ struct ARscanView:View{
                             ARappARpart.SecondorderfilterAnchor.notifications.facecamera.post()
                         } label: {
                             Image(systemName: "camera.viewfinder")
-                                .foregroundColor(Color.accentColor)
+                                .font(.system(size: geometrysize.height*0.03, weight: .light))
                         }
                         Button {
                             ARappARpart.SecondorderfilterAnchor.notifications.playaudio.post()
                         } label: {
                             Image(systemName: "music.note")
-                                .foregroundColor(Color.accentColor)
+                                .font(.system(size: geometrysize.height*0.03, weight: .light))
 
                         }
                     default:Text("")
@@ -62,7 +62,7 @@ struct ARscanView:View{
                         showmodeinformation=true
                     } label: {
                         Image(systemName: "info.circle")
-                        .foregroundColor(Color.accentColor)
+                            .font(.system(size: geometrysize.height*0.03, weight: .light))
                     }
                     Button {
                         withAnimation(.easeInOut(duration: 0.3)) {
@@ -70,7 +70,7 @@ struct ARscanView:View{
                         }
                     } label: {
                         Image(systemName: "photo.circle")
-                        .foregroundColor(Color.accentColor)
+                            .font(.system(size: geometrysize.height*0.03, weight: .light))
                     }
                 }
                 .font(.title2)
@@ -116,7 +116,7 @@ struct ARscanView:View{
                 }
                 //returnbutton
             }
-            .toolbar{ARtoolbarContent}
+            .toolbar{ARtoolbarContent(geometrysize: size)}
 
         }
         .onAppear {
@@ -132,7 +132,7 @@ extension ARscanView{
     private var modeextraview:some View{
         ZStack{
             switch extraviewmode {
-            case .Squarewavegenerator:VoltageregulatorextraView()
+            case .Squarewavegenerator:SquarewaveextraView()
             case .SquarewaveDRgenerator:SquarewaveDRextraView()
             case .Secondorder:SecondorderfilterextraView()
             case .Sequence:SequencegeneratorextraView(appmodel: ARappARpart, Sequencemodel: Sequencemodel)
