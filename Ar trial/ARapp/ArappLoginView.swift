@@ -23,6 +23,13 @@ struct ArappLoginView: View {
             HStack{
                 Spacer()
                 VStack{
+                    HStack{
+                        Toggle(isOn: $Usermodel.Language) {
+                            Text("")
+                        }
+                        .toggleStyle(.switch)
+                        Spacer()
+                    }
                     //Upper image
                     Image("SEUlogo").resizable().aspectRatio(nil, contentMode: .fit)
                         .frame(width:geometry.size.width*0.4)
@@ -70,7 +77,7 @@ struct ArappLoginView: View {
                             .background(!Usermodel.signinbuttonable || !Usermodel.Simulationurllegal() ? Color.secondary.opacity(0.7) : Color.accentColor)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                     }
-                    if !FirstLogin{
+                    if FirstLogin{
                         //Signup button
                         Button(action: {Usermodel.UserSignup.toggle()}) {
                             Text(Usermodel.Language ? "注册" : "Sign up")
@@ -80,21 +87,9 @@ struct ArappLoginView: View {
                         .foregroundColor(Color.accentColor)
                         .padding(.top)
                     }
-
-                    
                     Spacer()
                 }
                 Spacer()
-            }
-            
-
-        }
-        .toolbar{
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Toggle(isOn: $Usermodel.Language) {
-                    Text("")
-                }
-                .toggleStyle(.switch)
             }
         }
         .blurredSheet(Usermodel.blurredShapestyle, show: $Usermodel.UserSignup){

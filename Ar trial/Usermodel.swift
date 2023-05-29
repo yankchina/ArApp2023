@@ -62,7 +62,7 @@ class Appusermodel:ObservableObject{
     
     init(){
         user=ArappUser()
-        appstatus=0
+        appstatus=1
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -153,9 +153,6 @@ class Appusermodel:ObservableObject{
         //Clean user password and url
         user=ArappUser(id:username)
         //Return to login view
-        if !FirstLogin{
-            appstatus=0
-        }
         signinbuttonable=true
         loginfailalert=false
         SimulationimageRefreshDisable=false

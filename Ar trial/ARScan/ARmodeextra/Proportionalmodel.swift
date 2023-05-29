@@ -25,6 +25,12 @@ extension proportionalinputmode{
         }
     }
 }
+enum ProportionalcircuitExtraviewstatus:Int{
+    case start=0
+    case resistance=1
+    case input=2
+    case chart=3
+}
 /// Input struct
 struct input {
     var mode:proportionalinputmode
@@ -36,12 +42,7 @@ struct input {
 /// Proportional circuit model
 class Proportionalcircuitmodel:ObservableObject,Identifiable{
     //MARK: parameters
-    /// Chart present status
-    @Published var chartpresent:Bool
-    /// Typing resistance value
-    @Published var resistancepresent:Bool
-    /// Typing input value
-    @Published var inputpresent:Bool
+    @Published var ExtraViewstatus:ProportionalcircuitExtraviewstatus
     /// Resistance of each plus input
     @Published var resistanceplus:[Double]
     /// Textfield text of resistance of each plus input
@@ -81,9 +82,7 @@ class Proportionalcircuitmodel:ObservableObject,Identifiable{
     
     //MARK: initiate
     init() {
-        chartpresent=false
-        resistancepresent=true
-        inputpresent=false
+        ExtraViewstatus = .start
         resistanceplus=[1]
         resistanceplustext=[""]
         resistanceminus=[1]
@@ -102,6 +101,16 @@ class Proportionalcircuitmodel:ObservableObject,Identifiable{
         zooming=false
     }
     //MARK: functions
+    /// Extra View status go forward
+    func Statusforward()->Void{
+        let rawvalue=ExtraViewstatus.rawValue+1
+        ExtraViewstatus=ProportionalcircuitExtraviewstatus(rawValue: rawvalue) ?? .start
+    }
+    /// Extra View status go backward
+    func Statusbackward()->Void{
+        let rawvalue=ExtraViewstatus.rawValue-1
+        ExtraViewstatus=ProportionalcircuitExtraviewstatus(rawValue: rawvalue) ?? .start
+    }
     /// Add a plus input
     func addplus()->Void{
         if resistanceplus.count<3{
@@ -207,11 +216,12 @@ class Proportionalcircuitmodel:ObservableObject,Identifiable{
     
     /// Automatically decide whether values are legal
     func valuelegal()->Bool{
-        if resistancepresent {
+        switch ExtraViewstatus {
+        case .resistance:
             return resistancevaluelegal()
-        }
-        if inputpresent {
+        case .input:
             return inputvaluelegal()
+        default:break
         }
         return false
     }
@@ -226,8 +236,7 @@ class Proportionalcircuitmodel:ObservableObject,Identifiable{
         for index in resistanceminustext.indices {
             resistanceminus[index]=Double(resistanceminustext[index])!
         }
-        inputpresent=true
-        resistancepresent=false
+        Statusforward()
     }
     /// Confirm input values in textfield
     func confirminputvalue()->Void{
@@ -245,23 +254,17 @@ class Proportionalcircuitmodel:ObservableObject,Identifiable{
 
             }
         }
-        inputpresent=false
-        resistancepresent=true
     }
     /// Automatically confirm values in textfield
     func confirmvalue()->Void{
-        if resistancepresent{
+        switch ExtraViewstatus {
+        case .resistance:
             confirmresistancevalue()
-        }else if inputpresent{
+        case .input:
             confirminputvalue()
+        default:return
         }
         
-    }
-    
-    /// Return from input textfields to resistance textfields
-    func returntoresistance()->Void{
-        inputpresent=false
-        resistancepresent=true
     }
     //MARK: static functions
     

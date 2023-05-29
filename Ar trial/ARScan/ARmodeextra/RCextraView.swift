@@ -98,17 +98,13 @@ struct RCextraView: View {
                     if pulsepresent&&chartpresent {
                         VStack{
                             if zooming{
-                                MultiLineChartRCView(data: getdata(statistic: self.statistic, gradientcolors: self.gradientcolors), title: "pulse",chartwidth: geometry.size.width/4*zoomratio, chartheight: geometry.size.height/5*zoomratio,informlabel:chartinform,isPresent: $pulsepresent, zooming: $zooming)
                             }else{
-                                MultiLineChartRCView(data: getdata(statistic: self.statistic, gradientcolors: self.gradientcolors), title: "pulse",chartwidth: geometry.size.width/4, chartheight: geometry.size.height/5,informlabel:chartinform,isPresent: $pulsepresent, zooming: $zooming)
                             }
                         }.onDisappear{chartpresent=false}
                     }else if sinepresent&&chartpresent{
                         VStack{
                             if zooming{
-                                MultiLineChartRCView(data: getdata(statistic: self.statistic, gradientcolors: self.gradientcolors), title: "sine",chartwidth: geometry.size.width/4*zoomratio, chartheight: geometry.size.height/5*zoomratio,informlabel:chartinform,isPresent: $sinepresent, zooming: $zooming)
                             }else{
-                                MultiLineChartRCView(data: getdata(statistic: self.statistic, gradientcolors: self.gradientcolors), title: "sine",chartwidth: geometry.size.width/4, chartheight: geometry.size.height/5,informlabel:chartinform,isPresent: $sinepresent, zooming: $zooming)
                             }
                         }.onDisappear{chartpresent=false}
                     }else{
