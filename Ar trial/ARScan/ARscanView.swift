@@ -210,6 +210,7 @@ struct ARViewContainer: UIViewRepresentable {
             //add anchor according to update mode
             appmodel.addanchor(ARview: uiView,mode: mode)
             appmodel.enablegesture(arView: uiView,mode: mode)
+            appmodel.definetriggeractions(Sequencemodel: Sequencemodel)
             DispatchQueue.main.async {
                 Sequencemodel.clear()
                 extraviewmode=updatemode!

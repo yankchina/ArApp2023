@@ -11,7 +11,6 @@ import Combine
 
 /// View of all Online Tasks
 struct OnlineTaskView: View {
-    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var Usermodel:Appusermodel
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject var OnlineTaskmodel:OnlineTaskModel=OnlineTaskModel()

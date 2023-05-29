@@ -90,7 +90,8 @@ struct ARappmenuView: View {
                         Text(Usermodel.Language ? "任务" : "Tasks").font(.title2)
                     }
                     Button {
-                        Usermodel.appstatus=0
+                        Usermodel.logout(FirstLogin: false)
+                        usersheetpresent.toggle()
                     } label: {
                         Text(Usermodel.Language ? "登出" : "Log out")
                             .font(.title2)
@@ -113,6 +114,9 @@ struct ARappmenuView: View {
                 }
                 .navigationTitle(Usermodel.Language ? "主页" : "Menu")
                 .toolbar{MenutoolbarContent(geometry: geometry)}
+                .fullScreenCover(isPresented: $usersheetpresent) {
+                    ArappLoginView(FirstLogin: false)
+                }
             }
 
         }
