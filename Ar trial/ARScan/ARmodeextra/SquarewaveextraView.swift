@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import Combine
-import RealityKit
+//import Combine
+//import RealityKit
 //MARK: SquarewaveView
 struct SquarewaveextraView: View {
     

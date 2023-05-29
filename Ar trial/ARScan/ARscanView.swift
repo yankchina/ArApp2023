@@ -7,7 +7,7 @@
 
 import SwiftUI
 import RealityKit
-import Combine
+//import Combine
 
 //MARK: ARscanView
 /// AR part View

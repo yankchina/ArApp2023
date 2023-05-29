@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import UIKit
-import RealityKit
+//import UIKit
+//import RealityKit
 
 /// Login View, displays when appstatus == 0
 struct ArappLoginView: View {

@@ -8,7 +8,7 @@
 import SwiftUI
 import RealityKit
 import CoreData
-import Combine
+//import Combine
 
 /// The modes of AR
 enum scanmode:String{

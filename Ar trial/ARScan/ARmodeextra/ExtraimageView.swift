@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import RealityKit
+//import RealityKit
 
 struct ExtraimageView:View{
     @Binding var display:Bool

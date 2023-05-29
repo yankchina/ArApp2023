@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import RealityKit
+//import RealityKit
 
 /// Tips when first entering ARView
 struct ARTipView: View {

@@ -5,8 +5,8 @@
 //  Created by niudan on 2023/3/8.
 //
 import SwiftUI
-import RealityKit
-import Combine
+//import RealityKit
+//import Combine
 
 struct ContentView : View {
     @StateObject var Usermodel:Appusermodel=Appusermodel()

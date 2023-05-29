@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import RealityKit
+//import RealityKit
 import Combine
 
 /// The struct stores User information
