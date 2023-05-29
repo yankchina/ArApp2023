@@ -89,7 +89,11 @@ struct InputConfirmButton: View {
     let Buttondisable:Bool
     let Buttonaction:()->Void
     var body:some View{
-        Button(action: Buttonaction) {
+        Button(action: {
+            Usermodel.Actiondate=Date()
+            Buttonaction()
+            
+        }) {
             Text(Usermodel.Language ? "确认" : "Confirm")
                 .foregroundColor(Buttondisable ? Color.secondary:Color.white)
         }

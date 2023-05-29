@@ -103,6 +103,10 @@ struct SquarewaveextraView: View {
                                         .resizable()
                                         .aspectRatio(nil, contentMode: .fit)
                                         .cornerRadius(3)
+                                        .onAppear {
+                                            Usermodel.Receivedate=Date()
+                                            print(Usermodel.Receivedate.timeIntervalSince(Usermodel.Actiondate))
+                                        }
                                 case .failure:
                                     ZStack{
                                         Image(systemName: "questionmark")

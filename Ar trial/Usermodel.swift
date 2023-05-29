@@ -62,7 +62,7 @@ class Appusermodel:ObservableObject{
     
     init(){
         user=ArappUser()
-        appstatus=1
+        appstatus=0
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -106,7 +106,7 @@ class Appusermodel:ObservableObject{
     }
     
     /// Operation after user tap login button
-    func loginconfirm() -> Void {
+    func loginconfirm(DismissAction:DismissAction,FirstLogin:Bool) -> Void {
         //Disable signin button
         signinbuttonable=false
         //Remove blank spaces at the end of login view textfields texts
@@ -134,6 +134,9 @@ class Appusermodel:ObservableObject{
                 //If response authority >= 0, log in. Else alert user
                 if returnedPosts.authority >= 0{
                     self?.appstatus=1
+                    if !FirstLogin {
+                        DismissAction()
+                    }
                 }
                 else{
                     self?.loginfailalert=true
@@ -143,13 +146,16 @@ class Appusermodel:ObservableObject{
     }
     
     /// Operation after user tap logout button, reassign usermodel properties
-    func logout()->Void{
+    /// - Parameter FirstLogin: User first log in after entering app
+    func logout(FirstLogin:Bool)->Void{
         //Save user id
         let username=user.id
         //Clean user password and url
         user=ArappUser(id:username)
         //Return to login view
-        appstatus=0
+        if !FirstLogin{
+            appstatus=0
+        }
         signinbuttonable=true
         loginfailalert=false
         SimulationimageRefreshDisable=false

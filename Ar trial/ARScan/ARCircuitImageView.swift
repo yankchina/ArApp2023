@@ -14,6 +14,19 @@ struct ARCircuitImageView: View {
     let Geometrysize:CGSize
     let magnifyratio:CGFloat=1.5
     @State var imagemagnify:Bool=false
+    let PresentToggleAnimation:Animation?
+    
+    var CircuitImageDraggesture:some Gesture{
+        DragGesture()
+            .onEnded { value in
+                let dragsize=value.translation
+                if dragsize.width > 50 || dragsize.height < -50 {
+                    withAnimation(PresentToggleAnimation) {
+                        ispresent.toggle()
+                    }
+                }
+            }
+    }
     var body: some View {
         VStack{
             HStack{
@@ -24,12 +37,14 @@ struct ARCircuitImageView: View {
                         .frame(width:
                                 ispresent ? imagemagnify ? Geometrysize.width/2*magnifyratio : Geometrysize.width/2 : 0
                         )
+                        .opacity(ispresent ? 1 : 0.2)
                         .cornerRadius(10)
                         .onTapGesture {
                             withAnimation(.easeInOut) {
                                 imagemagnify.toggle()
                             }
                         }
+                        .gesture(CircuitImageDraggesture)
                 }else{
                     
                 }

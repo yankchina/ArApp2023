@@ -326,7 +326,7 @@ class ARsinegeneratormodel: ObservableObject {
     func startforward()->Void{statusforward()}
     func inputforward(userurl:String)->Void{
         requestcount += 1
-        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/timer555monostabletrigger?R=\(R)&C=\(C)&requestcount=\(requestcount)")
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/sinegenerator?R=\(R)&C=\(C)&requestcount=\(requestcount)")
         statusforward()
     }
     func inputbackward()->Void{statusbackward()}
@@ -334,7 +334,63 @@ class ARsinegeneratormodel: ObservableObject {
     func imageforward()->Void{statusforward()}
     func imagerefresh(userurl:String)->Void {
         requestcount += 1
-        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/timer555monostabletrigger?R=\(R)&C=\(C)&requestcount=\(requestcount)")
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/sinegenerator?R=\(R)&C=\(C)&requestcount=\(requestcount)")
+    }
+    func Valuelegal()->Bool{
+        return true
+    }
+        
+}
+
+//MARK: voltageregulatormodel
+class ARvoltageregulatormodel: ObservableObject {
+    @Published var R2:Double
+    @Published var UD1:Double
+    @Published var Simulationurl:URL?
+    @Published var requestcount:Int
+    @Published var status:ARSimulationextraviewstatus
+    @Published var inputwindowyoffset:CGFloat
+    @Published var imageyoffset:CGFloat
+    @Published var imagezoom:Bool
+    var imagezoomratio: CGFloat{return imagezoom ? 1.5:1}
+    var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        R2=1
+        UD1=3.2
+        requestcount=0
+        status = .start
+        inputwindowyoffset=0
+        imageyoffset=0
+        imagezoom=false
+        //getValues()
+    }
+    func statusforward()->Void{
+        if let newstatus=ARSimulationextraviewstatus(rawValue: status.rawValue+1){
+            status=newstatus
+        }else{
+            status=ARSimulationextraviewstatus(rawValue: 0)!
+        }
+    }
+    func statusbackward()->Void{
+        if let newstatus=ARSimulationextraviewstatus(rawValue: status.rawValue-1){
+            status=newstatus
+        }else{
+            status=ARSimulationextraviewstatus(rawValue: 0)!
+        }
+    }
+    func startforward()->Void{statusforward()}
+    func inputforward(userurl:String)->Void{
+        requestcount += 1
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/Voltageregulator?R2=\(R2)&UD1=\(UD1)&requestcount=\(requestcount)")
+        statusforward()
+    }
+    func inputbackward()->Void{statusbackward()}
+    func imagebackward()->Void{statusbackward()}
+    func imageforward()->Void{statusforward()}
+    func imagerefresh(userurl:String)->Void {
+        requestcount += 1
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/Voltageregulator?R2=\(R2)&UD1=\(UD1)&requestcount=\(requestcount)")
     }
     func Valuelegal()->Bool{
         return true

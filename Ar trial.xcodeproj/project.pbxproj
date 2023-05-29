@@ -68,6 +68,7 @@
 		C7521BAC29FF8A5E005AA58A /* CustomVideoPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7521BAB29FF8A5E005AA58A /* CustomVideoPlayer.swift */; };
 		C7521BAE29FFAD07005AA58A /* VideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7521BAD29FFAD07005AA58A /* VideoView.swift */; };
 		C755F1EE2A03A05800ABFD0B /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C755F1ED2A03A05800ABFD0B /* StringExtension.swift */; };
+		C75AB1B72A1DFEEF00A1C694 /* VoltageregulatorextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C75AB1B62A1DFEEF00A1C694 /* VoltageregulatorextraView.swift */; };
 		C75CD4872A08C8D500223E09 /* Secondorderfilter.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C75CD4862A08C8D500223E09 /* Secondorderfilter.rcproject */; };
 		C764EAB729D6A98800ED6A2D /* ARViewContainer_extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C764EAB629D6A98800ED6A2D /* ARViewContainer_extension.swift */; };
 		C7677FC429DEF752000A2267 /* ExtraimageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7677FC329DEF752000A2267 /* ExtraimageView.swift */; };
@@ -176,6 +177,7 @@
 		C7521BAB29FF8A5E005AA58A /* CustomVideoPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomVideoPlayer.swift; sourceTree = "<group>"; };
 		C7521BAD29FFAD07005AA58A /* VideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoView.swift; sourceTree = "<group>"; };
 		C755F1ED2A03A05800ABFD0B /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		C75AB1B62A1DFEEF00A1C694 /* VoltageregulatorextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoltageregulatorextraView.swift; sourceTree = "<group>"; };
 		C75CD4862A08C8D500223E09 /* Secondorderfilter.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = Secondorderfilter.rcproject; sourceTree = "<group>"; };
 		C764EAB629D6A98800ED6A2D /* ARViewContainer_extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARViewContainer_extension.swift; sourceTree = "<group>"; };
 		C7677FC329DEF752000A2267 /* ExtraimageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtraimageView.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				C78B1AB229F179B6000C9F6B /* SecondorderfilterextraView.swift */,
 				A66016962A1640F500AE96C8 /* SinegeneratorextraView.swift */,
 				A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */,
+				C75AB1B62A1DFEEF00A1C694 /* VoltageregulatorextraView.swift */,
 				C7CF0C022A150A7B005F764D /* SimlationSubViews */,
 			);
 			path = ARmodeextra;
@@ -586,6 +589,7 @@
 				C7E4178A2A0F66BB00A8EB9B /* ViewExtension.swift in Sources */,
 				C77B0DB829D2BFF30087DD44 /* Proportionalcircuit.rcproject in Sources */,
 				C75CD4872A08C8D500223E09 /* Secondorderfilter.rcproject in Sources */,
+				C75AB1B72A1DFEEF00A1C694 /* VoltageregulatorextraView.swift in Sources */,
 				C7AD257D29C2F039000B3B5C /* Path+QuadCurve.swift in Sources */,
 				C7AFF2D029D412850080D1CA /* ProportionalextraView.swift in Sources */,
 				C7AD257A29C2F039000B3B5C /* LineChartView.swift in Sources */,
@@ -766,7 +770,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -774,9 +778,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hhxhans.Ar-trialios15";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -799,7 +805,7 @@
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arkit;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationLandscapeRight;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationLandscapeRight;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -807,9 +813,11 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.hhxhans.Ar-trialios15";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_ENABLE_BATCH_MODE = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
