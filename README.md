@@ -1,7 +1,7 @@
 # 《电子电路基础》虚拟仿真 iPad 版
 
 - 2023 年东大自动化毕业论文代码
-- 审核: yankchina<yankchina@gmail.com>
+- 审核: <yankchina@gmail.com>
 
 
 
