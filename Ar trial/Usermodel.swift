@@ -62,7 +62,7 @@ class Appusermodel:ObservableObject{
     
     init(){
         user=ArappUser()
-        appstatus=1
+        appstatus=0
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -160,7 +160,7 @@ class Appusermodel:ObservableObject{
     }
     
     /// Operation when user tap signin button
-    func Signup(username:String,password:String,signupurl:String)->Void{
+    func Signup(username:String,password:String,signupurl:String,dismissAction:DismissAction)->Void{
         Signingup=true
         //Form url
         let urlstring:String="http://"+signupurl+"/AR/Online/Signup?username="+username+"&password="+password+"&url="+signupurl
@@ -178,7 +178,7 @@ class Appusermodel:ObservableObject{
                 self?.Signupsuccess=Signupresponse.Signupsuccess
                 //Automatically quit signin view after 2 seconds
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-                    self?.UserSignup=false
+                    dismissAction()
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now()+2.3) {
                     self?.Signingup=false

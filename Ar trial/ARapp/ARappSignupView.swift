@@ -9,6 +9,7 @@ import SwiftUI
 
 /// Singup View, displays after user taps signup Button in LoginView
 struct ARappSignupView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var Usermodel:Appusermodel
     @State var username:String=""
     @State var password:String=""
@@ -65,7 +66,7 @@ struct ARappSignupView: View {
                             TextFieldkeyboardtype: [0,0,2]
                         )
                         Button{
-                            Usermodel.Signup(username: username, password: password, signupurl: url)
+                            Usermodel.Signup(username: username, password: password, signupurl: url, dismissAction: dismiss)
                         }label: {
                             Text(Usermodel.Language ? "确认" : "Confirm")
                                 .foregroundColor(.BackgroundprimaryColor)

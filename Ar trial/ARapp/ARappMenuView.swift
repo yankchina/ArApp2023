@@ -28,7 +28,7 @@ struct ARappmenuView: View {
     /// - Returns: ToolbarContent for Menu
     func MenutoolbarContent(geometry:GeometryProxy)->some ToolbarContent{
         Group{
-            //Leading image to switch between two servers
+            //Trailing picker to switch between two servers
             ToolbarItemGroup(placement: .navigationBarTrailing) {
                 Picker(selection: $Usermodel.user.simulationurl){
                     ForEach(Usermodel.Urladdress.indices,id:\.self){index in
@@ -84,7 +84,7 @@ struct ARappmenuView: View {
                    
                     
                     //MARK: Material section placement
-                    Materialsection
+                    //Materialsection
                     
                     NavigationLink(destination: OnlineTaskView()) {
                         Text(Usermodel.Language ? "任务" : "Tasks").font(.title2)
