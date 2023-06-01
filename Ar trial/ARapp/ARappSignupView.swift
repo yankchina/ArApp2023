@@ -14,6 +14,24 @@ struct ARappSignupView: View {
     @State var username:String=""
     @State var password:String=""
     @State var url:String=""
+    
+    var Signupresulttext:String{
+        Usermodel.Signupsuccess! ? Usermodel.Language ? "注册成功" : "Sign up success" : Usermodel.Language ? "注册失败" : "Sign up fail"
+    }
+    
+    var TextFieldLeadingLabels:[String]{
+        Usermodel.Language ? [
+         "用户名",
+         "密码",
+         "服务器地址"
+        ] :
+         [
+         "Username",
+         "Password",
+         "URL"
+        ]
+    }
+    
     //MARK: body
     var body: some View {
         GeometryReader{
@@ -33,9 +51,7 @@ struct ARappSignupView: View {
                                 .foregroundColor(.accentColor)
                                 .font(.system(size:size.height*0.1,weight:.light))
                                 
-                            Text(
-                                Usermodel.Signupsuccess! ? Usermodel.Language ? "注册成功" : "Sign up success" : Usermodel.Language ? "注册失败" : "Sign up fail"
-                            )
+                            Text(Signupresulttext)
                                 .font(.title)
                                 .foregroundColor(Usermodel.Signupsuccess! ? Color.green : Color.red)
                             Spacer()
@@ -51,16 +67,7 @@ struct ARappSignupView: View {
                             .font(.system(size:size.height*0.1,weight:.light))
                         LoginTextFieldAreaView(
                             width: size.width/2,
-                            TextFieldLeadingLabel: Usermodel.Language ? [
-                             "用户名",
-                             "密码",
-                             "服务器地址"
-                            ] :
-                             [
-                             "Username",
-                             "Password",
-                             "URL"
-                            ],
+                            TextFieldLeadingLabel: TextFieldLeadingLabels,
                             TextFieldTypeisSecure: [false,true,true],
                             TextFieldtext: [$username,$password,$url],
                             TextFieldkeyboardtype: [0,0,2]

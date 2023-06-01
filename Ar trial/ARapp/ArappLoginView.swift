@@ -17,6 +17,19 @@ struct ArappLoginView: View {
     /// Usermodel passed in by ContentView
     @EnvironmentObject var Usermodel:Appusermodel
     
+    var TextFieldLeadingLabels:[String]{
+        Usermodel.Language ? [
+         "用户名",
+         "密码",
+         "服务器地址"
+        ] :
+         [
+         "Username",
+         "Password",
+         "URL"
+        ]
+    }
+    
     //MARK: body
     var body: some View {
         GeometryReader{geometry in
@@ -36,16 +49,7 @@ struct ArappLoginView: View {
                     //Login TextFields
                     LoginTextFieldAreaView(
                         width: geometry.size.width*0.5,
-                        TextFieldLeadingLabel: Usermodel.Language ? [
-                         "用户名",
-                         "密码",
-                         "服务器地址"
-                        ] :
-                         [
-                         "Username",
-                         "Password",
-                         "URL"
-                        ],
+                        TextFieldLeadingLabel: TextFieldLeadingLabels,
                         TextFieldTypeisSecure: [false,true,true],
                         TextFieldtext: [$Usermodel.user.id,$Usermodel.user.password,$Usermodel.user.simulationurl],
                         TextFieldkeyboardtype: [0,0,2]

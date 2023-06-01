@@ -38,16 +38,19 @@ struct SquarewaveDRextraView: View {
             let Geometrysize=geometry.size
             switch vm.status {
             case .start:
-                StartButton(yoffset: -Geometrysize.height*0.08,Buttonaction: vm.startforward)
+                StartButton(yoffset: -Geometrysize.height*Usermodel.Circuitupdatetabheightratio,Buttonaction: vm.startforward)
             case .input:
                 ZStack{
                     VStack(alignment:.trailing,spacing:.zero){
                         VStack(alignment:.trailing,spacing:.zero){
                             InputupperLabel(backwardButtonaction: vm.inputbackward)
                             Group{
-                                StoptimeTextField(leadingtext: Usermodel.Language ? "仿真截止时间" : "stoptime",
-                                                  Stoptimetext: $vm.stoptimetext, unittext: "s", TextfieldWidth: Geometrysize.width/8,
-                                                  TextFieldKeyboardTyperawValue: 2
+                                StoptimeTextField(
+                                    leadingtext: Usermodel.Language ? "仿真截止时间" : "stoptime",
+                                    Stoptimetext: $vm.stoptimetext,
+                                    unittext: "s",
+                                    TextfieldWidth: Geometrysize.width/8,
+                                    TextFieldKeyboardTyperawValue: 2
                                 )
                                 InputSlider(leadingtext: "RT:", Slidervalue: $vm.RT, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "k𝛀")
                                 InputSlider(leadingtext: "CT:", Slidervalue: $vm.CT, minimumValue: 1, maximumValue: 1000, SlidervalueStep: 1, ValueLabelDecimalplaces: 0, unittext: "𝛍F")
@@ -67,7 +70,7 @@ struct SquarewaveDRextraView: View {
                         .background(
                             InputbackgroundView()
                         )
-                        .offset(y:-geometry.size.height*0.08)
+                        .offset(y:-geometry.size.height*Usermodel.Circuitupdatetabheightratio)
                         .gesture(
                             DragGesture()
                                     .onChanged { value in}
@@ -117,7 +120,7 @@ struct SquarewaveDRextraView: View {
                         .background(
                             SimulationImagebackgroundView()
                         )                    //.frame(maxWidth: geometry.size.width*0.9)
-                        .offset(y: vm.imageyoffset-geometry.size.height*0.08)
+                        .offset(y: vm.imageyoffset-geometry.size.height*Usermodel.Circuitupdatetabheightratio)
                         .gesture(
                             AsyncImageDraggesture
                         )

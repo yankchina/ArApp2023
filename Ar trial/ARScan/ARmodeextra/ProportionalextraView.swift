@@ -297,7 +297,7 @@ struct ProportionalextrachartView:View{
             }
         }
         .background(Color.white.opacity(0.8).cornerRadius(5))
-        .offset(y: -geometry.size.height*0.08)
+        .offset(y: -geometry.size.height*Usermodel.Circuitupdatetabheightratio)
         .alert(isPresented: $showalert) {
             Alert(
                 title: Text(Usermodel.Language ? "即将展示仿真图像" : "Chart ready to display"),

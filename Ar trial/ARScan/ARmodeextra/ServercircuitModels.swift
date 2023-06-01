@@ -9,13 +9,19 @@ import Foundation
 import SwiftUI
 import Combine
 
+/// Int enum, represents Simulation status of circuits that get
+/// simulation images from server.
 enum ARSimulationextraviewstatus:Int {
     case start=0
     case input=1
     case image=2
 }
 
+// MARK: Super class Server circuit ViewModel
+/// ViewModel of all circuits that get simulation images from server.
+/// The ViewModel of all circuits that get simulation images from server inherits from this class.
 class ServercircuitViewModel:ObservableObject{
+    /// URL of AsyncImage
     @Published var Simulationurl:URL?
     @Published var requestcount:Int
     @Published var status:ARSimulationextraviewstatus
@@ -34,31 +40,39 @@ class ServercircuitViewModel:ObservableObject{
         //getValues()
     }
     
+    /// view status move forward
     func statusforward()->Void{
         status=ARSimulationextraviewstatus(rawValue: status.rawValue+1) ?? ARSimulationextraviewstatus(rawValue: 0)!
     }
+    /// view status move backward
     func statusbackward()->Void{
         status=ARSimulationextraviewstatus(rawValue: status.rawValue-1) ?? ARSimulationextraviewstatus(rawValue: 0)!
     }
+    /// status go forward from start status
     func startforward()->Void{statusforward()}
+    /// status go forward from input status
     func inputforward(userurl:String)->Void{
         statusforward()
     }
+    /// status go backward from input status
     func inputbackward()->Void{statusbackward()}
+    /// status go backward from image status
     func imagebackward()->Void{statusbackward()}
+    /// status go forward from image status
     func imageforward()->Void{statusforward()}
+    /// Refresh AsyncImage by changing AsyncImage URL
+    /// - Parameter userurl: Server address
     func imagerefresh(userurl:String)->Void {
         requestcount += 1
     }
+    /// Input circuit parameters legal, override this function in subclasses
     func Valuelegal()->Bool{
         return true
     }
-
-
-
-
 }
+
 //MARK: ARsquarewavemodel
+/// ViewModel of squarewave generator
 class ARsquarewavemodel: ServercircuitViewModel {
     @Published var stoptime:Double
     @Published var stoptimetext:String
@@ -90,6 +104,8 @@ class ARsquarewavemodel: ServercircuitViewModel {
         super.imagerefresh(userurl: userurl)
         Simulationurl=URL(string:"http://"+userurl+"/AR/Simulation/squarewave?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&VCC=\(VCC)&R1=\(R1)&R2=\(R2)&R3=\(R3)&requestcount=\(requestcount)")
     }
+    /// Input circuit parameters legal
+    /// - Returns: stoptime text can transfer to double, trasferred double > 0
     override func Valuelegal()->Bool{
         guard let stoptimevalue=Double(stoptimetext)else{return false}
         return stoptimevalue > 0
@@ -100,6 +116,7 @@ class ARsquarewavemodel: ServercircuitViewModel {
 
 
 //MARK: ARsquarewaveDRmodel
+/// ViewModel of duty ratio adjustable squarewave generator
 class ARsquarewaveDRmodel: ServercircuitViewModel {
     @Published var stoptime:Double
     @Published var stoptimetext:String
@@ -133,6 +150,8 @@ class ARsquarewaveDRmodel: ServercircuitViewModel {
         super.imagerefresh(userurl: userurl)
         Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/squarewaveDR?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&Uz=\(Uz)&RW=\(RW)&RWRatio=\(RWRatio)&R1=\(R1)&R2=\(R2)&requestcount=\(requestcount)")
     }
+    /// Input circuit parameters legal
+    /// - Returns: stoptime text can transfer to double, trasferred double > 0
     override func Valuelegal()->Bool{
         guard let stoptimevalue=Double(stoptimetext) else {return false}
         return stoptimevalue>0
@@ -143,6 +162,7 @@ class ARsquarewaveDRmodel: ServercircuitViewModel {
 
 
 //MARK: Secondorderfiltermodel
+/// ViewModel of second order filter
 class ARSecondorderfiltermodel: ServercircuitViewModel {
     @Published var R1:Double
     @Published var R2:Double
@@ -178,6 +198,7 @@ class ARSecondorderfiltermodel: ServercircuitViewModel {
 
 
 //MARK: 555timermonostabletriggermodel
+/// ViewModel of 555 monostable trigger
 class AR555timertriggermodel: ServercircuitViewModel {
     @Published var R:Double
     @Published var C:Double
@@ -211,6 +232,7 @@ class AR555timertriggermodel: ServercircuitViewModel {
 
 
 //MARK: sinegeneratormodel
+/// ViewModel of sine generator
 class ARsinegeneratormodel: ServercircuitViewModel {
     @Published var R:Double
     @Published var C:Double
@@ -233,6 +255,7 @@ class ARsinegeneratormodel: ServercircuitViewModel {
 }
 
 //MARK: voltageregulatormodel
+/// ViewModel of voltage regulator
 class ARvoltageregulatormodel: ServercircuitViewModel {
     @Published var R2:Double
     @Published var UD1:Double

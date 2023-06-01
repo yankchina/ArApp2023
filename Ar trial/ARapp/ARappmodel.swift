@@ -95,15 +95,6 @@ class ARappARpartmodel:ObservableObject{
                        .Secondorder:2,.Sequence:3,
                        .Proportional:4
         ]
-//        var boxanchor:Squarewave.Box?
-//        Squarewave.loadBoxAsync(completion: { (result) in
-//            do {
-//                boxanchor = try result.get()
-//                // ...
-//            } catch {
-//                // handle error
-//            }
-//        })
         SquarewaveGeneratorAnchor=try! Squarewave.loadBox()
         SquarewaveDRGeneratorAnchor=try! SquarewaveDR.loadBox()
         SecondorderfilterAnchor=try! Secondorderfilter.loadBox()
@@ -335,14 +326,30 @@ class ARappARpartmodel:ObservableObject{
         var message:Text?=nil
         switch mode {
         case .free:
-            text=Text(Language ? "这是自由扫描模式，所有锚点均已加载。" :
-                        "This is free scanning mode.")
+            text=Text(
+                Language ? "这是自由扫描模式，所有锚点均已加载。" :
+                        "This is free scanning mode."
+            )
+        case .Squarewavegenerator:
+            text=Text(
+                Language ? "这是矩形波发生器。" :
+                        "This is a squarewave generator."
+            )
+        case .SquarewaveDRgenerator:
+            text=Text(
+                Language ? "这是占空比可调的矩形波发生器。" :
+                        "This is a duty ratio adjustable squarewave generator."
+            )
         case .Secondorder:
-            text=Text(Language ? "这是二阶状态变量滤波器。" :
-                        "This is a second order filter.")
+            text=Text(
+                Language ? "这是二阶状态变量滤波器。" :
+                        "This is a second order filter."
+            )
         case .Sequence:
-            text=Text(Language ? "这是序列发生器。点击74138的Y0-Y7和74151的D0-D7来调整发生器运行参数，点击左侧按钮查看理论图，点击右侧按钮开始运行。" :
-                        "This is a sequence generator. Tap on 74138 Y0-Y7 and 74151 D0-D7 to set parameters of the generator. Tap the button on the left to see the details of the generator design.")
+            text=Text(
+                Language ? "这是序列发生器。点击74138的Y0-Y7和74151的D0-D7来调整发生器运行参数，点击左侧按钮查看理论图，点击右侧按钮开始运行。" :
+                        "This is a sequence generator. Tap on 74138 Y0-Y7 and 74151 D0-D7 to set parameters of the generator. Tap the button on the left to see the details of the generator design."
+            )
         default:break
         }
         return Alert(title: text,

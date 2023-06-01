@@ -40,7 +40,10 @@ struct SquarewaveextraView: View {
             switch vm.status {
             case .start:
                 //MARK: Start status view
-                StartButton(yoffset: -Geometrysize.height*0.08,Buttonaction: vm.startforward)
+                StartButton(
+                    yoffset: -Geometrysize.height*Usermodel.Circuitupdatetabheightratio,
+                    Buttonaction: vm.startforward
+                )
                 
                 
                 
@@ -67,7 +70,7 @@ struct SquarewaveextraView: View {
                         .background(
                             InputbackgroundView()
                         )
-                        .offset(y:-Geometrysize.height*0.08)
+                        .offset(y:-Geometrysize.height*Usermodel.Circuitupdatetabheightratio)
                     .gesture(
                         DragGesture()
                                 .onChanged { value in}
@@ -123,7 +126,7 @@ struct SquarewaveextraView: View {
                         .background(
                             SimulationImagebackgroundView()
                         )
-                        .offset(y:-geometry.size.height*0.08+vm.imageyoffset)
+                        .offset(y:-geometry.size.height*Usermodel.Circuitupdatetabheightratio+vm.imageyoffset)
 
                     //.frame(maxWidth: geometry.size.width*0.9)
                         .gesture(

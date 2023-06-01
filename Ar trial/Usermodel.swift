@@ -59,10 +59,11 @@ class Appusermodel:ObservableObject{
     @Published var Actiondate:Date
     @Published var Receivedate:Date
     let Urladdress:[String]
+    let Circuitupdatetabheightratio:CGFloat
     
     init(){
         user=ArappUser()
-        appstatus=0
+        appstatus=1
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -81,6 +82,7 @@ class Appusermodel:ObservableObject{
             "10.198.72.122:8000",
             "10.198.71.148:8000"
         ]
+        Circuitupdatetabheightratio=0.08
     }
     //MARK: Functions
     /// Returns whether the login view url is legal text
@@ -102,7 +104,7 @@ class Appusermodel:ObservableObject{
     
     /// Clears login view textfields texts
     func clearlogintype() -> Void {
-        user=ArappUser()
+        user=ArappUser(id:"",password: "",simulationurl: "")
     }
     
     /// Operation after user tap login button
@@ -150,8 +152,9 @@ class Appusermodel:ObservableObject{
     func logout(FirstLogin:Bool)->Void{
         //Save user id
         let username=user.id
+        let url=user.simulationurl
         //Clean user password and url
-        user=ArappUser(id:username)
+        user=ArappUser(id:username,password:"",simulationurl: url)
         //Return to login view
         signinbuttonable=true
         loginfailalert=false

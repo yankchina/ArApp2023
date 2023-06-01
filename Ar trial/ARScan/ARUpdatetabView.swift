@@ -53,7 +53,7 @@ struct ARUpdatetabView:View{
                                         .frame(width:1)
                                 }
                             }
-                        }.frame(height:geometry.size.height*0.08)
+                        }.frame(height:geometry.size.height*Usermodel.Circuitupdatetabheightratio)
                             .onAppear {
                                 if let modeindex=appmodel.scanmodeindex[startmode]{
                                     proxy.scrollTo(modeindex+1, anchor: .center)
