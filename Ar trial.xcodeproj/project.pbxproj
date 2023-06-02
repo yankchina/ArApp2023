@@ -14,6 +14,8 @@
 		C70D16EF2A04E9D400389E0C /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D16EE2A04E9D400389E0C /* Usermodel.swift */; };
 		C70D17102A0503B100389E0C /* LoginTextFieldAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */; };
 		C72630E72A29BE40003035FE /* PhotoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72630E62A29BE3F003035FE /* PhotoCacheManager.swift */; };
+		C72630E92A29E57E003035FE /* PhotoFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72630E82A29E57E003035FE /* PhotoFileManager.swift */; };
+		C72630EB2A29FA26003035FE /* PhotoCacheView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72630EA2A29FA26003035FE /* PhotoCacheView.swift */; };
 		C738CB1B29D066C2002A5F1C /* ARUpdatetabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */; };
 		C73D2D3229CF18510068B4DA /* RC.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C73D2D3129CF18510068B4DA /* RC.rcproject */; };
 		C743D08D29C878FD00F9EEB7 /* ARappMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743D08C29C878FD00F9EEB7 /* ARappMenuView.swift */; };
@@ -124,6 +126,8 @@
 		C70D16EE2A04E9D400389E0C /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldAreaView.swift; sourceTree = "<group>"; };
 		C72630E62A29BE3F003035FE /* PhotoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheManager.swift; sourceTree = "<group>"; };
+		C72630E82A29E57E003035FE /* PhotoFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFileManager.swift; sourceTree = "<group>"; };
+		C72630EA2A29FA26003035FE /* PhotoCacheView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheView.swift; sourceTree = "<group>"; };
 		C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARUpdatetabView.swift; sourceTree = "<group>"; };
 		C73D2D3129CF18510068B4DA /* RC.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = RC.rcproject; sourceTree = "<group>"; };
 		C743D08C29C878FD00F9EEB7 /* ARappMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARappMenuView.swift; sourceTree = "<group>"; };
@@ -250,6 +254,8 @@
 			isa = PBXGroup;
 			children = (
 				C72630E62A29BE3F003035FE /* PhotoCacheManager.swift */,
+				C72630E82A29E57E003035FE /* PhotoFileManager.swift */,
+				C72630EA2A29FA26003035FE /* PhotoCacheView.swift */,
 			);
 			path = LocalPhotoCache;
 			sourceTree = "<group>";
@@ -593,6 +599,7 @@
 				C78B1AB329F179B6000C9F6B /* SecondorderfilterextraView.swift in Sources */,
 				C743D08D29C878FD00F9EEB7 /* ARappMenuView.swift in Sources */,
 				C786D82229C34AE0003F0627 /* Arrayextension.swift in Sources */,
+				C72630EB2A29FA26003035FE /* PhotoCacheView.swift in Sources */,
 				C76D69DB2A1BB0B400341FD5 /* ARCircuitImageView.swift in Sources */,
 				C7E4178C2A0F6D6600A8EB9B /* OnlineTaskAddingView.swift in Sources */,
 				C7C4FC2129D5ADDE00ED7DA2 /* SequencegeneratorextraView.swift in Sources */,
@@ -626,6 +633,7 @@
 				C7C2484E2A1A08F800C842E0 /* Sequencegenerator.rcproject in Sources */,
 				C78559B52A113D8900ABDF6E /* ARappSignupView.swift in Sources */,
 				C78B1AB129F17122000C9F6B /* SquarewaveDRextraView.swift in Sources */,
+				C72630E92A29E57E003035FE /* PhotoFileManager.swift in Sources */,
 				C7AD257E29C2F039000B3B5C /* MultiLineChartView.swift in Sources */,
 				C7AA30D129B874DE0080D7B8 /* AppDelegate.swift in Sources */,
 				C7E417812A0E74B600A8EB9B /* Squarewave.rcproject in Sources */,

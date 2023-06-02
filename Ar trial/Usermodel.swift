@@ -30,6 +30,12 @@ struct SignupResponse:Codable{
     var Signupsuccess:Bool
 }
 
+struct PhotoCache:Identifiable{
+    var id:String=UUID().uuidString
+    var key:String
+    var mode:scanmode
+}
+
 //MARK: Appusermodel
 /// The model includes user information, app status, timers, view state vars
 class Appusermodel:ObservableObject{
@@ -60,7 +66,8 @@ class Appusermodel:ObservableObject{
     @Published var Receivedate:Date
     let Urladdress:[String]
     let Circuitupdatetabheightratio:CGFloat
-    let manager:PhotoFileManager
+    let manager:PhotoCacheManager
+    @Published var PhotoCachekeys:[PhotoCache]
     
     init(){
         user=ArappUser()
@@ -84,7 +91,8 @@ class Appusermodel:ObservableObject{
             "10.198.71.148:8000"
         ]
         Circuitupdatetabheightratio=0.08
-        manager=PhotoFileManager.instance
+        manager=PhotoCacheManager.instance
+        PhotoCachekeys=[]
     }
     //MARK: Functions
     /// Returns whether the login view url is legal text
@@ -212,7 +220,7 @@ class Appusermodel:ObservableObject{
         }
     }
     
-    func downloadImage(Imageurl:String,imagekey:String) {
+    func downloadImage(Imageurl:String,imagekey:String,mode:scanmode) {
         guard let url = URL(string: Imageurl) else {
             return
         }
@@ -227,10 +235,15 @@ class Appusermodel:ObservableObject{
                     let image = returnedImage else { return }
                 
                 self.manager.add(key: imagekey, value: image)
+                self.PhotoCachekeys.append(PhotoCache(key:imagekey,mode:mode))
+                
             }
             .store(in: &cancellables)
     }
     
+    func Clearcache()->Void{
+        PhotoCachekeys=PhotoCachekeys.filter{manager.get(key: $0.key) != nil}
+    }
     //MARK: static functions
     /// Handle datatask output
     static func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {

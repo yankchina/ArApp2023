@@ -249,10 +249,9 @@ class ARappARpartmodel:ObservableObject{
             model.generateCollisionShapes(recursive: true)
             arView.installGestures([.all], for: model as! (Entity & HasCollision))
         case .Secondorder:
-            return
-//            let filter=SecondorderfilterAnchor.filter!
-//            filter.generateCollisionShapes(recursive: true)
-//            arView.installGestures([.translation,.scale], for: filter as! (Entity & HasCollision))
+            let model=SecondorderfilterAnchor.filter!
+            model.generateCollisionShapes(recursive: true)
+            arView.installGestures([.all], for: model as! (Entity & HasCollision))
         case .Proportional:
             let model=ProportionalAnchor.circuit!
             model.generateCollisionShapes(recursive: true)

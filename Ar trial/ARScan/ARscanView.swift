@@ -35,20 +35,14 @@ struct ARscanView:View{
             ToolbarItem(placement:.navigationBarLeading) {
                 HStack{
                     switch extraviewmode {
-                    case .Secondorder:
-                        Button {
-                            ARappARpart.SecondorderfilterAnchor.notifications.facecamera.post()
-                        } label: {
-                            Image(systemName: "camera.viewfinder")
-                                .font(.system(size: geometrysize.height*0.03, weight: .light))
-                        }
-                        Button {
-                            ARappARpart.SecondorderfilterAnchor.notifications.playaudio.post()
-                        } label: {
-                            Image(systemName: "music.note")
-                                .font(.system(size: geometrysize.height*0.03, weight: .light))
-
-                        }
+                    case .Secondorder: Text("")
+//                        Button {
+//                            ARappARpart.SecondorderfilterAnchor.notifications.playaudio.post()
+//                        } label: {
+//                            Image(systemName: "music.note")
+//                                .font(.system(size: geometrysize.height*0.03, weight: .light))
+//
+//                        }
                     default:Text("")
                     }
 

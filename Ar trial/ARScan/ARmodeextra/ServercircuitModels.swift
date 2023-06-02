@@ -23,6 +23,7 @@ enum ARSimulationextraviewstatus:Int {
 class ServercircuitViewModel:ObservableObject{
     /// URL of AsyncImage
     @Published var Simulationurl:URL?
+    @Published var Simulationurlstring:String?
     @Published var requestcount:Int
     @Published var status:ARSimulationextraviewstatus
     @Published var inputwindowyoffset:CGFloat
@@ -97,11 +98,13 @@ class ARsquarewavemodel: ServercircuitViewModel {
     override func inputforward(userurl:String)->Void{
         stoptime=Double(stoptimetext)!
         requestcount += 1
+        Simulationurlstring="http://"+userurl+"/AR/Simulation/squarewave?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&VCC=\(VCC)&R1=\(R1)&R2=\(R2)&R3=\(R3)&requestcount=\(requestcount)"
         Simulationurl=URL(string:"http://"+userurl+"/AR/Simulation/squarewave?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&VCC=\(VCC)&R1=\(R1)&R2=\(R2)&R3=\(R3)&requestcount=\(requestcount)")
         super.inputforward(userurl: userurl)
     }
     override func imagerefresh(userurl:String)->Void {
         super.imagerefresh(userurl: userurl)
+        Simulationurlstring="http://"+userurl+"/AR/Simulation/squarewave?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&VCC=\(VCC)&R1=\(R1)&R2=\(R2)&R3=\(R3)&requestcount=\(requestcount)"
         Simulationurl=URL(string:"http://"+userurl+"/AR/Simulation/squarewave?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&VCC=\(VCC)&R1=\(R1)&R2=\(R2)&R3=\(R3)&requestcount=\(requestcount)")
     }
     /// Input circuit parameters legal
@@ -143,11 +146,13 @@ class ARsquarewaveDRmodel: ServercircuitViewModel {
     override func inputforward(userurl:String)->Void{
         stoptime=Double(stoptimetext)!
         requestcount += 1
+        Simulationurlstring="http://"+userurl+"/AR/Simulation/squarewaveDR?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&Uz=\(Uz)&RW=\(RW)&RWRatio=\(RWRatio)&R1=\(R1)&R2=\(R2)&requestcount=\(requestcount)"
         Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/squarewaveDR?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&Uz=\(Uz)&RW=\(RW)&RWRatio=\(RWRatio)&R1=\(R1)&R2=\(R2)&requestcount=\(requestcount)")
         super.inputforward(userurl: userurl)
     }
     override func imagerefresh(userurl:String)->Void {
         super.imagerefresh(userurl: userurl)
+        Simulationurlstring="http://"+userurl+"/AR/Simulation/squarewaveDR?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&Uz=\(Uz)&RW=\(RW)&RWRatio=\(RWRatio)&R1=\(R1)&R2=\(R2)&requestcount=\(requestcount)"
         Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/squarewaveDR?stoptime=\(stoptime)&RT=\(RT)&CT=\(CT)&Uz=\(Uz)&RW=\(RW)&RWRatio=\(RWRatio)&R1=\(R1)&R2=\(R2)&requestcount=\(requestcount)")
     }
     /// Input circuit parameters legal
@@ -186,12 +191,14 @@ class ARSecondorderfiltermodel: ServercircuitViewModel {
     }
     override func inputforward(userurl:String)->Void{
         requestcount += 1
-        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/Secondorderfilter?R1=\(R1)&R2=\(R2)&R3=\(R3)&R4\(R4)&R5=\(R5)&R6=\(R6)&RF=\(RF)&CF=\(CF)&requestcount=\(requestcount)")
+        Simulationurlstring="http://"+userurl+"/AR/Simulation/Secondorderfilter?R1=\(R1)&R2=\(R2)&R3=\(R3)&R4=\(R4)&R5=\(R5)&R6=\(R6)&RF=\(RF)&CF=\(CF)&requestcount=\(requestcount)"
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/Secondorderfilter?R1=\(R1)&R2=\(R2)&R3=\(R3)&R4=\(R4)&R5=\(R5)&R6=\(R6)&RF=\(RF)&CF=\(CF)&requestcount=\(requestcount)")
         statusforward()
     }
     override func imagerefresh(userurl:String)->Void {
         requestcount += 1
-        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/Secondorderfilter?R1=\(R1)&R2=\(R2)&R3=\(R3)&R4\(R4)&R5=\(R5)&R6=\(R6)&RF=\(RF)&CF=\(CF)&requestcount=\(requestcount)")
+        Simulationurlstring="http://"+userurl+"/AR/Simulation/Secondorderfilter?R1=\(R1)&R2=\(R2)&R3=\(R3)&R4=\(R4)&R5=\(R5)&R6=\(R6)&RF=\(RF)&CF=\(CF)&requestcount=\(requestcount)"
+        Simulationurl=URL(string: "http://"+userurl+"/AR/Simulation/Secondorderfilter?R1=\(R1)&R2=\(R2)&R3=\(R3)&R4=\(R4)&R5=\(R5)&R6=\(R6)&RF=\(RF)&CF=\(CF)&requestcount=\(requestcount)")
     }
         
 }

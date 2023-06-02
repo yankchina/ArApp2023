@@ -58,6 +58,14 @@ struct SecondorderfilterextraView: View {
                         InputConfirmButton(Buttondisable: !vm.Valuelegal()){
                             vm.inputforward(userurl: Usermodel.user.simulationurl)
                             Usermodel.SimulationImagedisplay()
+                            if let newkey=vm.Simulationurlstring,
+                               Usermodel.manager.get(key: newkey) == nil{
+                                Usermodel.downloadImage(
+                                    Imageurl: newkey,
+                                    imagekey: newkey,
+                                    mode: .Secondorder
+                                )
+                            }
                         }
                     }.frame(width:geometry.size.width*0.35)
                         .background(

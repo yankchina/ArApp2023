@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 import RealityKit
 
 /// Login View, displays when appstatus == 0

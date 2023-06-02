@@ -85,7 +85,9 @@ struct ARappmenuView: View {
                     
                     //MARK: Material section placement
                     //Materialsection
-                    
+                    NavigationLink(destination: PhotoCacheView()) {
+                        Text(Usermodel.Language ? "仿真图像缓存" : "Photo Cache").font(.title2)
+                    }
                     NavigationLink(destination: OnlineTaskView()) {
                         Text(Usermodel.Language ? "任务" : "Tasks").font(.title2)
                     }
