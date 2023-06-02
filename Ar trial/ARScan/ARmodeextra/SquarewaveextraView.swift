@@ -65,6 +65,7 @@ struct SquarewaveextraView: View {
                         InputConfirmButton(Buttondisable: !vm.Valuelegal()){
                             vm.inputforward(userurl: Usermodel.user.simulationurl)
                             Usermodel.SimulationImagedisplay()
+                            Usermodel.downloadImage(Imageurl: Usermodel.user.simulationurl, imagekey: Usermodel.user.simulationurl)
                         }
                     }.frame(width:geometry.size.width*0.35)
                         .background(

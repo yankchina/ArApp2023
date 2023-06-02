@@ -13,6 +13,7 @@
 		A66016992A16420000AE96C8 /* Timer555triggerextraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */; };
 		C70D16EF2A04E9D400389E0C /* Usermodel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D16EE2A04E9D400389E0C /* Usermodel.swift */; };
 		C70D17102A0503B100389E0C /* LoginTextFieldAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */; };
+		C72630E72A29BE40003035FE /* PhotoCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72630E62A29BE3F003035FE /* PhotoCacheManager.swift */; };
 		C738CB1B29D066C2002A5F1C /* ARUpdatetabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */; };
 		C73D2D3229CF18510068B4DA /* RC.rcproject in Sources */ = {isa = PBXBuildFile; fileRef = C73D2D3129CF18510068B4DA /* RC.rcproject */; };
 		C743D08D29C878FD00F9EEB7 /* ARappMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C743D08C29C878FD00F9EEB7 /* ARappMenuView.swift */; };
@@ -122,6 +123,7 @@
 		A66016982A16420000AE96C8 /* Timer555triggerextraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timer555triggerextraView.swift; sourceTree = "<group>"; };
 		C70D16EE2A04E9D400389E0C /* Usermodel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usermodel.swift; sourceTree = "<group>"; };
 		C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTextFieldAreaView.swift; sourceTree = "<group>"; };
+		C72630E62A29BE3F003035FE /* PhotoCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCacheManager.swift; sourceTree = "<group>"; };
 		C738CB1A29D066C2002A5F1C /* ARUpdatetabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARUpdatetabView.swift; sourceTree = "<group>"; };
 		C73D2D3129CF18510068B4DA /* RC.rcproject */ = {isa = PBXFileReference; lastKnownFileType = file.rcproject; path = RC.rcproject; sourceTree = "<group>"; };
 		C743D08C29C878FD00F9EEB7 /* ARappMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARappMenuView.swift; sourceTree = "<group>"; };
@@ -242,6 +244,14 @@
 				C70D170F2A0503B100389E0C /* LoginTextFieldAreaView.swift */,
 			);
 			path = LoginTextFieldAreaView;
+			sourceTree = "<group>";
+		};
+		C72630E52A29BE11003035FE /* LocalPhotoCache */ = {
+			isa = PBXGroup;
+			children = (
+				C72630E62A29BE3F003035FE /* PhotoCacheManager.swift */,
+			);
+			path = LocalPhotoCache;
 			sourceTree = "<group>";
 		};
 		C738CB1929D0667C002A5F1C /* ARScan */ = {
@@ -427,6 +437,7 @@
 				C78559B42A113D8900ABDF6E /* ARappSignupView.swift */,
 				C743D08C29C878FD00F9EEB7 /* ARappMenuView.swift */,
 				C773A73E29C864B7006ABFA4 /* ARappMaterialView.swift */,
+				C72630E52A29BE11003035FE /* LocalPhotoCache */,
 				C70D170E2A05037900389E0C /* LoginTextFieldAreaView */,
 				C7521BAA29FF8A2B005AA58A /* VideoView */,
 				C7E417822A0E878000A8EB9B /* TaskView */,
@@ -577,6 +588,7 @@
 				C7512B7329D971D700906A05 /* Proportionalmodel.swift in Sources */,
 				C7734EB829D5494E00ED51DF /* Sequencegeneratormodel.swift in Sources */,
 				C7AA30D329B874DE0080D7B8 /* ContentView.swift in Sources */,
+				C72630E72A29BE40003035FE /* PhotoCacheManager.swift in Sources */,
 				C7A05BA329E4081600812238 /* ARTipView.swift in Sources */,
 				C78B1AB329F179B6000C9F6B /* SecondorderfilterextraView.swift in Sources */,
 				C743D08D29C878FD00F9EEB7 /* ARappMenuView.swift in Sources */,

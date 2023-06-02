@@ -60,6 +60,7 @@ class Appusermodel:ObservableObject{
     @Published var Receivedate:Date
     let Urladdress:[String]
     let Circuitupdatetabheightratio:CGFloat
+    let manager:PhotoFileManager
     
     init(){
         user=ArappUser()
@@ -83,6 +84,7 @@ class Appusermodel:ObservableObject{
             "10.198.71.148:8000"
         ]
         Circuitupdatetabheightratio=0.08
+        manager=PhotoFileManager.instance
     }
     //MARK: Functions
     /// Returns whether the login view url is legal text
@@ -208,6 +210,25 @@ class Appusermodel:ObservableObject{
                 refreshcount=3
             }
         }
+    }
+    
+    func downloadImage(Imageurl:String,imagekey:String) {
+        guard let url = URL(string: Imageurl) else {
+            return
+        }
+        
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map { UIImage(data: $0.data) }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (_) in
+            } receiveValue: { [weak self] (returnedImage) in
+                guard
+                    let self = self,
+                    let image = returnedImage else { return }
+                
+                self.manager.add(key: imagekey, value: image)
+            }
+            .store(in: &cancellables)
     }
     
     //MARK: static functions
