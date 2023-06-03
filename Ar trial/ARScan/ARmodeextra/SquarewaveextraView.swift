@@ -67,9 +67,10 @@ struct SquarewaveextraView: View {
                             Usermodel.SimulationImagedisplay()
                             if let newkey=vm.Simulationurlstring,
                                Usermodel.manager.get(key: newkey) == nil{
+                                let imagekey=vm.Simulationurlstringwithparamater ?? ""
                                 Usermodel.downloadImage(
                                     Imageurl: newkey,
-                                    imagekey: newkey,
+                                    imagekey: imagekey,
                                     mode: .Squarewavegenerator
                                 )
                             }

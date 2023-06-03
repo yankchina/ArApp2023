@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import RealityKit
 import Combine
 
 /// Online task struct

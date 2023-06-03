@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RealityKit
 
 /// View of adding online task
 struct OnlineTaskAddingView: View {

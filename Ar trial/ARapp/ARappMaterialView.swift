@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RealityKit
 
 //MARK: Material view definition
 /// App Material View
