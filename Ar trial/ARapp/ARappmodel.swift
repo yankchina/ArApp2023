@@ -11,7 +11,7 @@ import CoreData
 import Combine
 
 /// The modes of AR
-enum scanmode:String{
+enum scanmode:String,CaseIterable{
     case free="Free Scanning"
     case Squarewavegenerator="Squarewave generator"
     case SquarewaveDRgenerator="Duty ratio adjustable squarewave generator"
@@ -49,10 +49,6 @@ extension scanmode{
     }
 }
 
-struct Scanmodeforvm:Identifiable{
-    let id:String=UUID().uuidString
-    let mode:scanmode
-}
 
 
 //MARK: ARappARpartmodel
@@ -70,8 +66,6 @@ class ARappARpartmodel:ObservableObject{
     /// Number of all tips
     let Tipnumber:Int
     //AR part variables
-    /// Circuit modes used in update tab
-    let scaaningmodes:[Scanmodeforvm]
     /// Dictionary used in adding AR anchors
     let scanmodeindex:[scanmode:Int]
     @Published var SquarewaveGeneratorAnchor:Squarewave.Box
@@ -82,14 +76,6 @@ class ARappARpartmodel:ObservableObject{
 
     //MARK: initiate
     init() {
-        scaaningmodes=[
-            Scanmodeforvm(mode: scanmode.free),
-            Scanmodeforvm(mode: .Squarewavegenerator),
-            Scanmodeforvm(mode: .SquarewaveDRgenerator),
-            Scanmodeforvm(mode: .Secondorder),
-            Scanmodeforvm(mode: .Sequence),
-            Scanmodeforvm(mode: .Proportional)
-        ]
         scanmodeindex=[.Squarewavegenerator:0,
                        .SquarewaveDRgenerator:1,
                        .Secondorder:2,.Sequence:3,
@@ -185,7 +171,10 @@ class ARappARpartmodel:ObservableObject{
         let Anchors:[HasAnchoring]=[SquarewaveGeneratorAnchor,SquarewaveDRGeneratorAnchor,SecondorderfilterAnchor,SequencegeneratorAnchor,ProportionalAnchor]
         switch mode {
         case .free:
-            ARview.scene.anchors.append(contentsOf: Anchors)
+            for index in Anchors.indices {
+                ARview.scene.anchors.append(Anchors[index])
+
+            }
         default:ARview.scene.anchors.append(Anchors[scanmodeindex[mode]!])
         }
     }

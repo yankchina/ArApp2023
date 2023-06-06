@@ -25,27 +25,27 @@ struct ARUpdatetabView:View{
                 ScrollView(.horizontal, showsIndicators: false){
                     ScrollViewReader{proxy in
                         LazyHStack(spacing:.zero){
-                            ForEach(appmodel.scaaningmodes) { Scanmodeforvm in
+                            ForEach(scanmode.allCases,id:\.rawValue) { mode in
                                 HStack(spacing:.zero){
                                     Rectangle().fill(Color.secondary.opacity(0.5))
                                         .frame(width:1)
                                     Button{
-                                        updatemode=Scanmodeforvm.mode
+                                        updatemode=mode
                                     }label: {
                                         ZStack{
                                             Text(
                                                 Usermodel.Language ?
-                                                Scanmodeforvm.mode == extraviewmode ?
-                                                Scanmodeforvm.mode.RawValuebyLanguage(Language: Usermodel.Language).appending(Usermodel.Language ? "(现在)" : " (Current)")
+                                                mode == extraviewmode ?
+                                                mode.RawValuebyLanguage(Language: Usermodel.Language).appending(Usermodel.Language ? "(现在)" : " (Current)")
                                                 :
-                                                    Scanmodeforvm.mode.RawValuebyLanguage(Language: Usermodel.Language)
+                                                    mode.RawValuebyLanguage(Language: Usermodel.Language)
                                                 :
-                                                    Scanmodeforvm.mode == extraviewmode ?
-                                                    Scanmodeforvm.mode.rawValue.appending(Usermodel.Language ? "(现在)" : " (Current)")
+                                                    mode == extraviewmode ?
+                                                    mode.rawValue.appending(Usermodel.Language ? "(现在)" : " (Current)")
                                                     :
-                                                        Scanmodeforvm.mode.rawValue
+                                                        mode.rawValue
                                             )
-                                                .foregroundColor(Scanmodeforvm.mode == extraviewmode ? Color.accentColor:Color.primary)
+                                                .foregroundColor(mode == extraviewmode ? Color.accentColor:Color.primary)
                                         }.frame(width:geometry.size.width*0.3)
                                     }.controlSize(.large)
                                     .frame(width:geometry.size.width*0.3)

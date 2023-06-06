@@ -89,6 +89,13 @@
                             "typeName" : "Bool",
                             "value" : true
                           }
+                        ],
+                        [
+                          "rigidBody-motionType",
+                          {
+                            "typeName" : "REMotionType",
+                            "value" : "static"
+                          }
                         ]
                       ]
                     },

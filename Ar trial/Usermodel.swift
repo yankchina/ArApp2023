@@ -24,10 +24,6 @@ struct ArappUser:Identifiable,Codable {
     var status:Bool=false
 }
 
-/// struct to decode sign up response json
-struct SignupResponse:Codable{
-    var Signupsuccess:Bool
-}
 
 struct PhotoCache:Identifiable{
     var id:String=UUID().uuidString
@@ -70,7 +66,7 @@ class Appusermodel:ObservableObject{
     
     init(){
         user=ArappUser()
-        appstatus=1
+        appstatus=0
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -180,14 +176,16 @@ class Appusermodel:ObservableObject{
             return
         }
         URLSession.shared.dataTaskPublisher(for: url)
-            //.subscribe(on: DispatchQueue.global(qos: .background))
+            .map { Bool(String(data:$0.data,encoding: .ascii) ?? "false") }
             .receive(on: DispatchQueue.main)
-            .tryMap(Appusermodel.handleOutput)
-            .decode(type: SignupResponse.self, decoder: JSONDecoder())
-            .replaceError(with: SignupResponse(Signupsuccess: false))
-            .sink{ [weak self] Signupresponse in
+            .sink { [weak self] (_) in
+            } receiveValue: { [weak self] returnvalue in
+                guard let unwrappedreturnvalue = returnvalue else{
+//                    print("fail")
+                    return
+                }
                 //Assign usermodel signup success var
-                self?.Signupsuccess=Signupresponse.Signupsuccess
+                self?.Signupsuccess=unwrappedreturnvalue
                 //Automatically quit signin view after 2 seconds
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
                     dismissAction()
@@ -195,7 +193,6 @@ class Appusermodel:ObservableObject{
                 DispatchQueue.main.asyncAfter(deadline: .now()+2.3) {
                     self?.Signingup=false
                 }
-
             }
             .store(in: &cancellables)
     }
@@ -225,7 +222,7 @@ class Appusermodel:ObservableObject{
         }
         
         URLSession.shared.dataTaskPublisher(for: url)
-            .map { UIImage(data: $0.data) }
+            .map { UIImage(data:$0.data) }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] (_) in
             } receiveValue: { [weak self] (returnedImage) in

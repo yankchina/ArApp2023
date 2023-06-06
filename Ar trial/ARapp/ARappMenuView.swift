@@ -12,15 +12,6 @@ import AVKit
 //MARK: Appmenuview
 /// App menu
 struct ARappmenuView: View {
-    /// Navigationlinks modes
-    let scaaningmodes:[Scanmodeforvm]=[
-        Scanmodeforvm(mode: scanmode.free),
-        Scanmodeforvm(mode: .Squarewavegenerator),
-        Scanmodeforvm(mode: .SquarewaveDRgenerator),
-        Scanmodeforvm(mode: .Secondorder),
-        Scanmodeforvm(mode: .Sequence),
-        Scanmodeforvm(mode: .Proportional)
-        ]
     @EnvironmentObject var Usermodel:Appusermodel
     @StateObject var ARappMaterialpart:ARappMaterialpartmodel=ARappMaterialpartmodel()
     @State var usersheetpresent:Bool=false
@@ -49,24 +40,6 @@ struct ARappmenuView: View {
                 .toggleStyle(.switch)
 
             }
-//            ToolbarItem(placement: .navigationBarLeading) {
-//                Button {
-//                    usersheetpresent.toggle()
-//                } label: {
-//                    Image(systemName: "person.crop.circle")
-//                        .font(.system(size: geometry.size.height*0.03, weight: .thin))
-//                }
-
-//                Image("SEUlogo")
-//                    .resizable()
-//                    .scaledToFit()
-//                    .frame(height:
-//                            geometry.size.height*0.05
-//                    )
-//                    .onTapGesture {
-//                        usersheetpresent.toggle()
-//                    }
-//            }
         }
     }
     
@@ -131,16 +104,25 @@ extension ARappmenuView{
     /// Navigationlinks to all ARscan views
     private var Scansection:some View{
         Section(header: Text(Usermodel.Language ? "增强现实模块" : "ARscan").font(.title)) {
-            ForEach(scaaningmodes) { Scanmodeforvm in
-                NavigationLink(destination: ARscanView(startmode:Scanmodeforvm.mode,extraviewmode: Scanmodeforvm.mode)) {
+            ForEach(scanmode.allCases,id:\.rawValue){mode in
+                NavigationLink(destination: ARscanView(startmode:mode,extraviewmode: mode)) {
                     Text(
-                        Scanmodeforvm.mode.RawValuebyLanguage(Language: Usermodel.Language)
+                        mode.RawValuebyLanguage(Language: Usermodel.Language)
                     )
                         .font(.title2)
                 }
-//                .background(Color.BackgroundprimaryColor)
 
             }
+//            ForEach(scaaningmodes) { Scanmodeforvm in
+//                NavigationLink(destination: ARscanView(startmode:Scanmodeforvm.mode,extraviewmode: Scanmodeforvm.mode)) {
+//                    Text(
+//                        Scanmodeforvm.mode.RawValuebyLanguage(Language: Usermodel.Language)
+//                    )
+//                        .font(.title2)
+//                }
+////                .background(Color.BackgroundprimaryColor)
+//
+//            }
         }
     }
     
