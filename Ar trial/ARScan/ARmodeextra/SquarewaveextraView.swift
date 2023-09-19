@@ -40,7 +40,10 @@ struct SquarewaveextraView: View {
             switch vm.status {
             case .start:
                 //MARK: Start status view
-                StartButton(yoffset: -Geometrysize.height*0.08,Buttonaction: vm.startforward)
+                StartButton(
+                    yoffset: -Geometrysize.height*Usermodel.Circuitupdatetabheightratio,
+                    Buttonaction: vm.startforward
+                )
                 
                 
                 
@@ -62,12 +65,21 @@ struct SquarewaveextraView: View {
                         InputConfirmButton(Buttondisable: !vm.Valuelegal()){
                             vm.inputforward(userurl: Usermodel.user.simulationurl)
                             Usermodel.SimulationImagedisplay()
+                            if let newkey=vm.Simulationurlstring,
+                               Usermodel.manager.get(key: newkey) == nil{
+                                let imagekey=vm.Simulationurlstringwithparamater ?? ""
+                                Usermodel.downloadImage(
+                                    Imageurl: newkey,
+                                    imagekey: imagekey,
+                                    mode: .Squarewavegenerator
+                                )
+                            }
                         }
                     }.frame(width:geometry.size.width*0.35)
                         .background(
                             InputbackgroundView()
                         )
-                        .offset(y:-Geometrysize.height*0.08)
+                        .offset(y:-Geometrysize.height*Usermodel.Circuitupdatetabheightratio)
                     .gesture(
                         DragGesture()
                                 .onChanged { value in}
@@ -103,6 +115,10 @@ struct SquarewaveextraView: View {
                                         .resizable()
                                         .aspectRatio(nil, contentMode: .fit)
                                         .cornerRadius(3)
+                                        .onAppear {
+                                            Usermodel.Receivedate=Date()
+                                            print(Usermodel.Receivedate.timeIntervalSince(Usermodel.Actiondate))
+                                        }
                                 case .failure:
                                     ZStack{
                                         Image(systemName: "questionmark")
@@ -119,7 +135,7 @@ struct SquarewaveextraView: View {
                         .background(
                             SimulationImagebackgroundView()
                         )
-                        .offset(y:-geometry.size.height*0.08+vm.imageyoffset)
+                        .offset(y:-geometry.size.height*Usermodel.Circuitupdatetabheightratio+vm.imageyoffset)
 
                     //.frame(maxWidth: geometry.size.width*0.9)
                         .gesture(

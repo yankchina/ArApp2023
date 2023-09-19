@@ -37,7 +37,7 @@ struct SecondorderfilterextraView: View {
             let Geometrysize=geometry.size
             switch vm.status {
             case .start:
-                StartButton(yoffset: -Geometrysize.height*0.08,Buttonaction: vm.startforward)
+                StartButton(yoffset: -Geometrysize.height*Usermodel.Circuitupdatetabheightratio,Buttonaction: vm.startforward)
             case .input:
                 ZStack{
                     VStack(alignment:.trailing,spacing:.zero){
@@ -58,12 +58,21 @@ struct SecondorderfilterextraView: View {
                         InputConfirmButton(Buttondisable: !vm.Valuelegal()){
                             vm.inputforward(userurl: Usermodel.user.simulationurl)
                             Usermodel.SimulationImagedisplay()
+                            if let newkey=vm.Simulationurlstring,
+                               Usermodel.manager.get(key: newkey) == nil{
+                                let imagekey=vm.Simulationurlstringwithparamater ?? ""
+                                Usermodel.downloadImage(
+                                    Imageurl: newkey,
+                                    imagekey: imagekey,
+                                    mode: .Secondorder
+                                )
+                            }
                         }
                     }.frame(width:geometry.size.width*0.35)
                         .background(
                             InputbackgroundView()
                         )
-                        .offset(y: -geometry.size.height*0.08)
+                        .offset(y: -geometry.size.height*Usermodel.Circuitupdatetabheightratio)
                         .gesture(
                             DragGesture()
                                     .onEnded { value in
@@ -112,7 +121,7 @@ struct SecondorderfilterextraView: View {
                         .background(
                             SimulationImagebackgroundView()
                         )
-                        .offset(y:-geometry.size.height*0.08+vm.imageyoffset)
+                        .offset(y:-geometry.size.height*Usermodel.Circuitupdatetabheightratio+vm.imageyoffset)
                     //.frame(maxWidth: geometry.size.width*0.9)
                         .gesture(
                             AsyncImageDraggesture

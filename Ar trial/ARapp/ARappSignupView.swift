@@ -9,10 +9,29 @@ import SwiftUI
 
 /// Singup View, displays after user taps signup Button in LoginView
 struct ARappSignupView: View {
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var Usermodel:Appusermodel
     @State var username:String=""
     @State var password:String=""
     @State var url:String=""
+    
+    var Signupresulttext:String{
+        Usermodel.Signupsuccess! ? Usermodel.Language ? "注册成功" : "Sign up success" : Usermodel.Language ? "注册失败" : "Sign up fail"
+    }
+    
+    var TextFieldLeadingLabels:[String]{
+        Usermodel.Language ? [
+         "用户名",
+         "密码",
+         "服务器地址"
+        ] :
+         [
+         "Username",
+         "Password",
+         "URL"
+        ]
+    }
+    
     //MARK: body
     var body: some View {
         GeometryReader{
@@ -25,9 +44,17 @@ struct ARappSignupView: View {
                         if Usermodel.Signupsuccess == nil {
                             ProgressView()
                         }else{
-                            Text(Usermodel.Signupsuccess! ? "Sign up success" : "Sign up fail")
+                            Text(Usermodel.Language ? "注册" : "Registration").font(.largeTitle).bold()
+                            Spacer()
+                            Image(systemName: "person.crop.circle")
+                                //.resizable().scaledToFit()
+                                .foregroundColor(.accentColor)
+                                .font(.system(size:size.height*0.1,weight:.light))
+                                
+                            Text(Signupresulttext)
                                 .font(.title)
                                 .foregroundColor(Usermodel.Signupsuccess! ? Color.green : Color.red)
+                            Spacer()
                         }
                     }
                     //View when typing in user information
@@ -35,29 +62,21 @@ struct ARappSignupView: View {
                         Text(Usermodel.Language ? "注册" : "Registration").font(.largeTitle).bold()
                         Spacer()
                         Image(systemName: "person.crop.circle")
-                            .resizable().scaledToFit()
-                            .frame(width: 100)
+                            //.resizable().scaledToFit()
                             .foregroundColor(.accentColor)
-                        LoginTextFieldAreaView(width: size.width/2,
-                                               TextFieldLeadingLabel: Usermodel.Language ? [
-                                                "用户名",
-                                                "密码",
-                                                "服务器地址"
-                                               ] :
-                                                [
-                                                "Username",
-                                                "Password",
-                                                "URL"
-                                               ],
-                                               TextFieldTypeisSecure: [false,true,true],
-                                               TextFieldtext: [$username,$password,$url],
-                                               TextFieldkeyboardtype: [0,0,2]
+                            .font(.system(size:size.height*0.1,weight:.light))
+                        LoginTextFieldAreaView(
+                            width: size.width/2,
+                            TextFieldLeadingLabel: TextFieldLeadingLabels,
+                            TextFieldTypeisSecure: [false,true,true],
+                            TextFieldtext: [$username,$password,$url],
+                            TextFieldkeyboardtype: [0,0,2]
                         )
                         Button{
-                            Usermodel.Signup(username: username, password: password, signupurl: url)
+                            Usermodel.Signup(username: username, password: password, signupurl: url, dismissAction: dismiss)
                         }label: {
                             Text(Usermodel.Language ? "确认" : "Confirm")
-                                .foregroundColor(.white)
+                                .foregroundColor(.BackgroundprimaryColor)
                         }
                         .padding()
                         .background(RoundedRectangle(cornerRadius: 5).fill(Color.accentColor))

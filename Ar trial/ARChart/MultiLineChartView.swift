@@ -206,6 +206,7 @@ public struct MultiLineChartRCView: View {
     @Binding var zooming:Bool
     @State private var touchLocation:CGPoint = .zero
     @State private var showIndicatorDot: Bool = false
+    let DismissAction:()->Void
     @State private var currentValue: Double = 2 {
         didSet{
             if (oldValue != self.currentValue && showIndicatorDot) {
@@ -244,7 +245,8 @@ public struct MultiLineChartRCView: View {
                 chartheight:CGFloat=UIScreen.main.bounds.height/4,
                 informlabel:([String],[Color])=([],[]),
                 isPresent:Binding<Bool>,
-                zooming:Binding<Bool>
+                zooming:Binding<Bool>,
+                hideaction:@escaping ()->Void
                 //resistant:Binding<Double>
     )
     {
@@ -261,6 +263,7 @@ public struct MultiLineChartRCView: View {
         self.informlabel=informlabel
         self._ispresent=isPresent
         self._zooming=zooming
+        self.DismissAction=hideaction
     }
     
     public var body: some View {
@@ -282,21 +285,17 @@ public struct MultiLineChartRCView: View {
                             //.bold()
                         .foregroundColor(.primary)
                         Spacer()
-                        Button {
+                        Button{
                             zooming.toggle()
-                        } label: {
-                            Text("Zoom").font(.title3)
-                                .foregroundColor(.accentColor.opacity(0.8))
+                        }label:{
+                            Image(systemName:zooming ? "arrow.down.right.and.arrow.up.left":"arrow.up.left.and.arrow.down.right")
+                                .font(.title3)
                         }
-                        .controlSize(.large)
                         .padding(.trailing,5)
-                        Button {
-                            ispresent=false
-                        } label: {
-                            Text("Hide").font(.title3)
-                                .foregroundColor(.accentColor.opacity(0.8))
+                        Button(action:DismissAction){
+                            Image(systemName: "chevron.down")
+                                .font(.title3)
                         }
-                        .controlSize(.large)
                         .padding(.trailing,5)
 
                     }
@@ -392,7 +391,7 @@ struct MultiWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         
         ZStack {
-            MultiLineChartRCView(data: [([8,23,54,32,12,37,7,23,43], GradientColors.orange)], title: "Line chart", legend: "Basic",informlabel: (["pulse","sine"],[Color(hexString: "FEFB00"),Color(hexString: "FEFB00")]),isPresent: .constant(true),zooming: .constant(false))
+            MultiLineChartRCView(data: [([8,23,54,32,12,37,7,23,43], GradientColors.orange)], title: "Line chart", legend: "Basic",informlabel: (["pulse","sine"],[Color(hexString: "FEFB00"),Color(hexString: "FEFB00")]),isPresent: .constant(true),zooming: .constant(false), hideaction: {})
             //MultiLineChartRCView(data: [([8,23,54,35,12,37,7,23,43], GradientColors.orange)], title: "Line chart", legend: "Basic",isPresent: .constant(true),resistant:.constant(1))
         }
     }

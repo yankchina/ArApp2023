@@ -8,7 +8,6 @@
 import SwiftUI
 import AVFoundation
 import AVKit
-import RealityKit
 
 struct VideoView: View {
     @State var player:AVPlayer?

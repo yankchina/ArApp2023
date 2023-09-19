@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import RealityKit
 import Combine
 
 /// Online task struct
@@ -43,12 +42,6 @@ struct OnlineTask:Identifiable,Codable{
     }
 }
 
-struct TaskAddingResponse:Codable{
-    var TaskAddingsuccess:Bool
-}
-struct TaskDeletingResponse:Codable{
-    var TaskDeletingsuccess:Bool
-}
 
 
 
@@ -130,16 +123,15 @@ class OnlineTaskModel:ObservableObject{
             return
         }
         URLSession.shared.dataTaskPublisher(for: url)
-            //.subscribe(on: DispatchQueue.global(qos: .background))
+            .map{Bool(String(data:$0.data,encoding: .ascii) ?? "false")}
             .receive(on: DispatchQueue.main)
-            .tryMap(Appusermodel.handleOutput)
-            .decode(type: TaskAddingResponse.self, decoder: JSONDecoder())
-            .replaceError(with: TaskAddingResponse(TaskAddingsuccess: false))
-            .sink{[weak self] returnValue in
-                print(returnValue.TaskAddingsuccess)
-                //Assign whether task successfully added to model var
-                self?.Taskadded = returnValue.TaskAddingsuccess
-                if !returnValue.TaskAddingsuccess{
+            .sink{[weak self]_ in}receiveValue:{[weak self] returnvalue in
+                guard let unwrappedreturnvalue = returnvalue else{
+//                    print("fail")
+                    return
+                }
+                self?.Taskadded = unwrappedreturnvalue
+                if !unwrappedreturnvalue{
                     self?.TaskAddingFail=true
                 }
             }
@@ -159,13 +151,14 @@ class OnlineTaskModel:ObservableObject{
             return
         }
         URLSession.shared.dataTaskPublisher(for: url)
-            //.subscribe(on: DispatchQueue.global(qos: .background))
+            .map{Bool(String(data:$0.data,encoding: .ascii) ?? "false")}
             .receive(on: DispatchQueue.main)
-            .tryMap(Appusermodel.handleOutput)
-            .decode(type: TaskDeletingResponse.self, decoder: JSONDecoder())
-            .replaceError(with: TaskDeletingResponse(TaskDeletingsuccess: false))
-            .sink{[weak self] returnValue in
-                self?.TaskDeletingSuccess=returnValue.TaskDeletingsuccess
+            .sink{[weak self]_ in}receiveValue:{[weak self] returnvalue in
+                guard let unwrappedreturnvalue = returnvalue else{
+//                    print("fail")
+                    return
+                }
+                self?.TaskDeletingSuccess=unwrappedreturnvalue
                 self?.TaskDeletingResponseReceive=true
             }
             .store(in: &cancellables)

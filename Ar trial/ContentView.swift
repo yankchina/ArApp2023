@@ -5,23 +5,18 @@
 //  Created by niudan on 2023/3/8.
 //
 import SwiftUI
-import RealityKit
-import Combine
 
 struct ContentView : View {
     @StateObject var Usermodel:Appusermodel=Appusermodel()
     var body: some View {
-        NavigationView{
-            ZStack{
-                switch Usermodel.appstatus {
-                case 0:ArappLoginView()
-                case 1:ARappmenuView()
+        ZStack{
+            switch Usermodel.appstatus {
+            case 0:ArappLoginView()
+            case 1:ARappmenuView()
 
-                default: ZStack{}
+            default: ZStack{}
 
-                }
             }
-
         }
         .environmentObject(Usermodel)
 

@@ -7,120 +7,11 @@
             {
               "arAnchorSpecification" : {
                 "name" : "image",
-                "physicalWidth" : 0.18062222003936768,
-                "url" : "image:d7df9391500d05d157c8214be551c57d\/0.png"
+                "physicalWidth" : 0.29618993401527405,
+                "url" : "image:413338b8dcb264b5c381f7761a97413c\/IMG_0549.heic"
               },
               "behaviors" : [
-                {
-                  "__content" : [
-                    {
-                      "accessibility" : {
-                        "__content" : [
-                          {
-                            "isEnabled" : false
-                          }
-                        ],
-                        "__version" : 1
-                      },
-                      "actionGroups" : [
-                        {
-                          "__content" : [
-                            {
-                              "configurations" : [
-                                {
-                                  "__content" : [
-                                    {
-                                      "configurationBox" : {
-                                        "configuration" : {
-                                          "target" : [
 
-                                          ],
-                                          "userIdentifier" : "行为"
-                                        },
-                                        "name" : {
-                                          "type" : "custom"
-                                        }
-                                      },
-                                      "identifier" : "714EF8CA-213E-4D82-8C53-E57F8EC6194D",
-                                      "isEnabled" : true
-                                    }
-                                  ],
-                                  "__version" : 1
-                                }
-                              ],
-                              "identifier" : "638E7D55-ECE3-428A-BF8C-900D1F212632",
-                              "isEnabled" : true
-                            }
-                          ],
-                          "__version" : 1
-                        },
-                        {
-                          "__content" : [
-                            {
-                              "configurations" : [
-                                {
-                                  "__content" : [
-                                    {
-                                      "configurationBox" : {
-                                        "configuration" : {
-                                          "audioType" : "play",
-                                          "loops" : false,
-                                          "target" : [
-
-                                          ],
-                                          "volume" : 0.5
-                                        },
-                                        "name" : {
-                                          "arguments" : "stereoBypass",
-                                          "type" : "soundtrack"
-                                        }
-                                      },
-                                      "identifier" : "25773C5D-AF97-4968-A0C4-FE4B394E4B97",
-                                      "isEnabled" : true
-                                    }
-                                  ],
-                                  "__version" : 1
-                                }
-                              ],
-                              "identifier" : "C086B776-355A-4E7F-8A6C-87806EA6828E",
-                              "isEnabled" : true
-                            }
-                          ],
-                          "__version" : 1
-                        }
-                      ],
-                      "color" : [
-                        0.364705890417099,
-                        0.74117648601531982,
-                        0.69019609689712524,
-                        1
-                      ],
-                      "identifier" : "D8AF8478-F370-4975-B36F-FE64CCAC6A10",
-                      "isEnabled" : true,
-                      "isLooping" : false,
-                      "isModal" : false,
-                      "name" : "行为",
-                      "triggers" : [
-                        {
-                          "__content" : [
-                            {
-                              "configurationBox" : {
-                                "configuration" : {
-                                  "userIdentifier" : "行为"
-                                },
-                                "name" : "custom"
-                              },
-                              "identifier" : "77B8F78F-3E0D-4CC6-A8A5-E11A4883117B",
-                              "isEnabled" : true
-                            }
-                          ],
-                          "__version" : 1
-                        }
-                      ]
-                    }
-                  ],
-                  "__version" : 3
-                }
               ],
               "gravity" : [
                 0,
@@ -137,12 +28,7 @@
                   "7F5F1ADC-E5E4-4EF5-A5B5-FC43B071FFA5" : null,
                   "8B6A40C8-ECBF-444B-AAFA-F51A5B4AF068" : null,
                   "56A8AEDE-2D80-40F8-B8AB-4E8A4AE8FDCD" : null,
-                  "632E476F-1E55-4E30-9723-1C51DD2E8B89" : null,
-                  "07264450-8D5A-47EC-AD7A-4A72489FF16A" : null,
-                  "AED46873-C4E0-4DEE-9E70-B4BFF6014E93" : null,
-                  "B3F05DB5-FA68-439A-906E-DB7E0386B145" : null,
-                  "B91C7CA3-4AB1-4253-9A84-07383168A8A8" : null,
-                  "C7F56929-0E61-4667-8E16-44FDD724CF79" : {
+                  "75C84333-177F-4EB9-910F-C25DD76A5148" : {
                     "overrides" : {
                       "arguments" : [
                         [
@@ -163,7 +49,7 @@
                           "url",
                           {
                             "typeName" : "String",
-                            "value" : "model:50428472ab629b1354e63753df64a61f\/Secondorderfilter.reality"
+                            "value" : "model:dcdc49b8e8b05a92d0fdfcf3de9460da\/%E6%96%B0%E9%A1%B9%E7%9B%AE(4).reality"
                           }
                         ],
                         [
@@ -183,7 +69,7 @@
                           "RuntimeIdentifier",
                           {
                             "typeName" : "UUID",
-                            "value" : "B916DCB7-696E-423C-AFFF-8A749078135E"
+                            "value" : "9ACFC55E-5CD5-4585-9EAC-CD270F9D92AE"
                           }
                         ],
                         [
@@ -204,25 +90,31 @@
                     },
                     "transform" : {
                       "matrix" : [
-                        1,
+                        1.1000001430511475,
                         0,
                         0,
                         0,
                         0,
-                        1,
+                        1.1000001430511475,
                         0,
                         0,
                         0,
                         0,
-                        1,
+                        1.1000001430511475,
                         0,
                         0,
-                        0.020578570663928986,
-                        0,
+                        0.019999999552965164,
+                        -0.15000000596046448,
                         1
                       ]
                     }
                   },
+                  "632E476F-1E55-4E30-9723-1C51DD2E8B89" : null,
+                  "07264450-8D5A-47EC-AD7A-4A72489FF16A" : null,
+                  "AED46873-C4E0-4DEE-9E70-B4BFF6014E93" : null,
+                  "B3F05DB5-FA68-439A-906E-DB7E0386B145" : null,
+                  "B91C7CA3-4AB1-4253-9A84-07383168A8A8" : null,
+                  "C7F56929-0E61-4667-8E16-44FDD724CF79" : null,
                   "D5A1EFDD-DD8A-4F5C-B1EE-4ED5572D635B" : null,
                   "E867EAAE-A874-47C0-9F07-A1FDA69616E0" : null,
                   "F4FF7C6B-0786-4BA9-96BD-54E943F05F17" : null
@@ -242,21 +134,21 @@
               "title" : "box",
               "viewTransform" : {
                 "cameraTransform" : [
-                  0.87594765424728394,
+                  0.88436746597290039,
+                  -4.2172690228881038e-08,
+                  -0.4667913019657135,
                   0,
-                  -0.48240584135055542,
+                  -0.17572110891342163,
+                  0.92643910646438599,
+                  -0.33291536569595337,
                   0,
-                  -0.38852807879447937,
-                  0.59273612499237061,
-                  -0.70548540353775024,
+                  0.43245381116867065,
+                  0.37644439935684204,
+                  0.81931263208389282,
                   0,
-                  0.28593945503234863,
-                  0.80539661645889282,
-                  0.51920592784881592,
-                  0,
-                  0.28655269742012024,
-                  0.55449509620666504,
-                  0.18633705377578735,
+                  0.75282597541809082,
+                  0.20000208914279938,
+                  0.45289367437362671,
                   1
                 ],
                 "sceneTransform" : [

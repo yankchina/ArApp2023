@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftUI
-import RealityKit
 import Combine
 
 /// The struct stores User information
@@ -25,9 +24,11 @@ struct ArappUser:Identifiable,Codable {
     var status:Bool=false
 }
 
-/// struct to decode sign up response json
-struct SignupResponse:Codable{
-    var Signupsuccess:Bool
+
+struct PhotoCache:Identifiable{
+    var id:String=UUID().uuidString
+    var key:String
+    var mode:scanmode
 }
 
 //MARK: Appusermodel
@@ -59,10 +60,13 @@ class Appusermodel:ObservableObject{
     @Published var Actiondate:Date
     @Published var Receivedate:Date
     let Urladdress:[String]
+    let Circuitupdatetabheightratio:CGFloat
+    let manager:PhotoCacheManager
+    @Published var PhotoCachekeys:[PhotoCache]
     
     init(){
         user=ArappUser()
-        appstatus=1
+        appstatus=0
         cancellables=Set<AnyCancellable>()
         signinbuttonable=true
         loginfailalert=false
@@ -81,6 +85,9 @@ class Appusermodel:ObservableObject{
             "10.198.72.122:8000",
             "10.198.71.148:8000"
         ]
+        Circuitupdatetabheightratio=0.08
+        manager=PhotoCacheManager.instance
+        PhotoCachekeys=[]
     }
     //MARK: Functions
     /// Returns whether the login view url is legal text
@@ -102,11 +109,11 @@ class Appusermodel:ObservableObject{
     
     /// Clears login view textfields texts
     func clearlogintype() -> Void {
-        user=ArappUser()
+        user=ArappUser(id:"",password: "",simulationurl: "")
     }
     
     /// Operation after user tap login button
-    func loginconfirm() -> Void {
+    func loginconfirm(DismissAction:DismissAction,FirstLogin:Bool) -> Void {
         //Disable signin button
         signinbuttonable=false
         //Remove blank spaces at the end of login view textfields texts
@@ -134,6 +141,9 @@ class Appusermodel:ObservableObject{
                 //If response authority >= 0, log in. Else alert user
                 if returnedPosts.authority >= 0{
                     self?.appstatus=1
+                    if !FirstLogin {
+                        DismissAction()
+                    }
                 }
                 else{
                     self?.loginfailalert=true
@@ -143,13 +153,14 @@ class Appusermodel:ObservableObject{
     }
     
     /// Operation after user tap logout button, reassign usermodel properties
-    func logout()->Void{
+    /// - Parameter FirstLogin: User first log in after entering app
+    func logout(FirstLogin:Bool)->Void{
         //Save user id
         let username=user.id
+        let url=user.simulationurl
         //Clean user password and url
-        user=ArappUser(id:username)
+        user=ArappUser(id:username,password:"",simulationurl: url)
         //Return to login view
-        appstatus=0
         signinbuttonable=true
         loginfailalert=false
         SimulationimageRefreshDisable=false
@@ -157,7 +168,7 @@ class Appusermodel:ObservableObject{
     }
     
     /// Operation when user tap signin button
-    func Signup(username:String,password:String,signupurl:String)->Void{
+    func Signup(username:String,password:String,signupurl:String,dismissAction:DismissAction)->Void{
         Signingup=true
         //Form url
         let urlstring:String="http://"+signupurl+"/AR/Online/Signup?username="+username+"&password="+password+"&url="+signupurl
@@ -165,22 +176,23 @@ class Appusermodel:ObservableObject{
             return
         }
         URLSession.shared.dataTaskPublisher(for: url)
-            //.subscribe(on: DispatchQueue.global(qos: .background))
+            .map { Bool(String(data:$0.data,encoding: .ascii) ?? "false") }
             .receive(on: DispatchQueue.main)
-            .tryMap(Appusermodel.handleOutput)
-            .decode(type: SignupResponse.self, decoder: JSONDecoder())
-            .replaceError(with: SignupResponse(Signupsuccess: false))
-            .sink{ [weak self] Signupresponse in
+            .sink { [weak self] (_) in
+            } receiveValue: { [weak self] returnvalue in
+                guard let unwrappedreturnvalue = returnvalue else{
+//                    print("fail")
+                    return
+                }
                 //Assign usermodel signup success var
-                self?.Signupsuccess=Signupresponse.Signupsuccess
+                self?.Signupsuccess=unwrappedreturnvalue
                 //Automatically quit signin view after 2 seconds
                 DispatchQueue.main.asyncAfter(deadline: .now()+2) {
-                    self?.UserSignup=false
+                    dismissAction()
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now()+2.3) {
                     self?.Signingup=false
                 }
-
             }
             .store(in: &cancellables)
     }
@@ -204,6 +216,30 @@ class Appusermodel:ObservableObject{
         }
     }
     
+    func downloadImage(Imageurl:String,imagekey:String,mode:scanmode) {
+        guard let url = URL(string: Imageurl) else {
+            return
+        }
+        
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map { UIImage(data:$0.data) }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (_) in
+            } receiveValue: { [weak self] (returnedImage) in
+                guard
+                    let self = self,
+                    let image = returnedImage else { return }
+                
+                self.manager.add(key: imagekey, value: image)
+                self.PhotoCachekeys.append(PhotoCache(key:imagekey,mode:mode))
+                
+            }
+            .store(in: &cancellables)
+    }
+    
+    func Clearcache()->Void{
+        PhotoCachekeys=PhotoCachekeys.filter{manager.get(key: $0.key) != nil}
+    }
     //MARK: static functions
     /// Handle datatask output
     static func handleOutput(output: URLSession.DataTaskPublisher.Output) throws -> Data {

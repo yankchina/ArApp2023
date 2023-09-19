@@ -30,15 +30,33 @@ struct ARscanView:View{
     @StateObject var Proportionalmodel:Proportionalcircuitmodel=Proportionalcircuitmodel()
     
     //MARK: AR toolbar Content
-    var ARtoolbarContent:some ToolbarContent{
+    func ARtoolbarContent(geometrysize:CGSize)->some ToolbarContent{
         Group{
+            ToolbarItem(placement:.navigationBarLeading) {
+                HStack{
+                    switch extraviewmode {
+                    case .Secondorder: Text("")
+//                        Button {
+//                            ARappARpart.SecondorderfilterAnchor.notifications.playaudio.post()
+//                        } label: {
+//                            Image(systemName: "music.note")
+//                                .font(.system(size: geometrysize.height*0.03, weight: .light))
+//
+//                        }
+                    default:Text("")
+                    }
+
+                }
+                .font(.title2)
+            }
+
             ToolbarItem(placement:.navigationBarTrailing) {
                 HStack(spacing: .zero){
                     Button {
                         showmodeinformation=true
                     } label: {
                         Image(systemName: "info.circle")
-                        .foregroundColor(Color.accentColor)
+                            .font(.system(size: geometrysize.height*0.03, weight: .light))
                     }
                     Button {
                         withAnimation(.easeInOut(duration: 0.3)) {
@@ -46,7 +64,7 @@ struct ARscanView:View{
                         }
                     } label: {
                         Image(systemName: "photo.circle")
-                        .foregroundColor(Color.accentColor)
+                            .font(.system(size: geometrysize.height*0.03, weight: .light))
                     }
                 }
                 .font(.title2)
@@ -60,27 +78,39 @@ struct ARscanView:View{
             let size=$0.size
             ZStack {
                 //Main AR View
-                ARViewContainer(startmode: startmode,
-                                appmodel: ARappARpart,
-                                Sequencemodel: Sequencemodel,
-                                updatemode: $updatemode,
-                                extraviewmode:$extraviewmode
+                ARViewContainer(
+                    startmode: startmode,
+                    appmodel: ARappARpart,
+                    Sequencemodel: Sequencemodel,
+                    updatemode: $updatemode,
+                    extraviewmode:$extraviewmode
                 )
                     .ignoresSafeArea(.all, edges: .top)
                     .alert(isPresented: $showmodeinformation){
                         ARappARpartmodel.generatemodeinform(mode: extraviewmode,Language: Usermodel.Language)
                     }
                 //extra view according to circuit mode
+                ARCircuitImageView(
+                    appmodel: ARappARpart,
+                    extraviewmode: $extraviewmode,
+                    ispresent: $showcircuitimage,
+                    Geometrysize: size,
+                    PresentToggleAnimation:.easeInOut(duration: 0.3)
+                )
                 modeextraview
-                ARCircuitImageView(appmodel: ARappARpart, extraviewmode: $extraviewmode, ispresent: $showcircuitimage, Geometrysize: size)
-                ARUpdatetabView(appmodel: ARappARpart, startmode:startmode!,updatemode: $updatemode, extraviewmode: $extraviewmode)
+                ARUpdatetabView(
+                    appmodel: ARappARpart,
+                    startmode:startmode!,
+                    updatemode: $updatemode,
+                    extraviewmode: $extraviewmode
+                )
                 //topleadingbuttons
                 if !ARappARpart.Tipconfirmed{
                     ARTipView(appmodel: ARappARpart)
                 }
                 //returnbutton
             }
-            .toolbar{ARtoolbarContent}
+            .toolbar{ARtoolbarContent(geometrysize: size)}
 
         }
         .onAppear {
@@ -120,38 +150,6 @@ extension ARscanView{
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
     
-    
-    
-    //MARK: Not used in current View
-    @ViewBuilder
-    /// Return AR part toolbar
-    /// - Parameter size: geometry size
-    func  ARscantoolbar(size :CGSize)->some View{
-        HStack{
-            Button {
-                showmodeinformation=true
-            } label: {
-                Image(systemName: "photo")
-                .foregroundColor(Color.accentColor)
-                    .font(.title2)
-            }
-            Spacer()
-            Button {
-                showmodeinformation=true
-            } label: {
-                Image(systemName: "info.circle")
-                .foregroundColor(Color.accentColor)
-                    .font(.title2)
-            }
-
-        }
-        .frame(width: size.width/2)
-
-        
-        
-
-
-    }
 
     
 
@@ -206,6 +204,7 @@ struct ARViewContainer: UIViewRepresentable {
             //add anchor according to update mode
             appmodel.addanchor(ARview: uiView,mode: mode)
             appmodel.enablegesture(arView: uiView,mode: mode)
+            appmodel.definetriggeractions(Sequencemodel: Sequencemodel)
             DispatchQueue.main.async {
                 Sequencemodel.clear()
                 extraviewmode=updatemode!

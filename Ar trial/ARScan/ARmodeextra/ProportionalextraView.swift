@@ -55,8 +55,10 @@ struct ProportionalextraView: View {
 //}
 
 struct ProportionalextrachartView:View{
+    @EnvironmentObject var Usermodel:Appusermodel
     @ObservedObject var appmodel:ARappARpartmodel
     @ObservedObject var proportionalmodel:Proportionalcircuitmodel
+    @State var chartdisplay:Bool=false
     var geometry:GeometryProxy
     @State var showalert:Bool=false
     @State var zooming:Bool=false
@@ -77,15 +79,43 @@ struct ProportionalextrachartView:View{
     }
     var body:some View{
         VStack(alignment:.trailing,spacing:.zero){
-            if proportionalmodel.chartpresent {
-                if zooming{
-                    MultiLineChartRCView(data: Proportionalcircuitmodel.getdata(statistic: self.statistic, gradientcolors: self.gradientcolors), title: "proportional",chartwidth: geometry.size.width/4*zoomratio, chartheight: geometry.size.height/5*zoomratio,informlabel:chartinform,isPresent: $proportionalmodel.chartpresent, zooming: $zooming)
-                }else{
-                    MultiLineChartRCView(data: Proportionalcircuitmodel.getdata(statistic: self.statistic, gradientcolors: self.gradientcolors), title: "proportional",chartwidth: geometry.size.width/4, chartheight: geometry.size.height/5,informlabel:chartinform,isPresent: $proportionalmodel.chartpresent, zooming: $zooming)
+            switch proportionalmodel.ExtraViewstatus{
+            case .start:
+                Button(action: proportionalmodel.Statusforward) {
+                    Text(Usermodel.Language ? "仿真" : "Simulation")
                 }
-
-            }else{
-                if proportionalmodel.resistancepresent{
+                .buttonStyle(.borderedProminent)
+                .buttonBorderShape(.roundedRectangle(radius: 2))
+            case .chart:
+                if zooming{
+                    MultiLineChartRCView(
+                        data: Proportionalcircuitmodel.getdata(statistic: self.statistic, gradientcolors: self.gradientcolors),
+                        title: Usermodel.Language ? "加减法电路" : "Proportional",
+                        chartwidth: geometry.size.width/4*zoomratio,
+                        chartheight: geometry.size.height/5*zoomratio,
+                        informlabel:chartinform,
+                        isPresent: $chartdisplay,
+                        zooming: $zooming){
+                            withAnimation(.spring()) {
+                                proportionalmodel.Statusbackward()
+                            }
+                        }
+                }else{
+                    MultiLineChartRCView(
+                        data: Proportionalcircuitmodel.getdata(statistic: self.statistic, gradientcolors: self.gradientcolors),
+                        title: Usermodel.Language ? "加减法电路" : "Proportional",
+                        chartwidth: geometry.size.width/4,
+                        chartheight: geometry.size.height/5,
+                        informlabel:chartinform,
+                        isPresent: $chartdisplay,
+                        zooming: $zooming){
+                            withAnimation(.spring()) {
+                                proportionalmodel.Statusbackward()
+                            }
+                        }
+                }
+            case .resistance:
+                VStack(alignment:.trailing,spacing: .zero){
                     HStack(spacing:10){
                         Button("- U+") {
                             switch proportionalmodel.plusinput.count {
@@ -124,7 +154,7 @@ struct ProportionalextrachartView:View{
 
                         }
                     }
-                    HStack(alignment:.bottom, spacing:.zero){
+                    VStack(spacing:.zero){
                         VStack(alignment:.trailing, spacing:.zero){
                             ForEach(proportionalmodel.resistanceplus.indices,id:\.self) { index in
                                 HStack(spacing:.zero){
@@ -132,7 +162,8 @@ struct ProportionalextrachartView:View{
                                     TextField("", text: $proportionalmodel.resistanceplustext[index])
                                         .background(Color.gray.opacity(0.3).cornerRadius(1))
                                         .frame(width:geometry.size.width/8)
-                                        .keyboardType(.numberPad)
+                                        .keyboardType(.numbersAndPunctuation)
+                                    Text(" k𝛀")
                                 }
                             }
                         }
@@ -143,7 +174,8 @@ struct ProportionalextrachartView:View{
                                     TextField("", text: $proportionalmodel.resistanceminustext[index])
                                         .background(Color.gray.opacity(0.3).cornerRadius(1))
                                         .frame(width:geometry.size.width/8)
-                                        .keyboardType(.numberPad)
+                                        .keyboardType(.numbersAndPunctuation)
+                                    Text(" k𝛀")
                                 }
                             }
                         }
@@ -153,16 +185,21 @@ struct ProportionalextrachartView:View{
                         TextField("", text: $proportionalmodel.resistanceatext)
                             .background(Color.gray.opacity(0.3).cornerRadius(1))
                             .frame(width:geometry.size.width/8)
-                            .keyboardType(.numberPad)
+                            .keyboardType(.numbersAndPunctuation)
+                        Text(" k𝛀")
+                    }
+                    HStack(spacing:.zero){
                         Text("Rf:")
                         TextField("", text: $proportionalmodel.resistanceftext)
                             .background(Color.gray.opacity(0.3).cornerRadius(1))
                             .frame(width:geometry.size.width/8)
-                            .keyboardType(.numberPad)
-
+                            .keyboardType(.numbersAndPunctuation)
+                        Text(" k𝛀")
                     }
                 }
-                if proportionalmodel.inputpresent{
+                .padding(.leading,3)
+            case .input:
+                VStack(alignment:.trailing,spacing: .zero){
                     ForEach(proportionalmodel.plusinput.indices,id:\.self) { index in
                         HStack(spacing:.zero){
                             Picker(selection: $proportionalmodel.plusinput[index].mode,
@@ -180,14 +217,16 @@ struct ProportionalextrachartView:View{
                             TextField("", text: $proportionalmodel.plusinputpeaktext[index])
                                 .background(Color.gray.opacity(0.3).cornerRadius(1))
                                 .frame(width:geometry.size.width/8)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.numbersAndPunctuation)
                             Text("V").padding(.trailing,5)
-
-                            Text("f:").padding(.trailing,5)
-                            TextField("", text: $proportionalmodel.plusinputfrequencytext[index])
-                                .background(Color.gray.opacity(0.3).cornerRadius(1))
-                                .frame(width:geometry.size.width/8)
-                                .keyboardType(.numberPad)
+                            if proportionalmodel.plusinput[index].mode.rawValue != 0 {
+                                Text("f:").padding(.trailing,5)
+                                TextField("", text: $proportionalmodel.plusinputfrequencytext[index])
+                                    .background(Color.gray.opacity(0.3).cornerRadius(1))
+                                    .frame(width:geometry.size.width/8)
+                                    .keyboardType(.numbersAndPunctuation)
+                                Text(" HZ")
+                            }
 
                         }.padding(.bottom,5)
                     }
@@ -208,56 +247,75 @@ struct ProportionalextrachartView:View{
                             TextField("", text: $proportionalmodel.minusinputpeaktext[index])
                                 .background(Color.gray.opacity(0.3).cornerRadius(1))
                                 .frame(width:geometry.size.width/8)
-                                .keyboardType(.numberPad)
+                                .keyboardType(.numbersAndPunctuation)
                             Text("V").padding(.trailing,5)
-
-                            Text("f:")
-                            TextField("", text: $proportionalmodel.minusinputfrequencytext[index])
-                                .background(Color.gray.opacity(0.3).cornerRadius(1))
-                                .frame(width:geometry.size.width/8)
-                                .keyboardType(.numberPad)
+                            if proportionalmodel.minusinput[index].mode.rawValue != 0 {
+                                Text("f:").padding(.trailing,5)
+                                TextField("", text: $proportionalmodel.minusinputfrequencytext[index])
+                                    .background(Color.gray.opacity(0.3).cornerRadius(1))
+                                    .frame(width:geometry.size.width/8)
+                                    .keyboardType(.numbersAndPunctuation)
+                                Text(" HZ")
+                            }
 
                         }.padding(.bottom,5)
                     }
 
                 }
+                .padding(.leading,3)
+
+            }
+            if proportionalmodel.ExtraViewstatus == .input || proportionalmodel.ExtraViewstatus == .resistance{
                 HStack(spacing:.zero) {
-                    if proportionalmodel.inputpresent {
+                    if proportionalmodel.ExtraViewstatus == .input {
                         Button {
-                            proportionalmodel.returntoresistance()
+                            proportionalmodel.Statusbackward()
                         } label: {
-                            Text("Cancel").foregroundColor(.primary)
+                            Text(Usermodel.Language ? "取消" : "Cancel")
+                                .foregroundColor(.primary)
                         }
                         .buttonStyle(.borderedProminent)
                         .buttonBorderShape(.roundedRectangle(radius: 1))
-                        .accentColor(Color.gray)
+                        .accentColor(Color.red)
                     }
                     Button {
-                        if proportionalmodel.inputpresent{
+                        if proportionalmodel.ExtraViewstatus == .input{
                             showalert=true
                         }
                         proportionalmodel.confirmvalue()
                         appmodel.proportionalupdatetext(ratext: proportionalmodel.resistanceatext, rftext: proportionalmodel.resistanceftext, plusresistancetext: proportionalmodel.resistanceplustext, minusresistancetext: proportionalmodel.resistanceminustext)
                     } label: {
-                        Text("Confirm").foregroundColor(.primary)
+                        Text(Usermodel.Language ? "确认" : "Confirm")
+                            .foregroundColor(.primary)
                     }
                     .buttonStyle(.borderedProminent)
                     .buttonBorderShape(.roundedRectangle(radius: 1))
                     .accentColor(proportionalmodel.valuelegal() ? Color.accentColor : Color.gray)
                     .disabled(!proportionalmodel.valuelegal())
                 }
-            }
-        }.background(Color.white.opacity(0.8).cornerRadius(5)).offset(y: -geometry.size.height*0.08)
-            .alert(isPresented: $showalert) {
-                Alert(title: Text("Chart ready to display"), primaryButton: .destructive(Text("Cancel").foregroundColor(.red)) {proportionalmodel.inputpresent=true
-                    proportionalmodel.resistancepresent=false}, secondaryButton: .default(Text("OK")){proportionalmodel.chartpresent=true})
-            }
-            .onChange(of: geometry.size) { value in
-                guard proportionalmodel.chartpresent else {return}
-                proportionalmodel.chartpresent=false
-                proportionalmodel.inputpresent=false
-                proportionalmodel.resistancepresent=true
-            }
 
+            }
+        }
+        .background(Color.white.opacity(0.8).cornerRadius(5))
+        .offset(y: -geometry.size.height*Usermodel.Circuitupdatetabheightratio)
+        .alert(isPresented: $showalert) {
+            Alert(
+                title: Text(Usermodel.Language ? "即将展示仿真图像" : "Chart ready to display"),
+                primaryButton: .destructive(
+                    Text(Usermodel.Language ? "取消" : "Cancel").foregroundColor(.red)
+                ) {
+                    proportionalmodel.ExtraViewstatus = .input
+                },
+                secondaryButton: .default(
+                    Text(Usermodel.Language ? "好的" : "OK")
+                ){
+                    proportionalmodel.Statusforward()
+                }
+            )
+        }
+        .onChange(of: geometry.size) { value in
+//            guard proportionalmodel.ExtraViewstatus == .chart else {return}
+//            proportionalmodel.ExtraViewstatus = .start
+        }
     }
 }

@@ -11,7 +11,7 @@ import CoreData
 import Combine
 
 /// The modes of AR
-enum scanmode:String{
+enum scanmode:String,CaseIterable{
     case free="Free Scanning"
     case Squarewavegenerator="Squarewave generator"
     case SquarewaveDRgenerator="Duty ratio adjustable squarewave generator"
@@ -39,15 +39,16 @@ extension scanmode{
         switch self{
         case .Proportional:return "proportional"
         case .Sequence:return "sequence"
+        case .Squarewavegenerator:return "squarewave"
+        case .SquarewaveDRgenerator:return "squarewaveDR"
+        case .Secondorder:return "secondorderfilter"
+
+
         default:return nil
         }
     }
 }
 
-struct Scanmodeforvm:Identifiable{
-    let id:String=UUID().uuidString
-    let mode:scanmode
-}
 
 
 //MARK: ARappARpartmodel
@@ -65,8 +66,6 @@ class ARappARpartmodel:ObservableObject{
     /// Number of all tips
     let Tipnumber:Int
     //AR part variables
-    /// Circuit modes used in update tab
-    let scaaningmodes:[Scanmodeforvm]
     /// Dictionary used in adding AR anchors
     let scanmodeindex:[scanmode:Int]
     @Published var SquarewaveGeneratorAnchor:Squarewave.Box
@@ -77,14 +76,6 @@ class ARappARpartmodel:ObservableObject{
 
     //MARK: initiate
     init() {
-        scaaningmodes=[
-            Scanmodeforvm(mode: scanmode.free),
-            Scanmodeforvm(mode: .Squarewavegenerator),
-            Scanmodeforvm(mode: .SquarewaveDRgenerator),
-            Scanmodeforvm(mode: .Secondorder),
-            Scanmodeforvm(mode: .Sequence),
-            Scanmodeforvm(mode: .Proportional)
-        ]
         scanmodeindex=[.Squarewavegenerator:0,
                        .SquarewaveDRgenerator:1,
                        .Secondorder:2,.Sequence:3,
@@ -180,7 +171,10 @@ class ARappARpartmodel:ObservableObject{
         let Anchors:[HasAnchoring]=[SquarewaveGeneratorAnchor,SquarewaveDRGeneratorAnchor,SecondorderfilterAnchor,SequencegeneratorAnchor,ProportionalAnchor]
         switch mode {
         case .free:
-            ARview.scene.anchors.append(contentsOf: Anchors)
+            for index in Anchors.indices {
+                ARview.scene.anchors.append(Anchors[index])
+
+            }
         default:ARview.scene.anchors.append(Anchors[scanmodeindex[mode]!])
         }
     }
@@ -244,9 +238,9 @@ class ARappARpartmodel:ObservableObject{
             model.generateCollisionShapes(recursive: true)
             arView.installGestures([.all], for: model as! (Entity & HasCollision))
         case .Secondorder:
-            let filter=SecondorderfilterAnchor.filter!
-            filter.generateCollisionShapes(recursive: true)
-            arView.installGestures([.all], for: filter as! (Entity & HasCollision))
+            let model=SecondorderfilterAnchor.filter!
+            model.generateCollisionShapes(recursive: true)
+            arView.installGestures([.all], for: model as! (Entity & HasCollision))
         case .Proportional:
             let model=ProportionalAnchor.circuit!
             model.generateCollisionShapes(recursive: true)
@@ -320,14 +314,30 @@ class ARappARpartmodel:ObservableObject{
         var message:Text?=nil
         switch mode {
         case .free:
-            text=Text(Language ? "这是自由扫描模式，所有锚点均已加载。" :
-                        "This is free scanning mode.")
+            text=Text(
+                Language ? "这是自由扫描模式，所有锚点均已加载。" :
+                        "This is free scanning mode."
+            )
+        case .Squarewavegenerator:
+            text=Text(
+                Language ? "这是矩形波发生器。" :
+                        "This is a squarewave generator."
+            )
+        case .SquarewaveDRgenerator:
+            text=Text(
+                Language ? "这是占空比可调的矩形波发生器。" :
+                        "This is a duty ratio adjustable squarewave generator."
+            )
         case .Secondorder:
-            text=Text(Language ? "这是二阶状态变量滤波器。" :
-                        "This is a second order filter.")
+            text=Text(
+                Language ? "这是二阶状态变量滤波器。" :
+                        "This is a second order filter."
+            )
         case .Sequence:
-            text=Text(Language ? "这是序列发生器。点击74138的Y0-Y7和74151的D0-D7来调整发生器运行参数，点击左侧按钮查看理论图，点击右侧按钮开始运行。" :
-                        "This is a sequence generator. Tap on 74138 Y0-Y7 and 74151 D0-D7 to set parameters of the generator. Tap the button on the left to see the details of the generator design.")
+            text=Text(
+                Language ? "这是序列发生器。点击74138的Y0-Y7和74151的D0-D7来调整发生器运行参数，点击左侧按钮查看理论图，点击右侧按钮开始运行。" :
+                        "This is a sequence generator. Tap on 74138 Y0-Y7 and 74151 D0-D7 to set parameters of the generator. Tap the button on the left to see the details of the generator design."
+            )
         default:break
         }
         return Alert(title: text,

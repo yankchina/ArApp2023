@@ -36,7 +36,7 @@ struct SinegeneratorextraView: View {
             let Geometrysize=geometry.size
             switch vm.status {
             case .start:
-                StartButton(yoffset: -Geometrysize.height*0.08,Buttonaction: vm.startforward)
+                StartButton(yoffset: -Geometrysize.height*Usermodel.Circuitupdatetabheightratio,Buttonaction: vm.startforward)
             case .input:
                 ZStack{
                     VStack(alignment:.trailing,spacing:.zero){
@@ -56,7 +56,7 @@ struct SinegeneratorextraView: View {
                         .background(
                             InputbackgroundView()
                         )
-                        .offset(y: -geometry.size.height*0.08)
+                        .offset(y: -geometry.size.height*Usermodel.Circuitupdatetabheightratio)
                         .gesture(
                             DragGesture()
                                     .onEnded { value in
@@ -105,7 +105,7 @@ struct SinegeneratorextraView: View {
                         .background(
                             SimulationImagebackgroundView()
                         )
-                        .offset(y:-geometry.size.height*0.08+vm.imageyoffset)
+                        .offset(y:-geometry.size.height*Usermodel.Circuitupdatetabheightratio+vm.imageyoffset)
                     //.frame(maxWidth: geometry.size.width*0.9)
                         .gesture(
                             AsyncImageDraggesture

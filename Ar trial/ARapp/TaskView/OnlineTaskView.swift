@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RealityKit
 import Combine
 
 /// View of all Online Tasks
@@ -14,6 +13,37 @@ struct OnlineTaskView: View {
     @EnvironmentObject var Usermodel:Appusermodel
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @StateObject var OnlineTaskmodel:OnlineTaskModel=OnlineTaskModel()
+    //MARK: OnlineTaskViewToolbar
+    var OnlineTaskViewToolbar:some ToolbarContent{
+        Group{
+            ToolbarItem(placement: .navigationBarTrailing) {
+                HStack{
+                    if Usermodel.user.authority>0{
+                        Button{
+                            OnlineTaskmodel.TaskAddingdisplay.toggle()
+                        }label:{
+                            HStack{
+                                Image(systemName:"plus")
+                                Text(Usermodel.Language ? "添加任务" : "Add task")
+                            }
+                        }.padding(.horizontal,2)
+                            .background(
+                                RoundedRectangle(cornerRadius: 5).stroke(Color.accentColor)
+                            )
+                    }
+                    Button{
+                        OnlineTaskmodel.Gettasks(Url: Usermodel.user.simulationurl)
+                    } label:{
+                        Image(systemName: "arrow.clockwise").font(.title2)
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    
+    //MARK: body
     var body: some View {
         GeometryReader{geometry in
             ZStack{
@@ -67,41 +97,19 @@ struct OnlineTaskView: View {
                     }
                 }
             }.frame(maxWidth: .infinity,maxHeight: .infinity)
-                .overlay(alignment: .bottomTrailing){
-                    if Usermodel.user.authority>0{
-                        Button{
-                            OnlineTaskmodel.TaskAddingdisplay.toggle()
-                        }label:{
-                            HStack{
-                                Image(systemName:"plus").foregroundColor(.BackgroundprimaryColor)
-                                    .font(.title2)
-                                Text(Usermodel.Language ? "添加任务" : "Add task").foregroundColor(.BackgroundprimaryColor)
-                                    .font(.title2)
-                            }
-                        }.padding()
-                            .background(Capsule().fill(Color.accentColor))
-
-                    }
-                }
                 .blurredSheet(.init(.ultraThinMaterial), show: $OnlineTaskmodel.TaskAddingdisplay) {
                     
                 } content: {
-                    Usermodel.Language ? OnlineTaskAddingView(OnlineTaskmodel: OnlineTaskmodel,
-                                                              Tasktitle: "任务标题",
-                                                              Taskdescription: "任务描述"
+                    Usermodel.Language ? OnlineTaskAddingView(
+                        OnlineTaskmodel: OnlineTaskmodel,
+                        Tasktitle: "任务标题",
+                        Taskdescription: "任务描述"
                     ) :
                     OnlineTaskAddingView(OnlineTaskmodel: OnlineTaskmodel)
                 }
                 //.background(RoundedRectangle(cornerRadius: 5).stroke(Color.primary))
         }
-        .navigationBarItems(trailing:
-                                Button{
-            OnlineTaskmodel.Gettasks(Url: Usermodel.user.simulationurl)
-        }label:{
-            Image(systemName: "arrow.clockwise").font(.title2)
-        }
-                            )
-
+        .toolbar{OnlineTaskViewToolbar}
         .onAppear{
             OnlineTaskmodel.Gettasks(Url: Usermodel.user.simulationurl)
             OnlineTaskmodel.UpdateTasksremaining()
@@ -111,10 +119,6 @@ struct OnlineTaskView: View {
                 OnlineTaskmodel.UpdateTasksremaining()
             }
         }
-
-            
-
-        
         //.ignoresSafeArea(.all, edges: .top)
     }
     
